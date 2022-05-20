@@ -52,7 +52,7 @@ podataka u obliku barem jedne vrste grafa (prema odabiru). Zabranjeno je korišt
 gotovih rješenja (PHP i JavaScript). Obavezno je korištenje JavaScript-a i Canvas-a.
 Moguće je koristiti i AJAX.
 
-- [ ] 8. **Relativne putanje** - rješenje projekta mora koristiti relativne putanje.
+- [x] 8. **Relativne putanje** - rješenje projekta mora koristiti relativne putanje.
 
 - [ ] 9. **Dnevnik rada** - svaki zahtjev treba biti upisan u dnevnik rada (tzv. log aplikacije): tko,
 kada, što je radio i slično. Obavezno zapisivanje osnovnih informacija o radu sustava u
