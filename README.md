@@ -4,7 +4,7 @@
 
 ***
 
-[] 1. **Neregistrirani korisnik** - je korisnik koji nema korisnički račun na sustavu. Članom
+- [] 1. **Neregistrirani korisnik** - je korisnik koji nema korisnički račun na sustavu. Članom
 sustava može postati u slučaju registracije na sustav. Kod registracije obavezno se
 unose osobni podaci o korisniku, lozinka i potvrda lozinke. Korisnik se smatra
 registriranim tek nakon aktivacije računa putem aktivacijske poruke elektroničke
