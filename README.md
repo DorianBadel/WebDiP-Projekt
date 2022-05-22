@@ -160,7 +160,7 @@ podataka (pogledaj točku 22). Skripta privatno/korisnici.php treba ispisati sve
 korisnike, njihove lozinke u čitljivom obliku i vrstu. Pristup do skripte nije ograničen
 na korisnike aplikacije.
 
-- [ ] 24. **Dokumentacija** - naziv datoteke treba biti dokumentacija.html i njoj se pristupa iz
+- [x] 24. **Dokumentacija** - naziv datoteke treba biti dokumentacija.html i njoj se pristupa iz
 početne stranice projektnog rješenja. Dokumentacija projektnog rješenja sastoji se
 od:
     a. opis projektnog zadatka
@@ -170,7 +170,7 @@ od:
     e. popis i opis korištenih tehnologija i alata
     f. popis i opis vanjskih (tuđih) modula/biblioteka i njihovo korištenje u skriptama i sl.
 
-- [ ] 25. **O autoru** - naziv datoteke treba biti o_autoru.html i njoj se pristupa s početne
+- [x] 25. **O autoru** - naziv datoteke treba biti o_autoru.html i njoj se pristupa s početne
 stranice projektnog rješenja. Stranica mora imati sliku (kao na osobnoj iskaznici), ime,
 prezime, broj iksice i mail (s poveznicom koji otvara slanje maila). Ostatak stranice
 sadrži podatke prema želji.
