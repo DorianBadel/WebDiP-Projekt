@@ -1,0 +1,142 @@
+@import "../../../globals/themes.css";
+
+.section__sort{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 10px;
+}
+
+
+
+.section__sort span{
+    font-size: 30px;
+    font-weight: 600;
+    border-bottom: 5px dotted var(--color-primary);
+}
+
+.section__sort select{
+    border: 1px solid var(--color-text-secondary);
+    border-radius: 6px;
+    width: 100%;
+    line-height: 50px;
+    height: 40px;
+    padding: 0 15px;
+    outline: none;
+    font-size: 14px;
+    font-family: var(--fonts-primary);
+}
+
+.section__sort .tag{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: none;
+    height: 48px;
+    font-size: 13px;
+    width: 90px; /*Ako rijec bude pre velika samo povecaj ovo*/
+    background-color: var(--color-primary);
+    color: var(--color-text-primary);
+    border-radius:15px;
+    font-weight: 500;
+
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.section__sort .active{
+    background-color: var(--color-text-tertiary);
+}
+
+.section__sort .tags{
+    margin-top: 5px;
+    padding-bottom: 10px;
+    border-bottom: 5px dotted var(--color-primary);
+}
+
+.section__sort .tag:hover{
+    background-color: var(--color-secondary);
+    box-shadow: 0 3px 3px var(--color-secondary);
+}
+
+.section__sort .active:hover{
+    background-color: var(--color-text-tertiary);
+    box-shadow: none;
+}
+
+.section__news{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 10px;
+}
+
+@media(min-width: 810px){
+    .section__news{
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 20px;
+        column-gap: 20px;
+    }
+}
+
+@media(min-width: 1024px){
+    .section__news{
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 20px;
+        column-gap: 20px;
+    }
+}
+
+@media(min-width: 1424px){
+    .section__news{
+        grid-template-columns: repeat(4, 1fr);
+        row-gap: 20px;
+        column-gap: 20px;
+    }
+}
+
+.section__news .news{
+    width: 100%;
+    margin-top: 20px;
+    background-color: var(--color-text-primary);
+    border-radius: 20px;
+}
+
+.section__news .news figure img{
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+}
+
+.section__news a{
+    text-decoration: none;
+}
+
+.section__news .news h3{
+    margin-left: 25px;
+    font-size: 25px;
+    font-style: italic;
+}
+
+.section__news .news p{
+    margin-left: 20px;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.section__news .news span{
+    color: var(--color-text-tertiary);
+    font-weight: 600;
+    margin-left: 30px;
+    position: relative;
+    top: 7px;
+}
+
+.section__news .news .broj_pregleda{
+    margin-right: 30px;
+    padding: 7px;
+    border: 1px solid var(--color-text-tertiary);
+    border-radius: 50px;
+    float: right;
+    margin-bottom: 20px;
+}
