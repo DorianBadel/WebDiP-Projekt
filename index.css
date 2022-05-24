@@ -1,0 +1,46 @@
+@import "./globals/themes.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.section_header{
+  background-color: var(--color-primary);
+}
+
+.footer{
+
+  background-color: var(--color-primary);
+}
+
+.section_welcome{
+  padding: 30px;
+  text-align: center;
+  font-size: 30px;
+}
+
+@media(min-width: 1024px){
+  .section_welcome{
+    padding: 60px;
+    text-align: center;
+    font-size: 40px;
+  }
+}
+
+.section_welcome p{
+  color: var(--color-text-tertiary);
+  font-family: var(--font-secondary);
+}
+
+.section_welcome span{
+  color: var(--color-text-secondary);
+  font-family: var(--font-primary);
+  font-weight: 600;
+}
+
+.section_welcome em{
+  color: var(--color-text-secondary);
+}
