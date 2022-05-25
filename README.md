@@ -85,7 +85,7 @@ zaštitu od automata prilikom registracije korisnika. Poželjno je da se pamte p
 zadnje uspješne prijave (korisničko ime). Detaljnije upute o prijavi opisane su u točki
 2.
 
-- [ ] 14. **Lozinke** - potrebno je sve lozinke u bazu podataka spremati u dva stupca. Prvi u
+- [x] 14. **Lozinke** - potrebno je sve lozinke u bazu podataka spremati u dva stupca. Prvi u
 čitljivom obliku i drugi u kriptiranom obliku korištenjem SHA256 algoritma za
 izračunavanja sažetka (eng. hash) i primjenom dinamičke (različita za svakog
 korisnika) soli (eng. salt). Čitljiv oblik se koristi samo iz praktičnih razloga za vrijeme
@@ -140,15 +140,15 @@ uspoređivanja. Redoslijed koraka je sljedeći:
     4. korištenje virtualnog vremena temeljem lokalne konfiguracije (baza ili
     datoteka).
 
-- [ ] 20. **Instalacija** - rješenje treba biti instalirano na računalu barka.foi.hr. Pristup ostalim
+- [x] 20. **Instalacija** - rješenje treba biti instalirano na računalu barka.foi.hr. Pristup ostalim
 studentima treba biti zabranjen.
 
-- [ ] 21. **Podaci** - se pohranjuju u MySQL bazu podataka pod nazivom WebDiP2021xnn (nn je
+- [x] 21. **Podaci** - se pohranjuju u MySQL bazu podataka pod nazivom WebDiP2021xnn (nn je
 broj studenta 01 <= nn <= 300). Za studente će biti kreirane potrebne baze podataka i
 dodijeljene potrebne dozvole (privilegije) za rad s bazom podataka. Studenti će dobiti
 potrebne informacije za bazu podataka.
 
-- [ ] 22. **Direktorij** - na kojem je smješteno projektno rješenje treba biti WebDiP2021xnn (nn
+- [x] 22. **Direktorij** - na kojem je smješteno projektno rješenje treba biti WebDiP2021xnn (nn
 je broj studenta 01 <= nn <= 300) u direktoriju /var/www/WebDiP/2021_projekti.
 Studenti će dobiti poruku s potrebnim informacijama za pohranu projektnog rješenja.
 Na direktoriju projektnog rješenja smiju se nalaziti samo skripte i ostali podaci vezani
@@ -156,9 +156,9 @@ uz projektno rješenje.
 
 - [ ] 23. **Direktorij privatno** - treba biti zaštićen .htaccess datotekom pri čemu u njoj treba
 postojati korisnik s istim korisničkim imenom i lozinkom kao i pristup do baze
-podataka (pogledaj točku 22). Skripta privatno/korisnici.php treba ispisati sve
-korisnike, njihove lozinke u čitljivom obliku i vrstu. Pristup do skripte nije ograničen
-na korisnike aplikacije.
+podataka (pogledaj točku 22). 
+> Skripta privatno/korisnici.php treba ispisati sve korisnike, njihove lozinke u čitljivom obliku i vrstu. Pristup do
+> skripte nije ograničen na korisnike aplikacije.
 
 - [x] 24. **Dokumentacija** - naziv datoteke treba biti dokumentacija.html i njoj se pristupa iz
 početne stranice projektnog rješenja. Dokumentacija projektnog rješenja sastoji se
