@@ -18,6 +18,9 @@
 
 
  -->
+ <?php
+  require_once('globals/smarty/smarty_main.php');
+ ?>
 
 <html lang="en">
 <head>

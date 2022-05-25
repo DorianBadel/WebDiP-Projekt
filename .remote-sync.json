@@ -1,0 +1,18 @@
+{
+  "logger": {
+    "title": "Remote Sync"
+  },
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "barka.foi.hr",
+  "target": "/var/www/webdip.barka.foi.hr/2021_projekti/WebDiP2021x003",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "dbadel",
+  "password": "r1,6,?q,sXHB",
+  "watch": [],
+  "transport": "scp"
+}
