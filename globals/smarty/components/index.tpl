@@ -1,27 +1,77 @@
-    <h2>Statistika problema</h2>
+<style>
+  .conditions div{
+    display:block;
+    text-align:left;
+    padding: 10px;
+  }
+</style>
 
-    <label for="kategorija">Kategorija: </label>
-    <input type="text" id="kategorija" name="kategorija">
-    <label for="minProblema">Problema više od: </label>
-    <input type="number" id="minProblema" name="minProblema">
-
-    <table id="problemi">
-            <thead>
-                <tr>
-                    <th>Kategorija</th>
-                    <th>Broj problema</th>
-                </tr>
-            </thead>
-    </table>
-    <button id="generirajPDF">Generiraj PDF</button>
-    <button id="isprintaj">Isprintaj</button>
-    <div class="grafContainer">
-        <canvas id="grafStatistike"></canvas>
+  <div class="conditions">
+    <span> Uvjeti korištenja </span>
+    <p> Mi pohranjujemo samo neosjetljive informacije o vašem korištenju aplikacije u svrhe statističke analize i poboljšanje korisničkog iskustva </p>
+    <div>
+      <input type="radio" name="uvjet" value="1" class="cb" onClick="showBtn()">
+      <label for="uvjeti1">{$opcije[0]}</label>
     </div>
-</table>
-<div class="pomoc" id="pomoc">
-    <div id="pomocSadrzaj">Ovo je sadrzaj pomoći...</div>
-    <button id="prethodnaStranicaPomoc">Prethodna stranica</button>
-    <button id="sljedecaStranicaPomoc">Sljedeća stranica</button>
-    <button id="ugasiPomoc">Ugasi pomoć</button>
-</div>
+    <div>
+      <input type="radio" name="uvjet" value="2" class="cb" onClick="showBtn()">
+      <label for="uvjeti2">{$opcije[1]}</label>
+    </div>
+    <div>
+      <input type="radio" name="uvjet" value="3" class="cb" onClick="showBtn()">
+      <label for="uvjeti3">{$opcije[2]}</label>
+    </div>
+
+
+    <div id="acceptBtn">
+
+
+    </div>
+
+    <script>
+      function showBtn(){
+        var cboxes = document.querySelectorAll(".cb");
+        var btn = document.getElementById("acceptBtn");
+        var anyChecked = false;
+
+        cboxes.forEach(function(cb){
+          if(cb.checked) anyChecked = true;
+        });
+
+        if(anyChecked){
+          btn.innerHTML = '<button onClick="setCookies()">Accept terms</button>';
+        } else{
+          btn.innerHTML = '';
+        }
+
+      }
+
+      function setCookie(korisnik, odabrano, istice){
+        let rok = new Date();
+        rok.setTime(rok.getTime() + (istice*86400*1000));
+        document.cookie =  korisnik + "=" + (odabrano || "") + "; expires="+ rok.toUTCString() +"; path=/";
+        location.reload();
+      }
+
+      function setCookies(){
+        var cboxA = document.querySelector("input[value='1']");
+        var cboxB = document.querySelector("input[value='2']");
+        var cboxC = document.querySelector("input[value='3']");
+
+        if(cboxA.checked){
+          setCookie("uvjeti","{$opcije[0]}");
+        }
+        if(cboxB.checked){
+          setCookie("uvjeti","{$opcije[1]}");
+        }
+        if(cboxC.checked){
+          setCookie("uvjeti","{$opcije[2]}");
+        }
+      }
+    </script>
+
+
+
+
+
+  </div>

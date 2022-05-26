@@ -10,6 +10,7 @@ if(isset($_POST['submit']) && !empty($_POST['korime']) && !empty($_POST['lozinka
   $lozinka_kript = hash('sha256',$lozinka);
 
   $korisnik = "SELECT * FROM korisnik WHERE korisnicko_ime='$korime'";
+
   $izvrsi = mysqli_query($connection, $korisnik);
   if($izvrsi->num_rows > 0){
     $row_kor = mysqli_fetch_assoc($izvrsi);
@@ -41,9 +42,13 @@ if(isset($_POST['submit']) && !empty($_POST['korime']) && !empty($_POST['lozinka
           header('Refresh:0; url=../../index.php');
         }
 
+      } else {
+        echo "
+        <script>
+          let msg = document.getElementById('section_msg');
+          msg.innerHTML = 'Pogresan unos podataka [lozinka]';
+        </script>";
       }
-    } else {
-      echo "<script> alert('lozinka pogresna!') </script>";
     }
   }else{
     echo "<script> alert('korisnik ne postoji!') </script>";
@@ -103,7 +108,10 @@ if(isset($_POST['submit']) && !empty($_POST['korime']) && !empty($_POST['lozinka
     </div>
 
     <div class="section_body">
+
         <div class="section_body-inner">
+          <div id="section_msg">
+          </div>
             <form action"" method="POST">
                 <label for="korime">Korisničko ime:</label>
                 <input type="text" name="korime">

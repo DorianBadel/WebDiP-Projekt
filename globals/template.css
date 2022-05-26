@@ -14,7 +14,7 @@
   width: 78px;
   background: var(--color-primary);
   padding: 6px 14px;
-  z-index: 99;
+  z-index: 5;
   transition: all 0.5s ease;
 }
 .sidebar.open{
@@ -178,4 +178,62 @@
 .footer a:hover{
   text-decoration: none;
   color: var(--color-text-tertiary);
+}
+
+
+.body .popup{
+  position: fixed; /* Stay in place */
+  z-index: 99;
+  padding-top: 70px;
+  left: 40px;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.body .conditions{
+  text-align: center;
+  background-color: var(--color-text-primary);
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  width: 80%;
+}
+
+.body .conditions input{
+  width: auto;
+  height:auto;
+
+}
+
+.conditions span{
+  color: var(--color-text-tertiary);
+  font-size: 28px;
+  font-weight: bold;
+}
+
+button{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: none;
+    height: 48px;
+    font-size: 16px;
+    width: 110px;
+    background-color: var(--color-primary);
+    color: var(--color-text-primary);
+    border-radius:15px;
+    font-weight: 500;
+
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+button:hover{
+    background-color: var(--color-secondary);
+    box-shadow: 0 3px 3px var(--color-secondary);
 }

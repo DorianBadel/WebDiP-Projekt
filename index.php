@@ -34,7 +34,10 @@
 
   <!--Globals-->
   <script src="./globals/template.js" type="text/javascript"></script>
+  <!--Popup-->
   <link rel="stylesheet" href="./globals/template.css">
+
+
 </head>
 <body>
   <header id="header">
@@ -68,34 +71,63 @@
 
   </header>
   <section class='body' id="body">
-    <div class="section_header">
-      <h1>Home</h1>
-    </div>
-    <div class="section_welcome">
-      <p>Dobrodošao/la! <span id="welcome_username">
-        <?php
-          if(empty($_SESSION['username'])){
-            echo "Neregistrirani korisnik";
 
+    <div id="popup" class="popup">
+      <?php
+        if(!isset($_COOKIE['uvjeti'])){
+          echo "
+          <script>
+            var pu = document.getElementById('popup');
+            pu.style.display = 'inherit';
+          </script>";
+
+          include 'globals/global.php';
+
+          $sql = "SELECT * FROM uvjeti_koristenja";
+          $izvrsi = mysqli_query($connection, $sql);
+          $opcije = array();
+          $i = 0;
+          while($row = $izvrsi->fetch_array()){
+            $opcije[] = $row["opis_uvjeta"];
+            $smarty->assign('opcije',$opcije);
+            $i++;
           }
-          else{
-            echo $_SESSION['username'];
-          }
-         ?>
-      </span> na tvoju novu jedinu postaju za sve <em>vijesti!</em></p>
+          $smarty->display("globals/smarty/components/index.tpl");
+        } else{
+          echo "
+          <script>
+            var pu = document.getElementById('popup');
+            pu.style.display = 'none';
+          </script>";
+        }
+       ?>
 
     </div>
 
-    <!-- If user has no JS -->
-    <noscript>Sorry, your browser does not support JavaScript!</noscript>
+      <div class="section_header">
+        <h1>Home</h1>
+      </div>
+      <div class="section_welcome">
+        <p>Dobrodošao/la! <span id="welcome_username">
+          <?php
+            if(empty($_SESSION['username'])){
+              echo "Neregistrirani korisnik";
+
+            }
+            else{
+              echo $_SESSION['username'];
+            }
+           ?>
+        </span> na tvoju novu jedinu postaju za sve <em>vijesti!</em></p>
+
+      </div>
+
+      <!-- If user has no JS -->
+      <noscript>Sorry, your browser does not support JavaScript!</noscript>
 
   </section>
   <footer id="footer">
 
   </footer>
-
-
-
-
 </body>
 </html>

@@ -61,6 +61,7 @@ if(isset($_POST['submit']) && !empty($_POST['ime']) && !empty($_POST['prezime'])
 
 </head>
 <body>
+
   <header id="header">
     <div class="sidebar">
     <div class="logo-details">
@@ -110,8 +111,11 @@ if(isset($_POST['submit']) && !empty($_POST['ime']) && !empty($_POST['prezime'])
                 <input type="password" name="lozinka" placeholder="Lozinka...">
                 <label for="ponlozinka">Ponovljena lozinka:</label>
                 <input type="password" name="ponlozinka" placeholder="Ponovljena lozinka...">
-                <label for="uvjeti">Uvjeti koristenja:</label>
-                <input type="number" name="uvjeti" placeholder="1/2">
+                <select name="uvjeti">
+                  <option value="1">Prihvacam dijeliti sve neosjetljive podatke s vama za optimalno iskustvo.</option>
+                  <option value="2">Prihvacam dijeliti samo informacije za svrhu statistike</option>
+                  <option value="3">Prihvacam dijeliti samo neophodne informacije.</option>
+                </select>
 
                 <button type="submit" name="submit">Registriraj se</button>
                 <p>Već imaš profil? <a href="prijava.php">Prijavi se</a></p>

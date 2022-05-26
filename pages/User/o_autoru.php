@@ -16,6 +16,8 @@
 
 </head>
 <body>
+
+
   <header id="header">
     <div class="sidebar">
     <div class="logo-details">
@@ -45,6 +47,39 @@
 
   </header>
   <section class='body' id="body">
+
+    <div id="popup" class="popup">
+      <?php
+        if(!isset($_COOKIE['uvjeti'])){
+          echo "
+          <script>
+            var pu = document.getElementById('popup');
+            pu.style.display = 'inherit';
+          </script>";
+
+          require_once('../../globals/smarty/smarty_main.php');
+          include '../../globals/global.php';
+
+          $sql = "SELECT * FROM uvjeti_koristenja";
+          $izvrsi = mysqli_query($connection, $sql);
+          $opcije = array();
+          $i = 0;
+          while($row = $izvrsi->fetch_array()){
+            $opcije[] = $row["opis_uvjeta"];
+            $smarty->assign('opcije',$opcije);
+            $i++;
+          }
+          $smarty->display("../../globals/smarty/components/index.tpl");
+        } else{
+          echo "
+          <script>
+            var pu = document.getElementById('popup');
+            pu.style.display = 'none';
+          </script>";
+        }
+       ?>
+
+    </div>
     <div class="section_header">
       <h1>O autoru</h1>
     </div>
