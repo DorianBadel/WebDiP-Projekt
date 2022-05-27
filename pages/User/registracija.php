@@ -1,44 +1,66 @@
 <?php
-include '../../globals/global.php';
+require '../../globals/global.php';
 
 if(isset($_POST['submit']) && !empty($_POST['ime']) && !empty($_POST['prezime'])
-&& !empty($_POST['korime']) && !empty($_POST['uvjeti']) && !empty($_POST['lozinka'])){
+&& !empty($_POST['korime']) && !empty($_POST['uvjeti']) && !empty($_POST['lozinka']) && !empty($_POST['email'])){
+
+  $warning = "";
+
   $ime = $_POST['ime'];
+
   $prezime = $_POST['prezime'];
+
   $opis = $_POST['opis'];
   $korime = $_POST['korime'];
+  if(strlen($korime) < 5) $warning .= "Korisnicko ime pre kratko";
+
   $lozinka = $_POST['lozinka'];
+  if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/", $lozinka)) $warning .= "Lozinka mora imati minimalno jedno veliko slovo,malo slovo,broj, nekakav znak, min 8 znakova max 30";
+
   $ponlozinka = $_POST['ponlozinka'];
+  if($lozinka != $ponlozinka) $warning .= "Lozinke nisu iste";
+
   $uvjeti = $_POST['uvjeti'];
+  $email = $_POST['email'];
+  if(!preg_match("/^\w+@\w+\.\w{2,4}$/", $email)) $warning .= "Mail je pogresan";
 
-  if($lozinka == $ponlozinka){
 
-    $lozinka_kript = hash('sha256',$ponlozinka);
+  try{
+  if($warning == ""){
+    $dataB = new DB();
 
-    $sql_pass = "INSERT INTO lozinka (lozinka, lozinka_kript)
-    VALUES ('$lozinka','$lozinka_kript')";
+    $aktivacijski_kod = hash("sha256", random_bytes(64));
+    $salt = random_bytes(13);
+    $salt = hash("sha256",$salt);
 
-    $result = mysqli_query($connection, $sql_pass);
 
-    if($result){
-      $ID_lozinke = mysqli_insert_id($connection);
+    $lozinka_kript = $lozinka . $salt;
+    $lozinka_kript = hash("sha256", $lozinka_kript);
 
-      $sql_user = "INSERT INTO korisnik (ime, prezime, opis, korisnicko_ime, ID_lozinke, ID_uvjeta, ID_tipa_korisnika)
-      VALUES ('$ime','$prezime','$opis','$korime','$ID_lozinke', '$uvjeti','2')" ;
+    if($dataB->exists($korime)){
+      $warning .= "Korisnicko ime se vec koristi";
+    } else{
+      echo "<script> console.log('err1'); </script>";
+      $rez = $dataB->query("INSERT INTO lozinka(lozinka, lozinka_kript, sol)
+      VALUES (?,?,?)" , "sss", true, [$lozinka, $lozinka_kript, $salt]);
 
-      $result = mysqli_query($connection, $sql_user);
-      if($result){
-        header('Refresh:3; url=prijava.php');
-        redirect();
+      $tip = 2;
+      $ID_lozinke = $dataB->fetchId();
+      echo "<script> console.log('err'); </script>";
+      $rez = $dataB->query("INSERT INTO korisnik (ime, prezime, opis, korisnicko_ime, ID_lozinke, ID_uvjeta, ID_tipa_korisnika, email, aktivacijski_kod)
+      VALUES (?,?,?,?,?,?,?,?,?)","ssssiiiss",true,[$ime,$prezime,$opis,$korime,$ID_lozinke,$uvjeti,$tip,$email,$aktivacijski_kod]);
 
-      }else{
-        echo "<script> alert('Registracija neuspješna !')</script>";
+      if($dataB->exists($korime)){
+        $warning .= "Uspjesna registracija!";
+        header("location: ./prijava.php");
+        $success = true;
       }
-
     }
-  }else{
-    echo "<script> alert('Lozinke nisu iste!')</script>";
-  }
+  }//no warnings
+}//try
+catch(Exception $ex){
+  $warning .= $ex->getMessage();
+}
 }
 ?>
 
@@ -97,21 +119,32 @@ if(isset($_POST['submit']) && !empty($_POST['ime']) && !empty($_POST['prezime'])
 
     <div class="section_body">
         <div class="section_body-inner">
-            <div class="returnMessage"></div>
+            <div class="returnMessage">
+              <?php
+                if(!empty($warning)){
+                  echo "<p style='color: red'>$warning</p>";
+                }
+                else if(isset($success)){
+                  echo "<p style='color: green'>$success</p>";
+                }
+              ?>
+            </div>
             <form action"" method="POST">
                 <label for="ime">Ime:</label>
-                <input type="text" name="ime" placeholder="Ime...">
+                <input type="text" name="ime" placeholder="Ime..." value="<?php echo @htmlspecialchars($ime) ?>" required>
                 <label for="prezime">Prezime:</label>
-                <input type="text" name="prezime" placeholder="Prezime...">
+                <input type="text" name="prezime" placeholder="Prezime..." value="<?php echo @htmlspecialchars($prezime) ?>" required>
                 <label for="opis">Opis:</label>
-                <textarea name="opis" cols="30" rows="10" placeholder="Opis..."></textarea>
+                <textarea name="opis" cols="30" rows="10" placeholder="Opis..." value="<?php echo @htmlspecialchars($opis) ?>"></textarea>
                 <label for="korime">Korisničko ime:</label>
-                <input type="text" name="korime" placeholder="Korisničko ime...">
+                <input type="text" name="korime" placeholder="Korisničko ime..." value="<?php echo @htmlspecialchars($korime) ?>" required>
+                <label for="email">E-pošta:</label>
+                <input type="email" name="email" placeholder="Email..." value="<?php echo @htmlspecialchars($email) ?>" required>
                 <label for="lozinka">Lozinka:</label>
-                <input type="password" name="lozinka" placeholder="Lozinka...">
+                <input type="password" name="lozinka" placeholder="Lozinka..."  required>
                 <label for="ponlozinka">Ponovljena lozinka:</label>
-                <input type="password" name="ponlozinka" placeholder="Ponovljena lozinka...">
-                <select name="uvjeti">
+                <input type="password" name="ponlozinka" placeholder="Ponovljena lozinka..."  required>
+                <select name="uvjeti" value="<?php echo @htmlspecialchars($uvjeti) ?>" required>
                   <option value="1">Prihvacam dijeliti sve neosjetljive podatke s vama za optimalno iskustvo.</option>
                   <option value="2">Prihvacam dijeliti samo informacije za svrhu statistike</option>
                   <option value="3">Prihvacam dijeliti samo neophodne informacije.</option>

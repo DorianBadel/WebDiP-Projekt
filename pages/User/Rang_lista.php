@@ -62,35 +62,45 @@
 
     <div id="popup" class="popup">
       <?php
-        if(!isset($_COOKIE['uvjeti'])){
-          echo "
-          <script>
-            var pu = document.getElementById('popup');
-            pu.style.display = 'inherit';
-          </script>";
+        if(empty($_SESSION['username'])){
+          if(!isset($_COOKIE['uvjeti'])){
+            echo "
+            <script>
+              var pu = document.getElementById('popup');
+              pu.style.display = 'inherit';
+            </script>";
 
-          require_once('../../globals/smarty/smarty_main.php');
-          include '../../globals/global.php';
+            require_once('../../globals/smarty/smarty_main.php');
+            include '../../globals/global.php';
+            $dataB = new DB();
 
-          $sql = "SELECT * FROM uvjeti_koristenja";
-          $izvrsi = mysqli_query($connection, $sql);
-          $opcije = array();
-          $i = 0;
-          while($row = $izvrsi->fetch_array()){
-            $opcije[] = $row["opis_uvjeta"];
-            $smarty->assign('opcije',$opcije);
-            $i++;
+            $sql_uvjeti = $dataB->query("SELECT * FROM uvjeti_koristenja");
+
+            $opcije = array();
+            $i = 0;
+            foreach($sql_uvjeti as &$row){
+              $opcije[] = $row["opis_uvjeta"];
+              $smarty->assign('opcije',$opcije);
+              $i++;
+            }
+            $smarty->display("../../globals/smarty/components/index.tpl");
+          } else{
+            echo "
+            <script>
+              var pu = document.getElementById('popup');
+              pu.style.display = 'none';
+            </script>";
+
+            shell_exec('php script/rang_lista_xml.php');
+          }}else{
+            echo "
+            <script>
+              var pu = document.getElementById('popup');
+              pu.style.display = 'none';
+            </script>";
+
+            shell_exec('php script/rang_lista_xml.php');
           }
-          $smarty->display("../../globals/smarty/components/index.tpl");
-        } else{
-          echo "
-          <script>
-            var pu = document.getElementById('popup');
-            pu.style.display = 'none';
-          </script>";
-
-          shell_exec('php script/rang_lista_xml.php');
-        }
        ?>
 
     </div>

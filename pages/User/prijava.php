@@ -1,17 +1,60 @@
 <?php
-include '../../globals/global.php';
+require '../../globals/global.php';
 
-session_start();
+@session_start();
 
 if(isset($_POST['submit']) && !empty($_POST['korime']) && !empty($_POST['lozinka'])){
 
   $korime = $_POST['korime'];
   $lozinka = $_POST['lozinka'];
-  $lozinka_kript = hash('sha256',$lozinka);
 
-  $korisnik = "SELECT * FROM korisnik WHERE korisnicko_ime='$korime'";
+  $dataB = new DB();
+  echo "<script> console.log('TEST4') </script>";
 
-  $izvrsi = mysqli_query($connection, $korisnik);
+  try{
+  if($dataB->exists($korime)){
+    try{
+      echo "<script> console.log('TEST3') </script>";
+      $ID_lozinke = $dataB->query("SELECT ID_lozinke FROM korisnik WHERE korisnicko_ime = ?","s",false,[$korime])[0]["ID_lozinke"];
+    }catch (Exception $ex){
+      $warning = $ex->getMessage()."<br>";
+    }
+
+    try{
+      $salt = $dataB->query("SELECT sol FROM lozinka WHERE ID = ?","s",false,[$ID_lozinke])[0]["sol"];
+    }catch (Exception $ex){
+      $warning = $ex->getMessage()."<br>";
+    }
+
+    $lozinka_kript = hash("sha256", $lozinka . $salt);
+    echo "<script> console.log('TEST2') </script>";
+
+    try{
+      $provjera = $dataB->query("SELECT ID, lozinka FROM lozinka WHERE ID = ? AND lozinka_kript = ?","is",FALSE,[$ID_lozinke,$lozinka_kript]);
+    }catch (Exception $ex){
+      $warning = $ex->getMessage()."<br>";
+    }
+
+    echo "<script> console.log('TEST1') </script>";
+
+
+    if(!empty($provjera)){
+      session_start();
+
+      $datum = date('Y-m-d H:i:s');
+
+      $_SESSION['username'] = $korime;
+      $_SESSION['start'] = $datum;
+
+      header("location: ../../index.php");
+    }
+  }
+  }//try
+  catch(Exception $ex){
+    $warning = $ex->getMessage();
+  }
+
+  /*$izvrsi = mysqli_query($connection, $korisnik);
   if($izvrsi->num_rows > 0){
     $row_kor = mysqli_fetch_assoc($izvrsi);
     $id_reda = $row_kor['ID_lozinke'];
@@ -52,7 +95,7 @@ if(isset($_POST['submit']) && !empty($_POST['korime']) && !empty($_POST['lozinka
     }
   }else{
     echo "<script> alert('korisnik ne postoji!') </script>";
-  }
+  }*/
 }
 ?>
 
@@ -110,7 +153,15 @@ if(isset($_POST['submit']) && !empty($_POST['korime']) && !empty($_POST['lozinka
     <div class="section_body">
 
         <div class="section_body-inner">
-          <div id="section_msg">
+          <div class="returnMessage">
+            <?php
+              if(!empty($warning)){
+                echo "<p style='color: red'>$warning</p>";
+              }
+              else if(isset($success)){
+                echo "<p style='color: green'>Uspjesan login</p>";
+              }
+            ?>
           </div>
             <form action"" method="POST">
                 <label for="korime">Korisničko ime:</label>

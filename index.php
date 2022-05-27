@@ -7,7 +7,6 @@
   16. Zaštita XSS i SQL
   15. Prijava mora bit preko HTTPS
   13. Prijava dupla autentifikacija
-  14. Lozinke: SHA256 (using salt) i citljivo
 
    Pitanja:
   1. opis moderatora:
@@ -74,6 +73,7 @@
 
     <div id="popup" class="popup">
       <?php
+      if(empty($_SESSION['username'])){
         if(!isset($_COOKIE['uvjeti'])){
           echo "
           <script>
@@ -81,19 +81,27 @@
             pu.style.display = 'inherit';
           </script>";
 
+          require_once('globals/smarty/smarty_main.php');
           include 'globals/global.php';
+          $dataB = new DB();
 
-          $sql = "SELECT * FROM uvjeti_koristenja";
-          $izvrsi = mysqli_query($connection, $sql);
+          $sql_uvjeti = $dataB->query("SELECT * FROM uvjeti_koristenja");
+
           $opcije = array();
           $i = 0;
-          while($row = $izvrsi->fetch_array()){
+          foreach($sql_uvjeti as &$row){
             $opcije[] = $row["opis_uvjeta"];
             $smarty->assign('opcije',$opcije);
             $i++;
           }
           $smarty->display("globals/smarty/components/index.tpl");
         } else{
+          echo "
+          <script>
+            var pu = document.getElementById('popup');
+            pu.style.display = 'none';
+          </script>";
+        }}else{
           echo "
           <script>
             var pu = document.getElementById('popup');

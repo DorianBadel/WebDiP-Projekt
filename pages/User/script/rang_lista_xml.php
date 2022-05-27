@@ -1,15 +1,17 @@
 <?php
   include '../../../globals/global.php';
-  $sql = "SELECT * FROM vijest WHERE ID_statusa='3'";
-  $connection->set_charset('utf8');
-  $exec = mysqli_query($connection, $sql);
+  $dataB = new DB();
+
+  $sql = $dataB->query("SELECT * FROM vijest WHERE ID_statusa=?","i",false,['3']);
+  //$connection->set_charset('utf8');
+  //$exec = mysqli_query($connection, $sql);
 
   $xmlDom = new DOMDocument('1.0','UTF-8');
 
   $xmlRoot = $xmlDom->createElement("xml");
   $xmlRoot = $xmlDom->appendChild($xmlRoot);
 
-  while($r = mysqli_fetch_assoc($exec)){
+  foreach($sql as &$r){
     $t1 = $r['broj_pregleda'];
     $t2 = $r['naslov'];
     $t3 = $r['autori'];
