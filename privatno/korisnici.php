@@ -1,39 +1,4 @@
-<?php
-  include '../globals/global.php';
 
-  $kor_sql = "SELECT `korisnik`.`korisnicko_ime` AS `Korisnik`, `tip_korisnika`.`naziv_tipa` AS `Uloga`, `lozinka`.`lozinka` AS `Lozinka`
-    FROM `lozinka`
-    LEFT JOIN `korisnik` ON `korisnik`.`ID_lozinke` = `lozinka`.`ID`
-    LEFT JOIN `tip_korisnika` ON `korisnik`.`ID_tipa_korisnika` = `tip_korisnika`.`ID`
-";
-
-  $izvrsi = mysqli_query($connection, $kor_sql);
-
-  if($izvrsi->num_rows > 0){
-    echo '<table style="width:100%">
-    <tr>
-      <th> Korisnik </th>
-      <th> Uloga </th>
-      <th> Lozinka </th>
-    </tr>
-
-    ';
-    while($row = $izvrsi->fetch_assoc()){
-      if($row["Korisnik"] != NULL){
-        echo '
-        <tr>
-          <td>'. $row["Korisnik"] .'</td>
-          <td>'. $row["Uloga"] .'</td>
-          <td>'. $row["Lozinka"] .'</td>
-        </tr>
-
-        ';
-
-      }
-    }
-    echo "</table>";
-  }
- ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,5 +16,41 @@
   <link rel="stylesheet" href="./globals/template.css">
 </head>
 <body>
+  <?php
+    include '../globals/global.php';
+    $dataB = new DB();
+
+    $sql = $dataB->query("SELECT `korisnik`.`korisnicko_ime` AS `Korisnik`, `tip_korisnika`.`naziv_tipa` AS `Uloga`, `lozinka`.`lozinka` AS `Lozinka`
+      FROM `lozinka`
+      LEFT JOIN `korisnik` ON `korisnik`.`ID_lozinke` = `lozinka`.`ID`
+      LEFT JOIN `tip_korisnika` ON `korisnik`.`ID_tipa_korisnika` = `tip_korisnika`.`ID`
+  ");
+
+    if($sql != null){
+      echo '<table style="width:100%">
+      <tr>
+        <th> Korisnik </th>
+        <th> Uloga </th>
+        <th> Lozinka </th>
+      </tr>
+
+      ';
+      foreach($sql as &$row){
+        if($row["Korisnik"] != NULL){
+          echo '
+          <tr>
+            <td>'. $row["Korisnik"] .'</td>
+            <td>'. $row["Uloga"] .'</td>
+            <td>'. $row["Lozinka"] .'</td>
+          </tr>
+
+          ';
+
+        }
+      }
+      echo "</table>";
+    }
+   ?>
+
 </body>
 </html>

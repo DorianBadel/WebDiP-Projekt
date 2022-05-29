@@ -7,6 +7,7 @@ function loadSve(){
     let header_component = document.querySelector(".nav-list");
     let footer_component = document.getElementById("footer");
 
+
     header_component.innerHTML += loadHeader();
 
     //footer_component.innerHTML += loadFooter();
@@ -81,7 +82,6 @@ function loadHeader(){
     return html;
 };
 
-
 function loadFooter(){
     var html;
     html = `
@@ -101,3 +101,6 @@ function loadFooter(){
     `;
     return html;
 };
+
+function getUloga(sql){
+}

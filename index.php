@@ -118,12 +118,21 @@
       <div class="section_welcome">
         <p>Dobrodošao/la! <span id="welcome_username">
           <?php
+            include 'globals/global.php';
+            $dataB = new DB(); // use smarty for nav, no other choice
+
             if(empty($_SESSION['username'])){
               echo "Neregistrirani korisnik";
+
+              $sqli = $dataB->getUloga();
+              echo $sqli;
 
             }
             else{
               echo $_SESSION['username'];
+
+              $sqli = $dataB->getUloga();
+              echo $sqli;
             }
            ?>
         </span> na tvoju novu jedinu postaju za sve <em>vijesti!</em></p>

@@ -62,7 +62,15 @@ class DB{
     return mysqli_insert_id($this->connection);
   }
 
+  public function getUloga(){
+    @session_start();
+    $sql = $this->query("SELECT ID_tipa_korisnika FROM korisnik WHERE korisnicko_ime= ?","s",false,[$_SESSION['username']]);
+    return $sql[0]["ID_tipa_korisnika"];
+  }
+
 } //DB
+
+
 
 
 

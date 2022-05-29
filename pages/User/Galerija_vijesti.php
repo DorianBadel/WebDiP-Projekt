@@ -14,6 +14,11 @@
   <script src="../../globals/template.js" type="text/javascript"></script>
   <link rel="stylesheet" href="../../globals/template.css">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <script src="script/ranglista.js" ></script>
 </head>
 <body>
 
@@ -113,28 +118,7 @@
         </div>
       </div>
       <div class="section__news">
-        <div class="news">
-          <a href="">
-            <figure>
-              <img src="../../media/me-jpeg.jpeg" alt="vijest 1">
-            </figure>
-            <h3>Vijest 1</h3>
-            <p>U ovoj vijesti se radi o...</p>
-            <span>Dorian Badel</span>
-            <p class="broj_pregleda">242</p>
-          </a>
-        </div>
-        <div class="news">
-          <a href="">
-            <figure>
-              <img src="../../media/me-jpeg.jpeg" alt="vijest 1">
-            </figure>
-            <h3>Vijest 1</h3>
-            <p>U ovoj vijesti se radi o...</p>
-            <span>Dorian Badel</span>
-            <p class="broj_pregleda">242</p>
-          </a>
-        </div>
+        
 
       </div>
     </div>
