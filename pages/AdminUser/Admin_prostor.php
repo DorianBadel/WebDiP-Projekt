@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-  <title>Urednicki prostor</title>
+  <title>Administratorski prostor</title>
 
   <link rel="stylesheet" href="../../index.css">
   <link rel="stylesheet" href="../RegUser/style/linker.css">
@@ -52,34 +52,52 @@
   <section class='body' id="body">
 
     <div class="section_header">
-      <h1>Urednicki prostor</h1>
+      <h1>Administratorski prostor</h1>
     </div>
 
     <div class="section_body" id="bod">
       <div class="section__links">
 
          <div class="link">
-           <a href="../User/Galerija_vijesti.php">
-             <i class='bx bx-block'></i>
-           <span class="title">Blokirani korisnici</span>
+           <a href="pages/kategorije.php">
+             <i class='bx bx-category-alt'></i>
+           <span class="title">Kategorije</span>
          </a>
          </div>
          <div class="link">
-           <a href="../User/o_autoru.php">
-             <i class='bx bx-user-check' ></i>
-           <span class="title">Moje recenzije</span>
+           <a href="pages/pop_zakljucanih.php">
+             <i class='bx bx-user-x' ></i>
+           <span class="title">Popis zaključanih korisnika</span>
          </a>
          </div>
          <div class="link">
-           <a href="../User/dokumentacija.php">
-             <i class='bx bx-message-square-x'></i>
-           <span class="title">Odbijene vijestima</span>
+           <a href="pages/ispis_svih_kor.php">
+             <i class='bx bxs-user-detail'></i>
+           <span class="title">Ispis svih korisnika</span>
          </a>
          </div>
          <div class="link">
-           <a href="../User/Rang_lista.php">
-              <i class='bx bx-line-chart' ></i>
-              <span class="title">Statistika</span>
+           <a href="pages/konfiguracija.php">
+             <i class='bx bx-cog' ></i>
+           <span class="title">Konfiguracija sustava</span>
+         </a>
+         </div>
+         <div class="link">
+           <a href="pages/vj_za_recenziju.php">
+             <i class='bx bx-book-reader' ></i>
+           <span class="title">Popis vijesti bez recenzenata</span>
+         </a>
+         </div>
+         <div class="link">
+           <a href="pages/edit_kolacic.php">
+             <i class='bx bx-cookie' ></i>
+           <span class="title">Kolačići</span>
+         </a>
+         </div>
+         <div class="link">
+           <a href="pages/dnevnik_rada.php">
+              <i class='bx bx-book-bookmark'></i>
+              <span class="title">Dnevnik rada</span>
            </a>
          </div>
 

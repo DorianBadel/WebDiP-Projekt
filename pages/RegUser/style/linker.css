@@ -29,12 +29,18 @@
   }
 }
 
+@media(min-width: 1324px){
+  .section__links{
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
 
 .section__links .link{
   padding: 20px;
   text-align: center;
   background-color: var(--color-text-tertiary);
-  min-height: 100px;
+  min-height: 150px;
   transition: all 0.5s ease;
 }
 
