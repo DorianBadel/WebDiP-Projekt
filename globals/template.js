@@ -4,11 +4,12 @@ document.addEventListener('load', loadSve);
 
 function loadSve(){
 
-    let header_component = document.querySelector(".nav-list");
+
     let footer_component = document.getElementById("footer");
 
+    srcUloga();
 
-    header_component.innerHTML += loadHeader();
+    //console.log(srcUloga())
 
     //footer_component.innerHTML += loadFooter();
 
@@ -47,38 +48,99 @@ function getLocationLinks(){
     return links;
 };
 
-function loadHeader(){
+function getLocationLinksAuth(){
+    var links= [];
+    var loc = window.location.pathname.split('/');
+    var path = loc[loc.length-1];
+    console.log(loc[loc.length-1]);
+
+    if(path == "" || path == "index.php" ){
+      links.push("pages/RegUser/pocetna.php");
+      links.push("pages/RegUser/Radni_prostor.php");
+    }else if(
+
+      path == "prijava.php" ||
+      path == "registracija.php" ||
+      path == "Galerija_vijesti.php" ||
+      path == "o_autoru.php" ||
+      path == "Rang_lista.php" ||
+      path == "dokumentacija.php"
+     ){
+      links.push("../RegUser/pocetna.php");
+      links.push("../RegUser/Radni_prostor.php");
+    }
+    else if(path == "pocetna.php"){
+      links.push("#");
+      links.push("Radni_prostor.php");
+    }
+    else if(path == "Radni_prostor.php"){
+      links.push("pocetna.php");
+      links.push("#");
+    }
+    else if(
+      path == "auth_stat.php" ||
+      path == "blo_kat.php" ||
+      path == "moj_recenzije.php" ||
+      path == "moj_vijesti.php"
+    ){
+      links.push("../pocetna.php");
+      links.push("../Radni_prostor.php");
+    }
+
+    return links;
+};
+
+function loadHeader(value){
     var html;
-    links = getLocationLinks();
+
+    if(value == 0){
+      let links = getLocationLinks();
+      html= `
+        <li>
+          <a href="`+links[0]+`">
+            <i class='bx bx-grid-alt'></i>
+          </a>
+           <span class="tooltip">Pregled Vijesti</span>
+        </li>
+        <li>
+         <a href="`+links[1]+`">
+           <i class='bx bx-user' ></i>
+         </a>
+         <span class="tooltip">O autoru</span>
+       </li>
+       <li>
+         <a href="`+links[2]+`">
+           <i class='bx bxs-file-doc' ></i>
+         </a>
+         <span class="tooltip">Dokumentacija</span>
+       </li>
+       <li>
+         <a href="`+links[3]+`">
+           <i class='bx bx-list-ol' ></i>
+         </a>
+         <span class="tooltip">Rang lista</span>
+       </li>
+      `;
+    }
 
 
-    html= `
-
+    if(value == 1){
+      let links = getLocationLinksAuth();
+      html =`
       <li>
         <a href="`+links[0]+`">
-          <i class='bx bx-grid-alt'></i>
+          <i class='bx bx-windows'></i>
         </a>
-         <span class="tooltip">Pregled Vijesti</span>
+         <span class="tooltip">Početna</span>
       </li>
       <li>
-       <a href="`+links[1]+`">
-         <i class='bx bx-user' ></i>
-       </a>
-       <span class="tooltip">O autoru</span>
-     </li>
-     <li>
-       <a href="`+links[2]+`">
-         <i class='bx bxs-file-doc' ></i>
-       </a>
-       <span class="tooltip">Dokumentacija</span>
-     </li>
-     <li>
-       <a href="`+links[3]+`">
-         <i class='bx bx-list-ol' ></i>
-       </a>
-       <span class="tooltip">Rang lista</span>
-     </li>
-    `
+        <a href="`+links[1]+`">
+          <i class='bx bx-coffee'></i>
+        </a>
+         <span class="tooltip">Radni prostor</span>
+      </li>
+      `
+    }
     return html;
 };
 
@@ -102,5 +164,36 @@ function loadFooter(){
     return html;
 };
 
-function getUloga(sql){
+function test(test){
+  console.log(test);
+  let header_component = document.querySelector(".nav-list");
+  switch(test){
+    case "2":
+      header_component.innerHTML += loadHeader(1);
+    break;
+    case "3":
+      header_component.innerHTML += loadHeader(2);
+    break;
+    case "4":
+      header_component.innerHTML += loadHeader(3);
+    break;
+    default:
+      header_component.innerHTML += loadHeader(0);
+  }
 }
+
+function srcUloga(){
+  console.log("test");
+  let vr = [];
+  $.ajax({url: 'https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/role.xml',
+    type: 'GET',
+    dataType: 'xml',
+    success: function(result){
+      $(result).find('xml korisnik').each(function(){
+          vr["gay"] = $(this).find('uloga').text();
+
+          test(vr["gay"]);
+      })
+      }
+    })
+  }

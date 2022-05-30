@@ -64,8 +64,29 @@ class DB{
 
   public function getUloga(){
     @session_start();
-    $sql = $this->query("SELECT ID_tipa_korisnika FROM korisnik WHERE korisnicko_ime= ?","s",false,[$_SESSION['username']]);
-    return $sql[0]["ID_tipa_korisnika"];
+
+    //if(file_exists("./role.xml")) unlink("./role.xml");
+
+    if(isset($_SESSION['username'])){
+      $sql = $this->query("SELECT ID_tipa_korisnika FROM korisnik WHERE korisnicko_ime= ?","s",false,[$_SESSION['username']]);
+      $uloga = $sql[0]['ID_tipa_korisnika'];
+    }
+    else {
+      $uloga = "1";
+    }
+    //$sql[0]["ID_tipa_korisnika"];
+
+    $xmlDom = new DOMDocument('1.0','UTF-8');
+
+    $xmlRoot = $xmlDom->createElement("xml");
+    $xmlRoot = $xmlDom->appendChild($xmlRoot);
+
+    $element = $xmlDom->createElement("korisnik");
+    $element = $xmlRoot->appendChild($element);
+    $element->appendChild($xmlDom->createElement('uloga',$uloga));
+
+    $xmlDom->save("./role.xml");
+
   }
 
 } //DB

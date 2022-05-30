@@ -31,6 +31,11 @@
 
   <link rel="stylesheet" href="index.css">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
   <!--Globals-->
   <script src="./globals/template.js" type="text/javascript"></script>
   <!--Popup-->
@@ -47,6 +52,8 @@
       </a>
     </div>
       <ul class="nav-list">
+        <div class="nav-inner">
+        </div>
 
 
 
@@ -123,16 +130,11 @@
 
             if(empty($_SESSION['username'])){
               echo "Neregistrirani korisnik";
-
-              $sqli = $dataB->getUloga();
-              echo $sqli;
-
+              $dataB->getUloga();
             }
             else{
               echo $_SESSION['username'];
-
-              $sqli = $dataB->getUloga();
-              echo $sqli;
+              $dataB->getUloga();
             }
            ?>
         </span> na tvoju novu jedinu postaju za sve <em>vijesti!</em></p>
