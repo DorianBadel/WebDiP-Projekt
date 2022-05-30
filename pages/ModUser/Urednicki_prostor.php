@@ -8,7 +8,7 @@
   <title>Radni prostor</title>
 
   <link rel="stylesheet" href="../../index.css">
-  <link rel="stylesheet" href="style/linker.css">
+  <link rel="stylesheet" href="../RegUser/style/linker.css">
 
   <!--Globals-->
   <script src="../../globals/template.js" type="text/javascript"></script>
@@ -60,26 +60,26 @@
 
          <div class="link">
            <a href="../User/Galerija_vijesti.php">
-             <i class='bx bx-grid-alt'></i>
-           <span class="title">Pregled Vijesti</span>
+             <i class='bx bx-block'></i>
+           <span class="title">Blokirani korisnici</span>
          </a>
          </div>
          <div class="link">
            <a href="../User/o_autoru.php">
-             <i class='bx bx-user' ></i>
-           <span class="title">O autoru</span>
+             <i class='bx bx-user-check' ></i>
+           <span class="title">Moje recenzije</span>
          </a>
          </div>
          <div class="link">
            <a href="../User/dokumentacija.php">
-             <i class='bx bxs-file-doc' ></i>
-           <span class="title">Dokumentacija</span>
+             <i class='bx bx-message-square-x'></i>
+           <span class="title">Odbijene vijestima</span>
          </a>
          </div>
          <div class="link">
            <a href="../User/Rang_lista.php">
-              <i class='bx bx-list-ol' ></i>
-              <span class="title">Rang lista</span>
+              <i class='bx bx-line-chart' ></i>
+              <span class="title">Statistika</span>
            </a>
          </div>
 

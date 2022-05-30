@@ -90,57 +90,148 @@ function getLocationLinksAuth(){
     return links;
 };
 
+function getLocationLinksRec(){
+  var links= [];
+  var loc = window.location.pathname.split('/');
+  var path = loc[loc.length-1];
+  console.log(loc[loc.length-1]);
+
+  if(path == "" || path == "index.php" ){
+    links.push("pages/RegUser/pocetna.php");
+    links.push("pages/RegUser/Radni_prostor.php");
+    links.push("pages/ModUser/Urednicki_prostor.php");
+  }else if(
+    path == "prijava.php" ||
+    path == "registracija.php" ||
+    path == "Galerija_vijesti.php" ||
+    path == "o_autoru.php" ||
+    path == "Rang_lista.php" ||
+    path == "dokumentacija.php"
+   ){
+    links.push("../RegUser/pocetna.php");
+    links.push("../RegUser/Radni_prostor.php");
+    links.push("../ModUser/Urednicki_prostor.php");
+  }
+  else if(path == "pocetna.php"){
+    links.push("#");
+    links.push("Radni_prostor.php");
+    links.push("../ModUser/Urednicki_prostor.php");
+  }
+  else if(path == "Radni_prostor.php"){
+    links.push("pocetna.php");
+    links.push("#");
+    links.push("../ModUser/Urednicki_prostor.php");
+  }
+  else if(path == "Urednicki_prostor.php"){
+    links.push("../RegUser/pocetna.php");
+    links.push("../RegUser/Radni_prostor.php");
+    links.push("#");
+  }
+  else if(
+    path == "auth_stat.php" ||
+    path == "blo_kat.php" ||
+    path == "moj_recenzije.php" ||
+    path == "moj_vijesti.php"
+  ){
+    links.push("../pocetna.php");
+    links.push("../Radni_prostor.php");
+    links.push("../../ModUser/Urednicki_prostor.php");
+  }
+  else if(
+    path == "blo_kor.php" ||
+    path == "moj_recenzije.php" ||
+    path == "odb_vijesti.php" ||
+    path == "rec_stat.php"
+  ){
+    links.push("../../RegUser/pocetna.php");
+    links.push("../../RegUser/Radni_prostor.php");
+    links.push("../ModUser/Urednicki_prostor.php");
+  }
+
+  return links;
+}
+
+
 function loadHeader(value){
     var html;
+    let links;
 
-    if(value == 0){
-      let links = getLocationLinks();
-      html= `
+    switch(value){
+      case 0: //Neregistriran korisnik
+        links = getLocationLinks();
+        html= `
+          <li>
+            <a href="`+links[0]+`">
+              <i class='bx bx-grid-alt'></i>
+            </a>
+             <span class="tooltip">Pregled Vijesti</span>
+          </li>
+          <li>
+           <a href="`+links[1]+`">
+             <i class='bx bx-user' ></i>
+           </a>
+           <span class="tooltip">O autoru</span>
+         </li>
+         <li>
+           <a href="`+links[2]+`">
+             <i class='bx bxs-file-doc' ></i>
+           </a>
+           <span class="tooltip">Dokumentacija</span>
+         </li>
+         <li>
+           <a href="`+links[3]+`">
+             <i class='bx bx-list-ol' ></i>
+           </a>
+           <span class="tooltip">Rang lista</span>
+         </li>
+        `;
+      break;
+      case 1: //Registriran korisnik
+        links = getLocationLinksAuth();
+        html =`
         <li>
           <a href="`+links[0]+`">
-            <i class='bx bx-grid-alt'></i>
+            <i class='bx bx-windows'></i>
           </a>
-           <span class="tooltip">Pregled Vijesti</span>
+           <span class="tooltip">Početna</span>
         </li>
         <li>
-         <a href="`+links[1]+`">
-           <i class='bx bx-user' ></i>
-         </a>
-         <span class="tooltip">O autoru</span>
-       </li>
-       <li>
-         <a href="`+links[2]+`">
-           <i class='bx bxs-file-doc' ></i>
-         </a>
-         <span class="tooltip">Dokumentacija</span>
-       </li>
-       <li>
-         <a href="`+links[3]+`">
-           <i class='bx bx-list-ol' ></i>
-         </a>
-         <span class="tooltip">Rang lista</span>
-       </li>
-      `;
-    }
+          <a href="`+links[1]+`">
+            <i class='bx bx-coffee'></i>
+          </a>
+           <span class="tooltip">Radni prostor</span>
+        </li>
+        `;
 
+      break;
+      case 2: //urednik
+        links = getLocationLinksRec();
+        html = `
+          <li>
+            <a href="`+links[0]+`">
+              <i class='bx bx-windows'></i>
+            </a>
+             <span class="tooltip">Početna</span>
+          </li>
+          <li>
+            <a href="`+links[1]+`">
+              <i class='bx bx-coffee'></i>
+            </a>
+             <span class="tooltip">Radni prostor</span>
+          </li>
+          <li>
+            <a href="`+links[2]+`">
+              <i class='bx bx-pen'></i>
+            </a>
+             <span class="tooltip">Urednicki prostor</span>
+          </li>
+        `;
+      break;
+      case 3: //admin
 
-    if(value == 1){
-      let links = getLocationLinksAuth();
-      html =`
-      <li>
-        <a href="`+links[0]+`">
-          <i class='bx bx-windows'></i>
-        </a>
-         <span class="tooltip">Početna</span>
-      </li>
-      <li>
-        <a href="`+links[1]+`">
-          <i class='bx bx-coffee'></i>
-        </a>
-         <span class="tooltip">Radni prostor</span>
-      </li>
-      `
-    }
+      break;
+    } //switch
+
     return html;
 };
 
@@ -167,6 +258,7 @@ function loadFooter(){
 function test(test){
   console.log(test);
   let header_component = document.querySelector(".nav-list");
+  //test = "3";
   switch(test){
     case "2":
       header_component.innerHTML += loadHeader(1);
@@ -190,9 +282,9 @@ function srcUloga(){
     dataType: 'xml',
     success: function(result){
       $(result).find('xml korisnik').each(function(){
-          vr["gay"] = $(this).find('uloga').text();
+          vr["ul"] = $(this).find('uloga').text();
 
-          test(vr["gay"]);
+          test(vr["ul"]);
       })
       }
     })
