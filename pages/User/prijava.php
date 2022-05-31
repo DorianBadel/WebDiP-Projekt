@@ -1,103 +1,4 @@
-<?php
-require '../../globals/global.php';
 
-@session_start();
-
-if(isset($_POST['submit']) && !empty($_POST['korime']) && !empty($_POST['lozinka'])){
-
-  $korime = $_POST['korime'];
-  $lozinka = $_POST['lozinka'];
-
-  $dataB = new DB();
-  echo "<script> console.log('TEST4') </script>";
-
-  try{
-  if($dataB->exists($korime)){
-    try{
-      echo "<script> console.log('TEST3') </script>";
-      $ID_lozinke = $dataB->query("SELECT ID_lozinke FROM korisnik WHERE korisnicko_ime = ?","s",false,[$korime])[0]["ID_lozinke"];
-    }catch (Exception $ex){
-      $warning = $ex->getMessage()."<br>";
-    }
-
-    try{
-      $salt = $dataB->query("SELECT sol FROM lozinka WHERE ID = ?","s",false,[$ID_lozinke])[0]["sol"];
-    }catch (Exception $ex){
-      $warning = $ex->getMessage()."<br>";
-    }
-
-    $lozinka_kript = hash("sha256", $lozinka . $salt);
-    echo "<script> console.log('TEST2') </script>";
-
-    try{
-      $provjera = $dataB->query("SELECT ID, lozinka FROM lozinka WHERE ID = ? AND lozinka_kript = ?","is",FALSE,[$ID_lozinke,$lozinka_kript]);
-    }catch (Exception $ex){
-      $warning = $ex->getMessage()."<br>";
-    }
-
-    echo "<script> console.log('TEST1') </script>";
-
-
-    if(!empty($provjera)){
-      session_start();
-
-      $datum = date('Y-m-d H:i:s');
-
-      $_SESSION['username'] = $korime;
-      $_SESSION['start'] = $datum;
-
-      header("location: ../../index.php");
-    }
-  }
-  }//try
-  catch(Exception $ex){
-    $warning = $ex->getMessage();
-  }
-
-  /*$izvrsi = mysqli_query($connection, $korisnik);
-  if($izvrsi->num_rows > 0){
-    $row_kor = mysqli_fetch_assoc($izvrsi);
-    $id_reda = $row_kor['ID_lozinke'];
-
-    $kor_pass = "SELECT * FROM lozinka WHERE ID='$id_reda'";
-    $izvrsi = mysqli_query($connection, $kor_pass);
-    if($izvrsi->num_rows > 0){
-      $row_pass = mysqli_fetch_assoc($izvrsi);
-      if($row_pass['lozinka_kript'] == $lozinka_kript){
-
-        $datum = date('Y-m-d H:i:s');
-
-        $db_ID_kor = $row_kor['ID'];
-        $_SESSION['username'] = $row_kor['korisnicko_ime'];
-        $_SESSION['start'] = $datum;
-
-        $sql_sess = "INSERT INTO sesija (ID, pocetak_sesije, ID_konfiguracije)
-        VALUES ('$korime','$datum', '1')";
-
-        $db_res_session = mysqli_query($connection, $sql_sess);
-        $db_sess_id = mysqli_insert_id($connection);
-
-        $sql_upd_kor = "UPDATE korisnik SET ID_sesije='$db_sess_id' WHERE ID = '$db_ID_kor'";
-        $db_res_kor_sess = mysqli_query($connection, $sql_upd_kor);
-
-        if($db_res_kor_sess){
-          echo "<script> alert('uspjeh'); </script>";
-          header('Refresh:0; url=../../index.php');
-        }
-
-      } else {
-        echo "
-        <script>
-          let msg = document.getElementById('section_msg');
-          msg.innerHTML = 'Pogresan unos podataka [lozinka]';
-        </script>";
-      }
-    }
-  }else{
-    echo "<script> alert('korisnik ne postoji!') </script>";
-  }*/
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -110,6 +11,11 @@ if(isset($_POST['submit']) && !empty($_POST['korime']) && !empty($_POST['lozinka
 
   <link rel="stylesheet" href="../../index.css">
   <link rel="stylesheet" href="style/prijava.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
 
   <!--Globals-->
   <script src="../../globals/template.js" type="text/javascript"></script>
@@ -155,6 +61,7 @@ if(isset($_POST['submit']) && !empty($_POST['korime']) && !empty($_POST['lozinka
         <div class="section_body-inner">
           <div class="returnMessage">
             <?php
+              if(isset($br_pokusaja)) echo $br_pokusaja;
               if(!empty($warning)){
                 echo "<p style='color: red'>$warning</p>";
               }
@@ -173,6 +80,68 @@ if(isset($_POST['submit']) && !empty($_POST['korime']) && !empty($_POST['lozinka
                 <p>Nisi prijavljen? <a href="registracija.php">Registriraj se</a></p>
 
             </form>
+
+            <?php
+            require '../../globals/global.php';
+
+            if(isset($_POST['submit']) && !empty($_POST['korime']) && !empty($_POST['lozinka'])){
+
+              $korime = $_POST['korime'];
+              $lozinka = $_POST['lozinka'];
+
+              $dataB = new DB();
+
+              try{
+              if($dataB->exists($korime)){
+                $br_pokusaja = 25;
+                $ID_lozinke = 25;
+                try{
+                  $korisnikInfo = $dataB->query("SELECT ID_lozinke , br_neuspj_unosa FROM korisnik WHERE korisnicko_ime = ?","s",false,[$korime]);
+                  $br_pokusaja = $korisnikInfo[0]['br_neuspj_unosa'];
+                  $ID_lozinke = $korisnikInfo[0]["ID_lozinke"];
+                }catch (Exception $ex){
+                  $warning = $ex->getMessage()."<br>";
+                }
+
+                if($br_pokusaja <= 3){
+
+                  try{
+                    $salt = $dataB->query("SELECT sol FROM lozinka WHERE ID = ?","s",false,[$ID_lozinke])[0]["sol"];
+                  }catch (Exception $ex){
+                    $warning = $ex->getMessage()."<br>";
+                  }
+
+                  $lozinka_kript = hash("sha256", $lozinka . $salt);
+
+
+                  $provjera = $dataB->query("SELECT ID, lozinka FROM lozinka WHERE ID = ? AND lozinka_kript = ?","is",FALSE,[$ID_lozinke,$lozinka_kript]);
+
+
+                  if(!empty($provjera)){
+                    @session_start();
+                    $dataB->query("UPDATE korisnik SET br_neuspj_unosa = ? WHERE korisnicko_ime = ?","is",true,[0,$korime]);
+
+                    $datum = date('Y-m-d H:i:s');
+
+                    $_SESSION['username'] = $korime;
+                    $_SESSION['start'] = $datum;
+
+                    header("location: ../../index.php");
+                  } else {
+                    "<script> console.log('azuriram') </script>";
+                    $dataB->query("UPDATE korisnik SET br_neuspj_unosa = ? WHERE korisnicko_ime = ?","is",true,[$br_pokusaja+1,$korime]);
+                    header("Refresh:0");
+                  }
+
+                } else echo "<script> console.log('BLOKIRAN SI') </script>";
+
+              }
+              }//try
+              catch(Exception $ex){
+                $warning = $ex->getMessage();
+              }
+            }
+            ?>
         </div>
 
     </div>

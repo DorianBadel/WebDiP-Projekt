@@ -74,7 +74,6 @@ class DB{
     else {
       $uloga = "1";
     }
-    //$sql[0]["ID_tipa_korisnika"];
 
     $xmlDom = new DOMDocument('1.0','UTF-8');
 

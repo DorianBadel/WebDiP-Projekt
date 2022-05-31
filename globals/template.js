@@ -372,7 +372,6 @@ function loadFooter(){
 function test(test){
   console.log(test);
   let header_component = document.querySelector(".nav-list");
-  test = "4";
   switch(test){
     case "2":
       header_component.innerHTML += loadHeader(1);
@@ -390,15 +389,15 @@ function test(test){
 
 function srcUloga(){
   console.log("test");
-  let vr = [];
+  let vr = "1";
   $.ajax({url: 'https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/role.xml',
     type: 'GET',
     dataType: 'xml',
     success: function(result){
       $(result).find('xml korisnik').each(function(){
-          vr["ul"] = $(this).find('uloga').text();
+          vr = $(this).find('uloga').text();
 
-          test(vr["ul"]);
+          test(vr);
       })
       }
     })
