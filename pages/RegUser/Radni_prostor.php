@@ -59,28 +59,28 @@
       <div class="section__links">
 
          <div class="link">
-           <a href="#">
+           <a href="pages/blo_kat.php">
               <i class='bx bx-block' ></i>
            <span class="title">Blokirane kategorije</span>
           </a>
          </div>
 
          <div class="link">
-           <a href="#">
+           <a href="pages/moj_vijesti.php">
               <i class='bx bx-news' ></i>
            <span class="title">Moje vijesti</span>
           </a>
          </div>
 
          <div class="link">
-           <a href="#">
+           <a href="pages/moj_recenzije.php">
               <i class='bx bx-edit-alt'></i>
            <span class="title">Moje recenzije</span>
           </a>
          </div>
 
          <div class="link">
-           <a href="#">
+           <a href="pages/auth_stat.php">
               <i class='bx bx-pie-chart-alt-2' ></i>
            <span class="title">Statistika</span>
           </a>

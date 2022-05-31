@@ -1,0 +1,10 @@
+@import "../../../globals/themes.css";
+
+.graph {
+  background-color: var(--color-text-tertiary);
+  display: flex;
+  justify-content: center;
+}
+
+.graph canvas {
+}
