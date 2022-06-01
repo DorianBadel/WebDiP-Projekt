@@ -39,7 +39,7 @@
               echo "<a href='prijava.php'><i class='bx bx-log-in' id='log_out'></i></a>";
             }
             else{
-              echo "<a href='../../globals/logout.php'><i class='bx bx-log-out' id='log_out'></i></a>";
+              echo "<a href='../../../globals/logout.php'><i class='bx bx-log-out' id='log_out'></i></a>";
             }
           ?>
 
@@ -93,6 +93,9 @@
        ?>
 
     </div>
+    <?php
+      shell_exec('php script/odb_vijesti_xml.php');
+    ?>
 
     <div class="section_header">
       <h1>Odbijene vijesti</h1>

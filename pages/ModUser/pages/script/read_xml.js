@@ -48,7 +48,36 @@ function ucitajPodatkeVJ(){
 }
 
 function ucitajPodatkeMR(){
+  let vijest;
+  let section = document.querySelector(".section__news");
+  section.innerHTML = "";
 
+  $.ajax({url: "https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/tablice/moje_rec.xml",
+    type: "GET",
+    dataType: "xml",
+    success: function(result){
+      $(result).find("xml vijest").each(function(){
+          vijest = `
+          <div class="news">
+
+              <figure>
+                <img src=`+$(this).find('slika').text()+` alt="Podatak ne postoji"
+              </figure>
+              <h3>`+($(this).find('naslov').text() || "Podatak ne postoji")+`</h3>
+              <p>`+($(this).find('tekst').text() || "Podatak ne postoji")+`</p>
+              <p>`+($(this).find('izvor').text() || "Podatak ne postoji")+`</p>
+              <span>`+($(this).find('autori').text() || "Podatak ne postoji")+`</span>
+              <span class="date">`+($(this).find('datum').text() || "Podatak ne postoji")+`</span>
+              <p class="broj_pregleda">`+($(this).find('verzija').text() || "Podatak ne postoji")+`</p>
+              <a href=""><i class='bx bx-edit-alt'></i></a>
+
+          </div>
+          `;
+
+          section.innerHTML += vijest;
+      })
+    }
+  });
 }
 
 $(document).ready(function(){

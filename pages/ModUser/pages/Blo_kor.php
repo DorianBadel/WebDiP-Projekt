@@ -94,6 +94,10 @@
 
     </div>
 
+    <?php
+      shell_exec('php script/blo_kor_xml.php');
+    ?>
+
     <div class="section_header">
       <h1>Blokirani korisnici</h1>
     </div>

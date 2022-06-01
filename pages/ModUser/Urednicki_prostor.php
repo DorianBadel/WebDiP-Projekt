@@ -65,7 +65,7 @@
          </a>
          </div>
          <div class="link">
-           <a href="../User/o_autoru.php">
+           <a href="pages/moj_recenzije.php">
              <i class='bx bx-user-check' ></i>
            <span class="title">Moje recenzije</span>
          </a>
@@ -77,7 +77,7 @@
          </a>
          </div>
          <div class="link">
-           <a href="../User/Rang_lista.php">
+           <a href="pages/rec_stat.php">
               <i class='bx bx-line-chart' ></i>
               <span class="title">Statistika</span>
            </a>

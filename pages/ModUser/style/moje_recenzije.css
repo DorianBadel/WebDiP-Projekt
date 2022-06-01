@@ -1,0 +1,13 @@
+@import "../../../globals/themes.css";
+
+.section__news .news .date{
+  display: block;
+}
+
+.section__news .news i{
+  display: block;
+ padding: 5px;
+ margin-top: 20px;
+ font-size: 30px;
+ text-align: center;
+}
