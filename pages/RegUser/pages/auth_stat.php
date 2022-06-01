@@ -62,7 +62,7 @@
 
     <div class="section_body" id="bod">
       <?php
-      shell_exec('php ../../User/script/rang_lista_xml.php');
+      shell_exec("php script/auth_stat.php");
       ?>
       <table id="java_table">
         <thead>
@@ -70,8 +70,8 @@
             <!-- HEADER -->
             <th>Pregledi</th>
             <th>Naslov</th>
+            <th>Autori</th>
             <th>Datum objave</th>
-            <th>Verzija vijesti</th>
           </tr> <!-- HEADER -->
         </thead>
 

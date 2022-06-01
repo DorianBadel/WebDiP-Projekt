@@ -25,36 +25,59 @@ function ucitajGraf(){
   cont.lineTo(RIGHT, BOTTOM);
   cont.stroke();
 
-  let arr = [4500,300,2200,20];
+  let arr = [];
+  var xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+      let xmlFile = this.responseXML;
+      let tmpArr = xmlFile.getElementsByTagName("pregledi");
+      for(let i = 0; i< tmpArr.length; i++){
+        arr.push(parseInt(tmpArr[i].childNodes[0].data));
+      }
+      console.log(arr);
 
-  cont.font = "12px arial";
+      let max = 0;
+
+      for(let i = 0; i< arr.length; i++){
+        if(arr[i] > max) max = arr[i];
+      }
 
 
-  cont.beginPath();
-  cont.strokeStyle = "rgba(255,255,255,0.5)";
-  cont.moveTo(LEFT, TOP);
-  cont.lineTo(RIGHT, TOP);
-  cont.stroke();
+      cont.font = "12px arial";
 
-  for(let i = 0; i< arr.length; ++i){
-    cont.beginPath();
-    cont.moveTo(LEFT, perspective(HEIGHT,max,arr[i])+TOP);
-    cont.lineTo(RIGHT, perspective(HEIGHT,max,arr[i])+TOP);
-    cont.fillText(arr[i],10,(perspective(HEIGHT,max,arr[i])+30));
-    cont.stroke();
+
+      cont.beginPath();
+      cont.strokeStyle = "rgba(255,255,255,0.5)";
+      cont.moveTo(LEFT, TOP);
+      cont.lineTo(RIGHT, TOP);
+      cont.stroke();
+
+      for(let i = 0; i< arr.length; ++i){
+        cont.beginPath();
+        cont.moveTo(LEFT, perspective(HEIGHT,max,arr[i])+TOP);
+        cont.lineTo(RIGHT, perspective(HEIGHT,max,arr[i])+TOP);
+        cont.fillText(arr[i],10,(perspective(HEIGHT,max,arr[i])+30));
+        cont.stroke();
+      }
+
+      cont.beginPath();
+      cont.lineJoin = "round";
+      cont.strokeStyle = "black";
+
+      cont.moveTo(LEFT, (perspective(HEIGHT,max,arr[0]))+ TOP);
+
+      for( let i = 0; i < arr.length; ++i ){
+        cont.lineTo( RIGHT / arr.length * i + LEFT, (perspective(HEIGHT,max,arr[i])) + TOP );
+        cont.fillText((i+1), RIGHT / arr.length * i + LEFT, BOTTOM + 20);
+      }
+
+      cont.stroke();
+
+    }
   }
+  xml.open("GET","../../../tablice/auth_stat.xml", true);
+  xml.send();
 
-  cont.beginPath();
-  cont.lineJoin = "round";
-  cont.strokeStyle = "black";
 
-  cont.moveTo(LEFT, (perspective(HEIGHT,max,arr[0]))+ TOP);
-
-  for( let i = 0; i < arr.length; ++i ){
-    cont.lineTo( RIGHT / arr.length * i + LEFT, (perspective(HEIGHT,max,arr[i])) + TOP );
-    cont.fillText((i+1), RIGHT / arr.length * i + LEFT, BOTTOM + 20);
-  }
-
-  cont.stroke();
 
 }

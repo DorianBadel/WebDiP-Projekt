@@ -72,7 +72,7 @@
     row-gap: 10px;
 }
 
-@media(min-width: 810px){
+@media(min-width: 580px){
     .section__news{
         grid-template-columns: repeat(2, 1fr);
         row-gap: 20px;
@@ -80,7 +80,7 @@
     }
 }
 
-@media(min-width: 1024px){
+@media(min-width: 800px){
     .section__news{
         grid-template-columns: repeat(3, 1fr);
         row-gap: 20px;
@@ -88,7 +88,7 @@
     }
 }
 
-@media(min-width: 1424px){
+@media(min-width: 1024px){
     .section__news{
         grid-template-columns: repeat(4, 1fr);
         row-gap: 20px;

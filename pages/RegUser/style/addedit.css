@@ -1,0 +1,55 @@
+@import "../../../globals/themes.css";
+
+.sub__header{
+  padding: 10px;
+  width: 100%;
+}
+
+.sub__header-buttons{
+  width: 100%;
+  background-color: var(--color-text-primary);
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+}
+
+.add{
+  margin-left: auto;
+  order: 2;
+  font-size: 25px;
+  padding-right: 5px;
+  border-radius: 10px;
+}
+
+.sub__header-buttons i{
+  transition: all 0.5s ease;
+}
+
+.sub__header-buttons i:hover{
+  color: var(--color-text-tertiary);
+}
+
+#bod{
+  padding-top: 0;
+}
+.section__news .news{
+
+}
+
+.section__news figure{
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+}
+.section__news figure i{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: var(--color-text-primary);
+  transition: all 0.5s ease;
+}
+
+.section__news figure a i:hover{
+  color: var(--color-tertiary);
+}

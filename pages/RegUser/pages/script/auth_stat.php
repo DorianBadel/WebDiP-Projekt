@@ -17,11 +17,13 @@
     if($file) unlink($file);
 
     foreach($sql as &$r){
-      echo var_dump($r);
       $t1 = $r['broj_pregleda'];
       $t2 = $r['naslov'];
       $t3 = $r['autori'];
       $t5 = $r['datum_objave'];
+
+      $g1 = $r['tekst'];
+      $g2 = $r['slika_src'];
 
 
       $element = $xmlDom->createElement("vijest");
@@ -30,6 +32,10 @@
       $element->appendChild($xmlDom->createElement('naslov',$t2));
       $element->appendChild($xmlDom->createElement('autori',$t3));
       $element->appendChild($xmlDom->createElement('datum',$t5));
+
+      $element->appendChild($xmlDom->createElement('tekst',$g1));
+      $element->appendChild($xmlDom->createElement('slika',$g2));
+
     }
 
     echo $xmlDom->save("../../../../tablice/auth_stat.xml");
