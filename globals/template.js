@@ -208,7 +208,7 @@ function getLocationLinksAdmin(){
     links.push("../pocetna.php");
     links.push("../Radni_prostor.php");
     links.push("../../ModUser/Urednicki_prostor.php");
-    links.push("../../AdminUser/Admin_prostor.php.php");
+    links.push("../../AdminUser/Admin_prostor.php");
   }
   else if(
     path == "blo_kor.php" ||
@@ -233,7 +233,7 @@ function getLocationLinksAdmin(){
     links.push("../../RegUser/pocetna.php");
     links.push("../../RegUser/Radni_prostor.php");
     links.push("../../ModUser/Urednicki_prostor.php");
-    links.push("../AdminUser/Admin_prostor.php");
+    links.push("../Admin_prostor.php");
   }
 
   return links;
