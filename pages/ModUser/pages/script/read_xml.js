@@ -47,6 +47,10 @@ function ucitajPodatkeVJ(){
   });
 }
 
+function ucitajPodatkeMR(){
+
+}
+
 $(document).ready(function(){
   console.log(document.title);
 
@@ -58,6 +62,10 @@ $(document).ready(function(){
     console.log("Spojen na odbijene vijesti");
 
     ucitajPodatkeVJ();
+  }else if(document.title.match('Moje recenzije')){
+    console.log("Spojen na moje recenzije");
+
+    ucitajPodatkeMR();
   }else{
     console.log("error");
   }
