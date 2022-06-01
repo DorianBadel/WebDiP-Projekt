@@ -71,9 +71,9 @@
          </a>
          </div>
          <div class="link">
-           <a href="../User/dokumentacija.php">
+           <a href="pages/odb_vijesti.php">
              <i class='bx bx-message-square-x'></i>
-           <span class="title">Odbijene vijestima</span>
+           <span class="title">Odbijene vijesti</span>
          </a>
          </div>
          <div class="link">

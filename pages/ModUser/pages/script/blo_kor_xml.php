@@ -13,15 +13,15 @@
 
   if($file) unlink($file);
 
-  $element = $xmlDom->createElement("blokiran");
-  $element = $xmlRoot->appendChild($element);
-
   foreach($korisnik_ID as &$r){
 
     $korisnik = $dataB->query("SELECT * FROM korisnik WHERE ID =?","i",false,[$r['ID_korisnika']]);
 
     $t1 = $korisnik[0]['korisnicko_ime'];
     $t2 = $r['razlog_blokiranja'];
+
+    $element = $xmlDom->createElement("blokiran");
+    $element = $xmlRoot->appendChild($element);
 
     $element->appendChild($xmlDom->createElement('korisnik',$t1));
     $element->appendChild($xmlDom->createElement('razlog',$t2));
