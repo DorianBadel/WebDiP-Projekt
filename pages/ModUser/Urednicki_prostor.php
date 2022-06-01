@@ -59,7 +59,7 @@
       <div class="section__links">
 
          <div class="link">
-           <a href="../User/Galerija_vijesti.php">
+           <a href="pages/Blo_kor.php">
              <i class='bx bx-block'></i>
            <span class="title">Blokirani korisnici</span>
          </a>
