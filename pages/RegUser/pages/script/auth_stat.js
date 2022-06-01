@@ -84,6 +84,31 @@ function ucitajPodatkeRec(){
   });
 }
 
+function ucitajPodatkeBlokKat(){
+  var table = $('#java_table').DataTable(
+    {
+      "aaSorting": [[0,"desc"]],
+      "bPaginate":true,
+      "bDeferRender": true
+    }
+  );
+
+  $.ajax({url: "https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/tablice/auth_blo_kat.xml",
+    type: "GET",
+    dataType: "xml",
+    success: function(result){
+      $(result).find("xml blokiran").each(function(){
+          table.row.add([
+          ($(this).find('kategorija').text() || "Podatak ne postoji"),
+          ($(this).find('blokiran_do').text() || "Podatak ne postoji")
+          ]).draw(false);
+
+      })
+    }
+  });
+
+}
+
 $(document).ready(function(){
   console.log(document.title);
 
@@ -99,6 +124,11 @@ $(document).ready(function(){
     console.log("Spojen na moje recenzije");
 
     ucitajPodatkeRec();
+  }else if(document.title.match('Blokirane kategorije')){
+    console.log("Spojen na blokirane kategorije");
+
+    ucitajPodatkeBlokKat();
+
   }else{
     console.log("error");
   }
