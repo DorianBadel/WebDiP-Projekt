@@ -8,8 +8,7 @@
   <title>Moje recenzije</title>
 
   <link rel="stylesheet" href="../../../index.css">
-  <link rel="stylesheet" href="../../User/style/galerija.css">
-  <link rel="stylesheet" href="../style/addedit.css">
+  <link rel="stylesheet" href="../style/moj_recenzije.css">
 
 
   <!--Globals-->
@@ -27,7 +26,7 @@
   <header id="header">
     <div class="sidebar">
     <div class="logo-details">
-        <a href="../../index.php">
+        <a href="../../../index.php">
              <i class='bx bxs-news' id='btn'></i>
         </a>
     </div>
@@ -98,20 +97,11 @@
     <div class="section_header">
       <h1>Moje recenzije</h1>
     </div>
-
-    <div class="sub__header">
-      <div class ="sub__header-buttons">
-        <div class="add">
-          <a href="#"></a>
-            <i class='bx bxs-plus-square'></i>
-          </a>
-        </div>
-      </div>
     </div>
     <div class="section_body" id="bod">
 
 
-      <div class="section__news">
+      <div class="section__rec">
 
 
       </div>

@@ -58,6 +58,32 @@ function ucitajPodatkeVijest(){
   });
 }
 
+function ucitajPodatkeRec(){
+  let vijest;
+  let section = document.querySelector(".section__rec");
+  section.innerHTML = "";
+  console.log("test1");
+
+  $.ajax({url: "https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/tablice/recenzije_auth.xml",
+    type: "GET",
+    dataType: "xml",
+    success: function(result){
+      $(result).find("xml recenzija").each(function(){
+          vijest = `
+          <div class="recenzija">
+                <h3>`+($(this).find('naslov').text() || "Podatak ne postoji")+`</h3>
+                <p>`+($(this).find('komentar').text() || "Podatak ne postoji")+`</p>
+                <span>`+($(this).find('naziv_statusa').text() || "Podatak ne postoji")+`</span>
+
+            <a href=""><i class='bx bx-edit'></i></a>
+          </div>
+          `;
+          section.innerHTML += vijest;
+      })
+    }
+  });
+}
+
 $(document).ready(function(){
   console.log(document.title);
 
@@ -72,7 +98,7 @@ $(document).ready(function(){
   }else if(document.title.match('Moje recenzije')){
     console.log("Spojen na moje recenzije");
 
-    ucitajPodatkeRecenzije();
+    ucitajPodatkeRec();
   }else{
     console.log("error");
   }
