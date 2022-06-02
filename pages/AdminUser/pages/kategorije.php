@@ -104,11 +104,54 @@
     <div class="sub__header">
       <div class ="sub__header-buttons">
         <div class="add">
-          <a href="#"></a>
+          <a onClick="triggerMenu()">
             <i class='bx bxs-plus-square'></i>
           </a>
         </div>
+
+        <div class="add_form" id="add_form" style="display: none">
+
+          <form action"" method="POST">
+              <label for="kategorija">Naziv kategorije:</label>
+              <input type="text" name="kategorija" required>
+              <label for="sazetak">Kratko o kategoriji:</label>
+              <input type="text" name="sazetak" required>
+              <label for="opis">Detaljan opis kategorije:</label>
+              <textarea type="text" name="opis"></textarea>
+              <label for="mod">Izaberite moderatora:</label>
+              <select class="moderator" name="mod" required>
+                <option value=""></option>
+                <?php
+                  include '../../../globals/global.php';
+                  include 'script/dodaj_kat.php';
+
+                  $dataB = new DB();
+                  $sql = $dataB->query("SELECT * FROM korisnik WHERE ID_tipa_korisnika = ?",'i',false,['3']);
+
+                  foreach($sql as &$rec){
+                    $html = "<option value='".$rec['ID']."'>".$rec['korisnicko_ime']."</option>";
+                    echo $html;
+                  }
+                ?>
+              </select>
+
+              <button name="submit" onClick="triggerMenu()">Dodaj kategoriju</button>
+          </form>
+        </div>
+
+        <script type="text/javascript">
+          function triggerMenu(){
+            var pu = document.getElementById('add_form');
+            if(pu.style.display === "none"){
+              pu.style.display = "block";
+            } else {
+              pu.style.display = 'none';
+            }
+          }
+        </script>
+
       </div>
+
     </div>
     <div class="section_body" id="bod">
       <div class="section__rec">

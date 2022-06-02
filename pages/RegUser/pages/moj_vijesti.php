@@ -102,10 +102,23 @@
     <div class="sub__header">
       <div class ="sub__header-buttons">
         <div class="add">
-          <a href="#"></a>
+          <a onClick="triggerMenu()">
             <i class='bx bxs-plus-square'></i>
           </a>
         </div>
+      </div>
+      <div class="add_form" id="add_form" style="display: none">
+
+        <form action"" method="POST">
+            <label for="kategorija">Naziv kategorije:</label>
+            <input type="text" name="kategorija" required>
+            <label for="sazetak">Kratko o kategoriji:</label>
+            <input type="text" name="sazetak" required>
+            <label for="opis">Detaljan opis kategorije:</label>
+            <textarea type="text" name="opis"></textarea>
+            <label for="mod">Izaberite moderatora:</label>
+            <button name="submit" onClick="triggerMenu()">Dodaj kategoriju</button>
+        </form>
       </div>
     </div>
     <div class="section_body" id="bod">
@@ -116,6 +129,17 @@
 
       </div>
     </div>
+
+    <script type="text/javascript">
+      function triggerMenu(){
+        var pu = document.getElementById('add_form');
+        if(pu.style.display === "none"){
+          pu.style.display = "block";
+        } else {
+          pu.style.display = 'none';
+        }
+      }
+    </script>
 
     <!-- If user has no JS -->
     <noscript>Sorry, your browser does not support JavaScript!</noscript>
