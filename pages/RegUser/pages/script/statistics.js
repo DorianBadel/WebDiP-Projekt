@@ -29,6 +29,7 @@ function ucitajGraf(){
   var xml = new XMLHttpRequest();
   xml.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
+
       let xmlFile = this.responseXML;
       let tmpArr = xmlFile.getElementsByTagName("pregledi");
       for(let i = 0; i< tmpArr.length; i++){
@@ -75,7 +76,7 @@ function ucitajGraf(){
 
     }
   }
-  xml.open("GET","../../../tablice/auth_stat.xml", true);
+  xml.open("GET","script/auth_stat.php", true);
   xml.send();
 
 

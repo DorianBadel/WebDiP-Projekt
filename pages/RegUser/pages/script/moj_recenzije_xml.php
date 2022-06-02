@@ -2,11 +2,12 @@
   include '../../../../globals/global.php';
   $dataB = new DB();
   @session_start();
+  header("Content-Type: text/xml");
 
   $korisnik = $dataB->query("SELECT * FROM korisnik WHERE korisnicko_ime = ?","s",false,[$_SESSION['username']]);
 
   if($korisnik){
-    $sql = $dataB->query(" SELECT `recenzija`.`komentar`, `tip_statusa`.*, `vijest`.`naslov`
+    $sql = $dataB->query("SELECT `recenzija`.`komentar`, `tip_statusa`.*, `vijest`.`naslov`, `vijest`.`ID` as `VJid`
     FROM `vijest`
     LEFT JOIN `recenzija` ON `recenzija`.`ID_vijesti` = `vijest`.`ID`
     LEFT JOIN `tip_statusa` ON `vijest`.`ID_statusa` = `tip_statusa`.`ID`
@@ -17,14 +18,13 @@
 
     $xmlRoot = $xmlDom->createElement("xml");
     $xmlRoot = $xmlDom->appendChild($xmlRoot);
-    $file = "../../../../tablice/recenzije_auth.xml";
 
-    if($file) unlink($file);
 
     foreach($sql as &$r){
       $t1 = $r['naslov'];
       $t2 = $r['naziv_statusa'];
       $t3 = $r['komentar'];
+      $t4 = $r['VJid'];
 
 
       $element = $xmlDom->createElement("recenzija");
@@ -32,10 +32,11 @@
       $element->appendChild($xmlDom->createElement('naslov',$t1));
       $element->appendChild($xmlDom->createElement('naziv_statusa',$t2));
       $element->appendChild($xmlDom->createElement('komentar',$t3));
+      $element->appendChild($xmlDom->createElement('ID',$t4));
 
     }
 
-    echo $xmlDom->save("../../../../tablice/recenzije_auth.xml");
+    echo $xmlDom->saveXML();
   } else { echo "problem z bazom (korisnik)";};
 
  ?>

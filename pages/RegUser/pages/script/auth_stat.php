@@ -2,6 +2,8 @@
   include '../../../../globals/global.php';
   $dataB = new DB();
   @session_start();
+  header("Content-Type: text/xml");
+
 
   $korisnik = $dataB->query("SELECT * FROM korisnik WHERE korisnicko_ime = ?","s",false,[$_SESSION['username']]);
 
@@ -12,9 +14,6 @@
 
     $xmlRoot = $xmlDom->createElement("xml");
     $xmlRoot = $xmlDom->appendChild($xmlRoot);
-    $file = "../../../../tablice/auth_stat.xml";
-
-    if($file) unlink($file);
 
     foreach($sql as &$r){
       $t1 = $r['broj_pregleda'];
@@ -38,7 +37,9 @@
 
     }
 
-    echo $xmlDom->save("../../../../tablice/auth_stat.xml");
+
+    echo $xmlDom->saveXML();
+    /*echo $xmlDom->save("../../../../tablice/auth_stat.xml");*/
   } else { echo "problem z bazom (korisnik)";};
 
  ?>

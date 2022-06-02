@@ -42,7 +42,7 @@
               echo "<a href='prijava.php'><i class='bx bx-log-in' id='log_out'></i></a>";
             }
             else{
-              echo "<a href='../../globals/logout.php'><i class='bx bx-log-out' id='log_out'></i></a>";
+              echo "<a href='../../../globals/logout.php'><i class='bx bx-log-out' id='log_out'></i></a>";
             }
           ?>
 
@@ -104,11 +104,15 @@
     <div class="section_body" id="bod">
 
 
+
       <div class="section__rec">
 
 
       </div>
     </div>
+    <script>
+      
+    </script>
 
     <!-- If user has no JS -->
     <noscript>Sorry, your browser does not support JavaScript!</noscript>

@@ -1,5 +1,4 @@
 <?php
-
 if (@$requireLogin == true) {
   if(empty($_SESSION['username'])){
     header("Location: https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/index.php");
@@ -70,7 +69,7 @@ class DB{
     return mysqli_insert_id($this->connection);
   }
 
-  public function getUloga(){
+  public function getUloga(){ //TODO should be replaced by roles.php
     @session_start();
 
     //if(file_exists("./role.xml")) unlink("./role.xml");
@@ -93,14 +92,6 @@ class DB{
     $element->appendChild($xmlDom->createElement('uloga',$uloga));
 
     $xmlDom->save("./role.xml");
-
   }
-
-} //DB
-
-
-
-
-
-
+}
 ?>
