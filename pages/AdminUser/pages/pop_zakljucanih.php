@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-  <title>Zaljucani korisnici</title>
+  <title>Zakljucani korisnici</title>
 
   <link rel="stylesheet" href="../../../index.css">
   <link rel="stylesheet" href="../../RegUser/style/moj_recenzije.css">
@@ -99,7 +99,7 @@
     ?>
 
     <div class="section_header">
-      <h1>Zaljucani korisnici</h1>
+      <h1>Zakljucani korisnici</h1>
     </div>
     </div>
     <div class="section_body" id="bod">

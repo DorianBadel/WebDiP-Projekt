@@ -33,14 +33,14 @@ function ucitajPodatkeZak(){
     dataType: "xml",
     success: function(result){
       $(result).find("xml zakljucan").each(function(){
-          vijest = `
-          <div class="recenzija">
-                <h3>`+($(this).find('ime').text()+($(this).find('prezime').text() || "Podatak ne postoji")+`</h3>
-                <p>`+($(this).find('email').text() || "Podatak ne postoji")+`</p>
-                <p>`+($(this).find('korisnicko_ime').text() || "Podatak ne postoji")+`</p>
-            <a href=""><i class='bx bx-edit'></i></a>
-          </div>
-          `;
+        vijest = `
+        <div class="recenzija">
+              <h3>`+($(this).find('ime').text()+" "+$(this).find('prezime').text() || "Podatak ne postoji")+`</h3>
+              <span>`+($(this).find('korisnicko_ime').text() || "Podatak ne postoji")+`</span>
+              <p>`+($(this).find('email').text() || "Podatak ne postoji")+`</p>
+          <a href="" style="float: right">Makni blokadu</i></a>
+        </div>
+        `;
           section.innerHTML += vijest;
       })
     }
