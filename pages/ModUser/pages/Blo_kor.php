@@ -1,3 +1,6 @@
+<?php
+  $requireLogin =true;
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,14 +48,12 @@
 
         </div>
       </li>
-
      </ul>
    </div>
 
-
   </header>
-  <section class='body' id="body">
 
+  <section class='body' id="body">
     <div id="popup" class="popup">
       <?php
       if(empty($_SESSION['username'])){
@@ -91,7 +92,6 @@
           </script>";
         }
        ?>
-
     </div>
 
     <?php

@@ -1,3 +1,6 @@
+<?php
+  $requireLogin =true;
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,7 +123,6 @@
               <textarea type="text" name="opis"></textarea>
               <label for="mod">Izaberite moderatora:</label>
               <select class="moderator" name="mod" required>
-                <option value=""></option>
                 <?php
                   include '../../../globals/global.php';
                   include 'script/dodaj_kat.php';
@@ -135,7 +137,8 @@
                 ?>
               </select>
 
-              <button name="submit" onClick="triggerMenu()">Dodaj kategoriju</button>
+
+              <button name="submit" onClick="triggerMenu()">Dodaj vijest</button>
           </form>
         </div>
 

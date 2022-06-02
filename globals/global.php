@@ -1,5 +1,13 @@
 <?php
 
+if (@$requireLogin == true) {
+  if(empty($_SESSION['username'])){
+    header("Location: https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/index.php");
+    exit();
+  }
+
+}
+
 function cleanUp(&$value, $id){
   $value = htmlspecialchars($value);
 }
