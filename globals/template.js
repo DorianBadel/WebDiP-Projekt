@@ -211,14 +211,14 @@ function getLocationLinksAdmin(){
     links.push("../../AdminUser/Admin_prostor.php");
   }
   else if(
-    path == "blo_kor.php" ||
+    path == "Blo_kor.php" ||
     path == "moj_recenzije.php" ||
     path == "odb_vijesti.php" ||
     path == "rec_stat.php"
   ){
     links.push("../../RegUser/pocetna.php");
     links.push("../../RegUser/Radni_prostor.php");
-    links.push("../ModUser/Urednicki_prostor.php");
+    links.push("../Urednicki_prostor.php");
     links.push("../../AdminUser/Admin_prostor.php");
   }
   else if(
