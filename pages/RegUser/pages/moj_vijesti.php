@@ -101,10 +101,6 @@
 
     </div>
 
-    <?php
-      shell_exec('php script/auth_stat.php');
-    ?>
-
     <div class="section_header">
       <h1>Moje objave</h1>
     </div>
@@ -113,40 +109,49 @@
     <div class="sub__header">
       <div class ="sub__header-buttons">
         <div class="add">
-          <a onClick="triggerMenu()">
+          <a onClick="triggerMenuAdd()">
             <i class='bx bxs-plus-square'></i>
           </a>
         </div>
       </div>
 
       <?php
+      include "script/azuriraj_vijest.php";
       include "script/dodaj_vijest.php";
+      $add = 3;
       ?>
       <div class="add_form" id="add_form" style="display: none">
 
         <form action"" method="POST">
             <label for="naslov">Naslov članka:*</label>
-            <input type="text" name="naslov" required/>
+            <input type="text" name="naslov" id="naslov" required/>
 
             <label for="tekst">Tekst članka:*</label>
-            <textarea type="text" name="tekst" required></textarea>
+            <textarea type="text" name="tekst"  id="tekst" required></textarea>
 
             <label for="izvor">Link izvora:</label>
-            <input type="text" name="izvor"/>
+            <input type="text" name="izvor" id="izvor"/>
 
             <label for="autori">Popis autora:*</label>
-            <input type="text" name="autori" required/>
+            <input type="text" name="autori"  id="autori" required/>
 
             <label for="slika_src">Link slike:*</label>
-            <input type="text" name="slika_src" required/>
+            <input type="text" name="slika_src"  id="slika_src" required/>
 
             <label for="video_src">Link videa:</label>
-            <input type="text" name="video_src"/>
+            <input type="text" name="video_src" id="video_src"/>
 
             <label for="audio_src">Link zvucnog zapisa:</label>
-            <input type="text" name="audio_src"/>
+            <input type="text" name="audio_src" id="audio_src"/>
 
-            <select name="kategorija" required>
+            <label for="index" style="display: none">Ja san index</label>
+            <input name ="index" type="text" id="index" style="display: none"/>
+            <label for="verzija:" style="display: none"></label>
+            <input id="verzija" type="text" name="verzija" style="display: none"/>
+
+
+
+            <select name="kategorija" id="kategorija" required>
               <?php
 
                 $dataB = new DB();
@@ -172,7 +177,9 @@
               ?>
             </select>
 
-            <button name="submit" onClick="triggerMenu()">Dodaj kategoriju</button>
+            <div id="btnn">
+            </div>
+
         </form>
       </div>
     </div>
@@ -182,8 +189,20 @@
       </div>
     </div>
     <script type="text/javascript">
-      function triggerMenu(){
+      function triggerMenu(el){
         event.preventDefault();
+        let value = document.getElementById('btnn');
+        value.innerHTML += "<button name='submit'>Azuriraj vijest</button>";
+        document.getElementById('naslov').value = el.getAttribute('vj-name');
+        document.getElementById('izvor').value = el.getAttribute('vj-izvor');
+        document.getElementById('tekst').value = el.getAttribute('vj-tekst');
+        document.getElementById('autori').value = el.getAttribute('vj-autori');
+        document.getElementById('slika_src').value = el.getAttribute('vj-slika');
+        document.getElementById('video_src').value = el.getAttribute('vj-video');
+        document.getElementById('audio_src').value = el.getAttribute('vj-audio');
+        document.getElementById('index').value = el.getAttribute('vj-index');
+        document.getElementById('verzija').value = el.getAttribute('vj-verzija');
+        document.getElementById('kategorija').value = el.getAttribute('vj-kateg');
 
         var pu = document.getElementById('add_form');
         if(pu.style.display === "none"){
@@ -192,6 +211,20 @@
           pu.style.display = 'none';
         }
       }
+
+      function triggerMenuAdd(){
+        event.preventDefault();
+        let v = document.getElementById('btnn');
+        v.innerHTML = `<button name='add'>Dodaj vijest</button>`
+
+        var pu = document.getElementById('add_form');
+        if(pu.style.display === "none"){
+          pu.style.display = "block";
+        } else {
+          pu.style.display = 'none';
+        }
+      }
+
     </script>
     <!-- If user has no JS -->
     <noscript>Sorry, your browser does not support JavaScript!</noscript>

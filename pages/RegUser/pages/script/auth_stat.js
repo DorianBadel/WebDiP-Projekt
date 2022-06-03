@@ -17,16 +17,19 @@ function ucitajPodatke(){
       let naslov = xmlFile.getElementsByTagName("naslov");
       let autori = xmlFile.getElementsByTagName("autori");
       let datum = xmlFile.getElementsByTagName("datum");
+      let tmpStatus = xmlFile.getElementsByTagName("status");
+
       console.log(pregled[0].childNodes[0].nodeValue);
 
 
       for(let i=0; i< naslov.length; i++){
-        table.row.add([
-          (pregled[i].childNodes[0].nodeValue || "Podatak ne postoji"),
-          (naslov[i].childNodes[0].nodeValue || "Podatak ne postoji"),
-          (autori[i].childNodes[0].nodeValue || "Podatak ne postoji"),
-          (datum[i].childNodes[0].nodeValue || "Podatak ne postoji")
-        ]).draw(false);
+        if(tmpStatus[i].childNodes[0].nodeValue == 3)
+          table.row.add([
+            (pregled[i].childNodes[0].nodeValue || "Podatak ne postoji"),
+            (naslov[i].childNodes[0].nodeValue || "Podatak ne postoji"),
+            (autori[i].childNodes[0].nodeValue || "Podatak ne postoji"),
+            (datum[i].childNodes[0].nodeValue || "Podatak ne postoji")
+          ]).draw(false);
       }
 
     }
@@ -45,30 +48,82 @@ function ucitajPodatkeVijest(){
   xml.onreadystatechange = function (){
     if(this.readyState == 4 && this.status == 200){
       let xmlFile = this.responseXML;
-      let slika = xmlFile.getElementsByTagName("slika");
       let naslov = xmlFile.getElementsByTagName("naslov");
-      let tekst = xmlFile.getElementsByTagName("tekst");
-      let autori = xmlFile.getElementsByTagName("autori");
-      let pregledi = xmlFile.getElementsByTagName("pregledi");
+      let slika = xmlFile.getElementsByTagName("slika");
 
+      let tekst = xmlFile.getElementsByTagName("tekst");
+      let izvor = xmlFile.getElementsByTagName("izvor");
+      let autori = xmlFile.getElementsByTagName("autori");
+      let video = xmlFile.getElementsByTagName("video");
+      let audio = xmlFile.getElementsByTagName("audio");
+      let pregledi = xmlFile.getElementsByTagName("pregledi");
+      let tmpStatus = xmlFile.getElementsByTagName("status");
+      let ID = xmlFile.getElementsByTagName("ID");
+      let kateg= xmlFile.getElementsByTagName("kategorija");
+      let status="";
+
+      function isUndefined(value){
+        if(typeof value === 'undefined'){
+          return false;
+        }
+        else return true;
+      }
+
+      function isDorada(value,i){
+        if(value === 'dorada'){
+          let l = document.getElementById("status"+i);
+          l.style.color = 'turquoise';
+          let b = document.getElementById("btnRec"+i);
+          b.innerHTML =`
+          <a name="submit"  onClick="triggerMenu(this)"
+          vj-name="`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "")+`"
+          vj-tekst="`+(isUndefined(tekst[i].childNodes[0]) ? tekst[i].childNodes[0].nodeValue : "")+`"
+          vj-autori="`+(isUndefined(autori[i].childNodes[0]) ? autori[i].childNodes[0].nodeValue : "")+`"
+          vj-izvor="`+(isUndefined(izvor[i].childNodes[0]) ? izvor[i].childNodes[0].nodeValue : "")+`"
+          vj-slika="`+(isUndefined(slika[i].childNodes[0]) ? slika[i].childNodes[0].nodeValue : "")+`"
+          vj-zvuk="`+(isUndefined(audio[i].childNodes[0]) ? audio[i].childNodes[0].nodeValue : "")+`"
+          vj-kateg="`+(isUndefined(kateg[i].childNodes[0]) ? kateg[i].childNodes[0].nodeValue : "")+`"
+          vj-video="`+(isUndefined(video[i].childNodes[0]) ? video[i].childNodes[0].nodeValue : "")+`"
+          vj-index="`+(isUndefined(ID[i].childNodes[0]) ? ID[i].childNodes[0].nodeValue : "")+`"
+          vj-verzija="`+(isUndefined(tmpStatus[i].childNodes[0]) ? tmpStatus[i].childNodes[0].nodeValue : "")+`"
+          ><i class='bx bx-edit'></i></a>
+          `;
+
+        }
+      }
 
       for(let i=0; i<naslov.length; i++){
+
+        switch(tmpStatus[i].childNodes[0].nodeValue){
+          case '1': status="recenzija";
+          break;
+          case '2': status="dorada";
+          break;
+          case '3': status="prihvaceno";
+          break;
+          case '4': status="odbijeno";
+          break;
+        }
+
         let vijest = `
         <div class="news">
 
             <figure>
-              <a href=""> <i class='bx bx-edit'></i> </a>
+            <div class="testtt" id='btnRec`+i+`'></div>
               <img src=`+slika[i].childNodes[0].nodeValue+` alt="Podatak ne postoji"
             </figure>
             <a href="">
-              <h3>`+(naslov[i].childNodes[0].nodeValue || "Podatak ne postoji")+`</h3>
-              <p>`+(tekst[i].childNodes[0].nodeValue || "Podatak ne postoji")+`</p>
-              <span>`+(autori[i].childNodes[0].nodeValue  || "Podatak ne postoji")+`</span>
-              <p class="broj_pregleda">`+(pregledi[i].childNodes[0].nodeValue  || "Podatak ne postoji")+`</p>
+              <h3>`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</h3>
+              <p>`+(isUndefined(tekst[i].childNodes[0]) ? tekst[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</p>
+              <span>`+(isUndefined(autori[i].childNodes[0]) ? autori[i].childNodes[0].nodeValue  : "Podatak ne postoji")+`</span>
+              <br><br>
+              <span id='status`+i+`'>`+status+`</span>
+              <p class="broj_pregleda">`+(isUndefined(pregledi[i].childNodes[0]) ? pregledi[i].childNodes[0].nodeValue  : "Podatak ne postoji")+`</p>
             </a>
         </div>
         `;
         section.innerHTML += vijest;
+        isDorada(status,i);
         }
     }
   }
@@ -112,7 +167,7 @@ function ucitajPodatkeRec(){
       function isDorada(value,i){
         if(value === 'dorada'){
           let l = document.getElementById("status"+i);
-          l.style.color = 'purple';
+          l.style.color = 'turquoise';
           let b = document.getElementById("btnRec"+i);
           b.innerHTML =`
           <button name="submit"  onClick="triggerMenu(this)"

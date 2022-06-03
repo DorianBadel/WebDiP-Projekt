@@ -72,7 +72,7 @@
     row-gap: 10px;
 }
 
-@media(min-width: 580px){
+@media(min-width: 800px){
     .section__news{
         grid-template-columns: repeat(2, 1fr);
         row-gap: 20px;
@@ -80,7 +80,8 @@
     }
 }
 
-@media(min-width: 800px){
+
+@media(min-width: 1024px){
     .section__news{
         grid-template-columns: repeat(3, 1fr);
         row-gap: 20px;
@@ -88,13 +89,14 @@
     }
 }
 
-@media(min-width: 1024px){
+@media(min-width: 1400px){
     .section__news{
         grid-template-columns: repeat(4, 1fr);
         row-gap: 20px;
         column-gap: 20px;
     }
 }
+
 
 .section__news .news{
     width: 100%;
@@ -113,7 +115,7 @@
 }
 
 .section__news .news h3{
-    margin-left: 25px;
+    padding: 25px;
     font-size: 25px;
     font-style: italic;
 }

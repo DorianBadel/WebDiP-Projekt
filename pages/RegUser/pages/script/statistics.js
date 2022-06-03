@@ -32,8 +32,10 @@ function ucitajGraf(){
 
       let xmlFile = this.responseXML;
       let tmpArr = xmlFile.getElementsByTagName("pregledi");
+      let tmpStatus = xmlFile.getElementsByTagName("status");
       for(let i = 0; i< tmpArr.length; i++){
-        arr.push(parseInt(tmpArr[i].childNodes[0].data));
+        if(tmpStatus[i].childNodes[0].nodeValue == 3)
+          arr.push(parseInt(tmpArr[i].childNodes[0].data));
       }
       console.log(arr);
 
