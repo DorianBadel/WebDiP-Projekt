@@ -124,6 +124,28 @@
       <div class="add_form" id="add_form" style="display: none">
 
         <form action"" method="POST">
+          <?php include "script/azuriraj_vijest.php";
+          ?>
+          <?php
+            if(isset($_POST['submit'])){
+              $dataB = new DB();
+
+              $sql = $dataB->query("UPDATE vijest SET
+                `tekst` = ?,
+                `naslov` = ?,
+                `autori` = ?,
+                `url_za_izvor` = ?,
+                `slika_src` = ?,
+                `video_src` = ?,
+                `audio_src` = ?,
+                `ID_statusa` = ?
+              WHERE `vijest`.`ID` = ?;","sssssssii",true,[$_POST['tekst'],$_POST['naslov'],$_POST['autori'],$_POST['izvor'],$_POST['slika_src'],$_POST['video_src'],$_POST['audio_src'],'1',$_POST['index']]);
+
+            }
+
+
+          ?>
+
           <label for="naslov">Naslov članka:*</label>
           <input type="text" name="naslov" id="naslov" required/>
 
@@ -145,8 +167,12 @@
           <label for="audio_src">Link zvucnog zapisa:</label>
           <input type="text" name="audio_src" id="audio_src"/>
 
+          <label for="index">Ja san index</label>
+          <input name ="index" type="text" id="index"/>
+          <input id="verzija" type="text" name="verzija"/>
 
-          <button name="submit" >Azuriraj vijest</button>
+
+          <button name="submit">Azuriraj vijest</button>
         </form>
       </div>
 
@@ -160,6 +186,8 @@
           document.getElementById('slika_src').value = el.getAttribute('vj-slika');
           document.getElementById('video_src').value = el.getAttribute('vj-video');
           document.getElementById('audio_src').value = el.getAttribute('vj-audio');
+          document.getElementById('index').value = el.getAttribute('vj-index');
+          document.getElementById('verzija').value = el.getAttribute('vj-verzija');
 
           var pu = document.getElementById('add_form');
           if(pu.style.display === "none"){
@@ -168,6 +196,7 @@
             pu.style.display = 'none';
           }
         }
+
       </script>
 
       <div class="section__rec">

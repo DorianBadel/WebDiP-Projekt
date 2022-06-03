@@ -52,6 +52,7 @@
       $vjElement->appendChild($xmlDom->createElement('slika',$sqlVj[0]['slika_src']));
       $vjElement->appendChild($xmlDom->createElement('zvuk',$sqlVj[0]['audio_src']));
       $vjElement->appendChild($xmlDom->createElement('video',$sqlVj[0]['video_src']));
+      $vjElement->appendChild($xmlDom->createElement('verzija',$sqlVj[0]['verzija_vj']));
 
     }
 

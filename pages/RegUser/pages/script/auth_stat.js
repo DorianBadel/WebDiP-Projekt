@@ -96,6 +96,7 @@ function ucitajPodatkeRec(){
       let vjSlika = xmlFile.getElementsByTagName("slika");
       let vjZvuk = xmlFile.getElementsByTagName("zvuk");
       let vjVideo = xmlFile.getElementsByTagName("video");
+      let vjVerzija = xmlFile.getElementsByTagName("verzija")
 
 
       function isUndefined(value){
@@ -108,8 +109,6 @@ function ucitajPodatkeRec(){
         if(value === 'dorada'){
           let l = document.getElementById("status"+i);
           l.style.color = 'purple';
-          console.log("btnRec"+i);
-          console.log(document.querySelector(".testtt").getAttribute('id'));
           let b = document.getElementById("btnRec"+i);
           b.innerHTML =`
           <button name="submit"  onClick="triggerMenu(this)"
@@ -120,7 +119,9 @@ function ucitajPodatkeRec(){
           vj-slika="`+(isUndefined(vjSlika[i].childNodes[0]) ? vjSlika[i].childNodes[0].nodeValue : "")+`"
           vj-zvuk="`+(isUndefined(vjZvuk[i].childNodes[0]) ? vjZvuk[i].childNodes[0].nodeValue : "")+`"
           vj-video="`+(isUndefined(vjVideo[i].childNodes[0]) ? vjVideo[i].childNodes[0].nodeValue : "")+`"
-          >`+ID[i].childNodes[0].nodeValue+`</button>
+          vj-index="`+(isUndefined(ID[i].childNodes[0]) ? ID[i].childNodes[0].nodeValue : "")+`"
+          vj-verzija="`+(isUndefined(vjVerzija[i].childNodes[0]) ? vjVerzija[i].childNodes[0].nodeValue : "")+`"
+          style="float: right">Azuriraj vijest</button>
           `;
           return true;
         } else return false;
