@@ -51,7 +51,7 @@
 
   </header>
   <section class='body' id="body">
-    <<div id="popup" class="popup">
+    <div id="popup" class="popup">
       <?php
       if(empty($_SESSION['username'])){
         if(!isset($_COOKIE['uvjeti'])){
@@ -129,7 +129,23 @@
         <div class="docu__f-tehnologije"> <!-- "popis i opis vanjskih (tuđih) modula/biblioteka i njihovo korištenje u skriptama i sl." -->
           <span>Popis i opis vanjskih (tuđih) modula/biblioteka i njihovo korištenje u skriptama i sl.</span>
           <hr>
-          <p>Ovo je opis</p>
+          <ul class="element">
+            <li> Korištenja online resursa za ikone > Boxiocon
+              <ul>
+                <li> Izvor: <a target="_blank" rel="noopener noreferrer" href="https://boxicons.com/"> poveznica </a></li>
+                <li> Opis: Korišten je za sve ikone u aplikaciji. </li>
+              </ul>
+            </li>
+          </ul><br>
+
+          <ul class="element">
+            <li> Korištenje tuđeg pristupa riješenju navigacije > Codinglabweb
+              <ul>
+                <li> Izvor: <a target="_blank" rel="noopener noreferrer" href="https://www.codinglabweb.com/2021/04/responsive-side-navigation-bar-in-html.html"> poveznica </a> </li>
+                <li> Opis: Korišten je vizualni dio rješenja a za samo dinamično učitavanje i preusmjeravanje korišten je vlastiti kod. </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

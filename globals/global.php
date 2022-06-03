@@ -2,17 +2,18 @@
 if (@$requireLogin == true) {
   $dataB = new DB();
   session_start();
-  if($dataB->exists($_SESSION['username'])){
-    $vr = $dataB->query("SELECT ID_tipa_korisnika FROM korisnik WHERE korisnicko_ime = ?","s",false,[$_SESSION['username']]);
-    $vr = $vr[0]['ID_tipa_korisnika'];
+  if(isset($_SESSION['username'])){
+    if($dataB->exists($_SESSION['username'])){
+      $vr = $dataB->query("SELECT ID_tipa_korisnika FROM korisnik WHERE korisnicko_ime = ?","s",false,[$_SESSION['username']]);
+      $vr = $vr[0]['ID_tipa_korisnika'];
 
-    if($vr >= $minStatus){
-    }else{
-      header("Location: https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/index.php");
-      exit();
+      if($vr >= $minStatus){
+      }else{
+        header("Location: https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/index.php");
+        exit();
+      }
     }
   }
-
 }
 
 function cleanUp(&$value, $id){

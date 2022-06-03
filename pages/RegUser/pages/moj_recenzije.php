@@ -128,22 +128,22 @@
           <input type="text" name="naslov" id="naslov" required/>
 
           <label for="tekst">Tekst članka:*</label>
-          <textarea type="text" name="tekst" required></textarea>
+          <textarea type="text" name="tekst" id="tekst" required></textarea>
 
           <label for="izvor">Link izvora:*</label>
-          <input type="text" name="izvor" required/>
+          <input type="text" name="izvor" id="izvor" required/>
 
           <label for="autori">Popis autora:*</label>
-          <input type="text" name="autori" required/>
+          <input type="text" name="autori" id="autori" required/>
 
           <label for="slika_src">Link slike:*</label>
-          <input type="text" name="slika_src" required/>
+          <input type="text" name="slika_src" id="slika_src" required/>
 
           <label for="video_src">Link videa:</label>
-          <input type="text" name="video_src"/>
+          <input type="text" name="video_src" id="video_src"/>
 
           <label for="audio_src">Link zvucnog zapisa:</label>
-          <input type="text" name="audio_src"/>
+          <input type="text" name="audio_src" id="audio_src"/>
 
 
           <button name="submit" >Azuriraj vijest</button>
@@ -154,6 +154,12 @@
         function triggerMenu(el){
           event.preventDefault();
           document.getElementById('naslov').value = el.getAttribute('vj-name');
+          document.getElementById('izvor').value = el.getAttribute('vj-izvor');
+          document.getElementById('tekst').value = el.getAttribute('vj-tekst');
+          document.getElementById('autori').value = el.getAttribute('vj-autori');
+          document.getElementById('slika_src').value = el.getAttribute('vj-slika');
+          document.getElementById('video_src').value = el.getAttribute('vj-video');
+          document.getElementById('audio_src').value = el.getAttribute('vj-audio');
 
           var pu = document.getElementById('add_form');
           if(pu.style.display === "none"){

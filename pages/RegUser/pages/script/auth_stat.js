@@ -90,7 +90,13 @@ function ucitajPodatkeRec(){
       let naziv_statusa = xmlFile.getElementsByTagName("naziv_statusa");
       let ID = xmlFile.getElementsByTagName("ID");
 
-      if(typeof komentar[0].childNodes[0] === 'undefined') console.log('undef'); else console.log('defdef');
+      let vjTekst = xmlFile.getElementsByTagName("tekst");
+      let vjAutori = xmlFile.getElementsByTagName("autori");
+      let vjIzvor = xmlFile.getElementsByTagName("izvor");
+      let vjSlika = xmlFile.getElementsByTagName("slika");
+      let vjZvuk = xmlFile.getElementsByTagName("zvuk");
+      let vjVideo = xmlFile.getElementsByTagName("video");
+
 
       function isUndefined(value){
         if(typeof value === 'undefined'){
@@ -100,15 +106,22 @@ function ucitajPodatkeRec(){
       }
       function isDorada(value,i){
         if(value === 'dorada'){
-          let l = document.getElementById("status");
+          let l = document.getElementById("status"+i);
           l.style.color = 'purple';
-          let b = document.getElementById("btnRec");
+          console.log("btnRec"+i);
+          console.log(document.querySelector(".testtt").getAttribute('id'));
+          let b = document.getElementById("btnRec"+i);
           b.innerHTML =`
           <button name="submit"  onClick="triggerMenu(this)"
-          vj-name="`+naslov[i].childNodes[0].nodeValue+`">`+ID[i].childNodes[0].nodeValue+`</button>
+          vj-name="`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "")+`"
+          vj-tekst="`+(isUndefined(vjTekst[i].childNodes[0]) ? vjTekst[i].childNodes[0].nodeValue : "")+`"
+          vj-autori="`+(isUndefined(vjAutori[i].childNodes[0]) ? vjAutori[i].childNodes[0].nodeValue : "")+`"
+          vj-izvor="`+(isUndefined(vjIzvor[i].childNodes[0]) ? vjIzvor[i].childNodes[0].nodeValue : "")+`"
+          vj-slika="`+(isUndefined(vjSlika[i].childNodes[0]) ? vjSlika[i].childNodes[0].nodeValue : "")+`"
+          vj-zvuk="`+(isUndefined(vjZvuk[i].childNodes[0]) ? vjZvuk[i].childNodes[0].nodeValue : "")+`"
+          vj-video="`+(isUndefined(vjVideo[i].childNodes[0]) ? vjVideo[i].childNodes[0].nodeValue : "")+`"
+          >`+ID[i].childNodes[0].nodeValue+`</button>
           `;
-
-          //createEditForm();
           return true;
         } else return false;
       }
@@ -120,8 +133,8 @@ function ucitajPodatkeRec(){
         <div class="recenzija">
               <h3>`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</h3>
               <p>`+(isUndefined(komentar[i].childNodes[0]) ? komentar[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</p>
-              <span id="status">`+(isUndefined(naziv_statusa[i].childNodes[0])  ? naziv_statusa[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</span>
-              <div id="btnRec"></div>
+              <span id='status`+i+`'>`+(isUndefined(naziv_statusa[i].childNodes[0])  ? naziv_statusa[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</span>
+              <div class="testtt" id='btnRec`+i+`'></div>
         </div>
         `;
         section.innerHTML += vijest;
