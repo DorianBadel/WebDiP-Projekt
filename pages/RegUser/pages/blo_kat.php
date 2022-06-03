@@ -108,7 +108,7 @@
       <h1>Blokirane kategorije</h1>
     </div>
     </div>
-    <div class="section_body" id="bod">
+    <div class="section_body" >
       <div class="section__blokiran">
         <table id="java_table">
           <thead>

@@ -89,6 +89,10 @@ function ucitajPodatkeRec(){
       let komentar = xmlFile.getElementsByTagName("komentar");
       let naziv_statusa = xmlFile.getElementsByTagName("naziv_statusa");
       let ID = xmlFile.getElementsByTagName("ID");
+      let greske_c = xmlFile.getElementsByTagName("greske_c");
+      let greske_g = xmlFile.getElementsByTagName("greske_g");
+      let nedostatak_ref = xmlFile.getElementsByTagName("nedostatak_ref");
+      let nedostatak_mat = xmlFile.getElementsByTagName("nedostatak_mat");
 
       let vjTekst = xmlFile.getElementsByTagName("tekst");
       let vjAutori = xmlFile.getElementsByTagName("autori");
@@ -133,7 +137,16 @@ function ucitajPodatkeRec(){
         let vijest = `
         <div class="recenzija">
               <h3>`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</h3>
-              <p>`+(isUndefined(komentar[i].childNodes[0]) ? komentar[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</p>
+
+              <br>
+              <div> <strong> Komentar: </strong>  <sp>`+(isUndefined(komentar[i].childNodes[0]) ? komentar[i].childNodes[0].nodeValue : "")+`</p> </div>
+              <div> <strong> Činjenične greške: </strong>  <sp>`+(isUndefined(greske_c[i].childNodes[0]) ? greske_c[i].childNodes[0].nodeValue : "")+`</p> </div>
+              <div> <strong> Gramatičke greške: </strong>  <sp>`+(isUndefined(greske_g[i].childNodes[0]) ? greske_g[i].childNodes[0].nodeValue : "")+`</p> </div>
+              <div> <strong> Nedostatak referenci: </strong>   <sp>`+(isUndefined(nedostatak_ref[i].childNodes[0]) ? nedostatak_ref[i].childNodes[0].nodeValue : "")+`</p> </div>
+              <div> <strong> Nedostatak materijala: </strong>  <sp>`+(isUndefined(nedostatak_mat[i].childNodes[0]) ? nedostatak_mat[i].childNodes[0].nodeValue : "")+`</p> </div>
+
+
+
               <span id='status`+i+`'>`+(isUndefined(naziv_statusa[i].childNodes[0])  ? naziv_statusa[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</span>
               <div class="testtt" id='btnRec`+i+`'></div>
         </div>
@@ -157,19 +170,33 @@ function ucitajPodatkeBlokKat(){
     }
   );
 
-  $.ajax({url: "https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/tablice/auth_blo_kat.xml",
-    type: "GET",
-    dataType: "xml",
-    success: function(result){
-      $(result).find("xml blokiran").each(function(){
-          table.row.add([
-          ($(this).find('kategorija').text() || "Podatak ne postoji"),
-          ($(this).find('blokiran_do').text() || "Podatak ne postoji")
-          ]).draw(false);
+  let xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
 
-      })
+      let xmlFile = this.responseXML;
+      let kategorija = xmlFile.getElementsByTagName("kategorija");
+      let blokiran_do = xmlFile.getElementsByTagName("blokiran_do");
+
+      function isUndefined(value){
+        if(typeof value === 'undefined'){
+          return false;
+        }
+        else return true;
+      }
+
+
+      for(let i=0; i< kategorija.length; i++){
+        table.row.add([
+          (isUndefined(kategorija[i].childNodes[0]) ? kategorija[i].childNodes[0].nodeValue : "Podatak ne postoji"),
+          (isUndefined(blokiran_do[i].childNodes[0]) ? blokiran_do[i].childNodes[0].nodeValue : "Podatak ne postoji")
+        ]).draw(false);
+      }
+
     }
-  });
+  }
+  xml.open("GET","script/auth_blo_kat_xml.php",true);
+  xml.send();
 
 }
 

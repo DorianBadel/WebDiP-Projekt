@@ -131,8 +131,8 @@
             <label for="tekst">Tekst članka:*</label>
             <textarea type="text" name="tekst" required></textarea>
 
-            <label for="izvor">Link izvora:*</label>
-            <input type="text" name="izvor" required/>
+            <label for="izvor">Link izvora:</label>
+            <input type="text" name="izvor"/>
 
             <label for="autori">Popis autora:*</label>
             <input type="text" name="autori" required/>
