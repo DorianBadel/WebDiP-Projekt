@@ -1,5 +1,7 @@
 <?php
   $requireLogin =true;
+  $minStatus = 2;
+  include "../../../globals/global.php"
  ?>
 <!DOCTYPE html>
 <html lang="en">

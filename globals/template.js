@@ -162,6 +162,7 @@ function getLocationLinksAdmin(){
     links.push("pages/RegUser/Radni_prostor.php");
     links.push("pages/ModUser/Urednicki_prostor.php");
     links.push("pages/AdminUser/Admin_prostor.php");
+    links[99] = "globals";
   }else if(
     path == "prijava.php" ||
     path == "registracija.php" ||
@@ -174,30 +175,35 @@ function getLocationLinksAdmin(){
     links.push("../RegUser/Radni_prostor.php");
     links.push("../ModUser/Urednicki_prostor.php");
     links.push("../AdminUser/Admin_prostor.php");
+    links[99] = "../../globals";
   }
   else if(path == "pocetna.php"){
     links.push("#");
     links.push("Radni_prostor.php");
     links.push("../ModUser/Urednicki_prostor.php");
     links.push("../AdminUser/Admin_prostor.php");
+    links[99] = "../../globals";
   }
   else if(path == "Radni_prostor.php"){
     links.push("pocetna.php");
     links.push("#");
     links.push("../ModUser/Urednicki_prostor.php");
     links.push("../AdminUser/Admin_prostor.php");
+    links[99] = "../../globals";
   }
   else if(path == "Urednicki_prostor.php"){
     links.push("../RegUser/pocetna.php");
     links.push("../RegUser/Radni_prostor.php");
     links.push("#");
     links.push("../AdminUser/Admin_prostor.php");
+    links[99] = "../../globals";
   }
   else if(path == "Admin_prostor.php"){
     links.push("../RegUser/pocetna.php");
     links.push("../RegUser/Radni_prostor.php");
     links.push("../ModUser/Urednicki_prostor.php");
     links.push("#");
+    links[99] = "../../globals";
   }
   else if(
     path == "auth_stat.php" ||
@@ -209,6 +215,7 @@ function getLocationLinksAdmin(){
     links.push("../Radni_prostor.php");
     links.push("../../ModUser/Urednicki_prostor.php");
     links.push("../../AdminUser/Admin_prostor.php");
+    links[99] = "../../../globals";
   }
   else if(
     path == "Blo_kor.php" ||
@@ -220,6 +227,7 @@ function getLocationLinksAdmin(){
     links.push("../../RegUser/Radni_prostor.php");
     links.push("../Urednicki_prostor.php");
     links.push("../../AdminUser/Admin_prostor.php");
+    links[99] = "../../../globals";
   }
   else if(
     path == "dnevnik_rada.php" ||
@@ -234,6 +242,7 @@ function getLocationLinksAdmin(){
     links.push("../../RegUser/Radni_prostor.php");
     links.push("../../ModUser/Urednicki_prostor.php");
     links.push("../Admin_prostor.php");
+    links[99] = "../../../globals";
   }
 
   return links;
@@ -387,18 +396,85 @@ function test(test){
   }
 }
 
+function getLocationPrefiks(){
+  var link;
+  var loc = window.location.pathname.split('/');
+  var path = loc[loc.length-1];
+  console.log(loc[loc.length-1]);
+
+  if(path == "" || path == "index.php" ){
+    link = "globals/roles.php";
+  }else if(
+    path == "Urednicki_prostor.php" ||
+    path == "Admin_prostor.php" ||
+    path == "Radni_prostor.php" ||
+    path == "pocetna.php" ||
+    path == "prijava.php" ||
+    path == "registracija.php" ||
+    path == "Galerija_vijesti.php" ||
+    path == "o_autoru.php" ||
+    path == "Rang_lista.php" ||
+    path == "dokumentacija.php"
+  ){
+    link = "../../globals/roles.php";
+  }
+  else if(
+    path == "auth_stat.php" ||
+    path == "blo_kat.php" ||
+    path == "moj_recenzije.php" ||
+    path == "moj_vijesti.php" ||
+    path == "Blo_kor.php" ||
+    path == "moj_recenzije.php" ||
+    path == "odb_vijesti.php" ||
+    path == "rec_stat.php" ||
+    path == "dnevnik_rada.php" ||
+    path == "edit_kolacic.php" ||
+    path == "ispis_svih_kor.php" ||
+    path == "kategorije.php" ||
+    path == "konfiguracija.php" ||
+    path == "pop_zakljucanih.php" ||
+    path == "vj_za_recenziju.php"
+  ){
+    link = "../../../globals/roles.php";
+  }
+
+  return link;
+
+}
+
+/*function getUloga(){
+  let loc = getLocationPrefiks();
+
+  var xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+    let xmlFile = this.responseXML;
+    let uloga = xmlFile.getElementsByTagName("uloga");
+    if(typeof uloga[0].childNodes[0] === 'undefined'){
+      console.log("undefined");
+      return 1;
+    } else {
+      console.log("defined");
+      return uloga[0].childNodes[0].nodeValue;
+    }
+  }
+  xml.open("GET",loc,true);
+  xml.send();
+}*/
+
 function srcUloga(){
   console.log("test");
   let vr = "1";
-  $.ajax({url: 'https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/role.xml',
-    type: 'GET',
-    dataType: 'xml',
-    success: function(result){
-      $(result).find('xml korisnik').each(function(){
-          vr = $(this).find('uloga').text();
+  let loc = getLocationPrefiks();
 
-          test(vr);
-      })
-      }
-    })
+  var xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+    let xmlFile = this.responseXML;
+    if(xmlFile != null){
+      let uloga = xmlFile.getElementsByTagName("uloga");
+      vr =  uloga[0].childNodes[0].nodeValue;
+      test(vr);
+    }
+  }
+  xml.open("GET",loc,true);
+  xml.send();
   }

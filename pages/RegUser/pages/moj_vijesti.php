@@ -1,5 +1,7 @@
 <?php
   $requireLogin =true;
+  $minStatus = 2;
+  include "../../../globals/global.php"
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,11 +118,12 @@
           </a>
         </div>
       </div>
+
+      <?php
+      include "script/dodaj_vijest.php";
+      ?>
       <div class="add_form" id="add_form" style="display: none">
 
-        <?php
-          include "script/dodaj_vijest.php"
-         ?>
         <form action"" method="POST">
             <label for="naslov">Naslov članka:*</label>
             <input type="text" name="naslov" required/>
@@ -145,13 +148,11 @@
 
             <select name="kategorija" required>
               <?php
-                include '../../../globals/global.php';
-                //include 'script/dodaj_vijest.php';
 
                 $dataB = new DB();
                 @session_start();
                 if($dataB->exists($_SESSION['username'])){
-                  //pronadi id ID_korisnika
+                  //pronadi ID_korisnika
                   $id_kor = $dataB->query("SELECT * FROM korisnik WHERE korisnicko_ime = ?","s",false,[$_SESSION['username']]);
 
                   $sql = $dataB->query("SELECT * FROM pripada WHERE ID_korisnika = ?",'i',false,[$id_kor[0]['ID']]);

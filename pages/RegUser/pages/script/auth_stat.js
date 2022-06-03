@@ -98,12 +98,16 @@ function ucitajPodatkeRec(){
         }
         else return true;
       }
-      function isDorada(value){
+      function isDorada(value,i){
         if(value === 'dorada'){
           let l = document.getElementById("status");
           l.style.color = 'purple';
-          let e = document.getElementById("edit");
-          e.innerHTML = "<i class='bx bx-edit'></i>";
+          let b = document.getElementById("btnRec");
+          b.innerHTML =`
+          <button name="submit"  onClick="triggerMenu(this)"
+          vj-name="`+naslov[i].childNodes[0].nodeValue+`">`+ID[i].childNodes[0].nodeValue+`</button>
+          `;
+
           //createEditForm();
           return true;
         } else return false;
@@ -117,11 +121,11 @@ function ucitajPodatkeRec(){
               <h3>`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</h3>
               <p>`+(isUndefined(komentar[i].childNodes[0]) ? komentar[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</p>
               <span id="status">`+(isUndefined(naziv_statusa[i].childNodes[0])  ? naziv_statusa[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</span>
-            <a  href=""  id="edit">`+ID[i].childNodes[0].nodeValue+`</a>
+              <div id="btnRec"></div>
         </div>
         `;
         section.innerHTML += vijest;
-        isDorada(naziv_statusa[i].childNodes[0].nodeValue);
+        isDorada(naziv_statusa[i].childNodes[0].nodeValue,i);
         }
     }
   }

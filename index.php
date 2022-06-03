@@ -130,11 +130,9 @@
 
             if(empty($_SESSION['username'])){
               echo "Neregistrirani korisnik";
-              $dataB->getUloga();
             }
             else{
               echo $_SESSION['username'];
-              $dataB->getUloga();
             }
            ?>
         </span> na tvoju novu jedinu postaju za sve <em>vijesti!</em></p>

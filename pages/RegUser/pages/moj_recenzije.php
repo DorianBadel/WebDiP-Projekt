@@ -1,5 +1,7 @@
 <?php
   $requireLogin =true;
+  $minStatus = 2;
+  include "../../../globals/global.php"
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +96,6 @@
           </script>";
         }
        ?>
-
     </div>
 
     <div class="section_header">
@@ -102,8 +103,66 @@
     </div>
     </div>
     <div class="section_body" id="bod">
+      <div id="section_inner">
+        <?php
+          /*if(isset($_POST['submit'])){
+            $dataB = new DB();
+            echo $_POST['index'];
+            $vj = $dataB->query("SELECT *
+              FROM vijesti WHERE
+              ID = ?",'i',false,[$_POST['index']]);
+
+            echo "<script>
+            let naslov = document.getElementById('naslov');
+            naslov.value = ".$vj[0]['naslov'].";
+            ";
+          }*/
+
+         ?>
+
+      </div>
+      <div class="add_form" id="add_form" style="display: none">
+
+        <form action"" method="POST">
+          <label for="naslov">Naslov članka:*</label>
+          <input type="text" name="naslov" id="naslov" required/>
+
+          <label for="tekst">Tekst članka:*</label>
+          <textarea type="text" name="tekst" required></textarea>
+
+          <label for="izvor">Link izvora:*</label>
+          <input type="text" name="izvor" required/>
+
+          <label for="autori">Popis autora:*</label>
+          <input type="text" name="autori" required/>
+
+          <label for="slika_src">Link slike:*</label>
+          <input type="text" name="slika_src" required/>
+
+          <label for="video_src">Link videa:</label>
+          <input type="text" name="video_src"/>
+
+          <label for="audio_src">Link zvucnog zapisa:</label>
+          <input type="text" name="audio_src"/>
 
 
+          <button name="submit" >Azuriraj vijest</button>
+        </form>
+      </div>
+
+      <script type="text/javascript">
+        function triggerMenu(el){
+          event.preventDefault();
+          document.getElementById('naslov').value = el.getAttribute('vj-name');
+
+          var pu = document.getElementById('add_form');
+          if(pu.style.display === "none"){
+            pu.style.display = "block";
+          } else {
+            pu.style.display = 'none';
+          }
+        }
+      </script>
 
       <div class="section__rec">
 
@@ -111,7 +170,7 @@
       </div>
     </div>
     <script>
-      
+
     </script>
 
     <!-- If user has no JS -->

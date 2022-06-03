@@ -1,8 +1,16 @@
 <?php
 if (@$requireLogin == true) {
-  if(empty($_SESSION['username'])){
-    header("Location: https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/index.php");
-    exit();
+  $dataB = new DB();
+  session_start();
+  if($dataB->exists($_SESSION['username'])){
+    $vr = $dataB->query("SELECT ID_tipa_korisnika FROM korisnik WHERE korisnicko_ime = ?","s",false,[$_SESSION['username']]);
+    $vr = $vr[0]['ID_tipa_korisnika'];
+
+    if($vr >= $minStatus){
+    }else{
+      header("Location: https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/index.php");
+      exit();
+    }
   }
 
 }
@@ -67,31 +75,6 @@ class DB{
 
   public function fetchId(){
     return mysqli_insert_id($this->connection);
-  }
-
-  public function getUloga(){ //TODO should be replaced by roles.php
-    @session_start();
-
-    //if(file_exists("./role.xml")) unlink("./role.xml");
-
-    if(isset($_SESSION['username'])){
-      $sql = $this->query("SELECT ID_tipa_korisnika FROM korisnik WHERE korisnicko_ime= ?","s",false,[$_SESSION['username']]);
-      $uloga = $sql[0]['ID_tipa_korisnika'];
-    }
-    else {
-      $uloga = "1";
-    }
-
-    $xmlDom = new DOMDocument('1.0','UTF-8');
-
-    $xmlRoot = $xmlDom->createElement("xml");
-    $xmlRoot = $xmlDom->appendChild($xmlRoot);
-
-    $element = $xmlDom->createElement("korisnik");
-    $element = $xmlRoot->appendChild($element);
-    $element->appendChild($xmlDom->createElement('uloga',$uloga));
-
-    $xmlDom->save("./role.xml");
   }
 }
 ?>
