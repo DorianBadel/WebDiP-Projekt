@@ -46,10 +46,11 @@
 
       }
 
-      function setCookie(korisnik, odabrano, istice){
-        let rok = new Date();
-        rok.setTime(rok.getTime() + (istice*86400*1000));
-        document.cookie =  korisnik + "=" + (odabrano || "") + "; expires="+ rok.toUTCString() +"; path=/";
+      function setCookie(odabrano, istice){
+        var rok = new Date();
+        rok.setTime(rok.getTime() + istice* 24 * 60 * 60 * 1000);
+        console.log(rok.toUTCString());
+        document.cookie =  "uvjeti =" + odabrano + "; expires="+ rok.toUTCString() +"; path=/";
         location.reload();
       }
 
@@ -59,13 +60,13 @@
         var cboxC = document.querySelector("input[value='3']");
 
         if(cboxA.checked){
-          setCookie("uvjeti","{$opcije[0]}");
+          setCookie("{$opcije[0]}",2);
         }
         if(cboxB.checked){
-          setCookie("uvjeti","{$opcije[1]}");
+          setCookie("{$opcije[1]}",2);
         }
         if(cboxC.checked){
-          setCookie("uvjeti","{$opcije[2]}");
+          setCookie("{$opcije[2]}",2);
         }
       }
     </script>

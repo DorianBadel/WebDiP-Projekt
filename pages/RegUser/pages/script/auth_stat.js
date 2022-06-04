@@ -110,7 +110,7 @@ function ucitajPodatkeVijest(){
 
             <figure>
             <div class="testtt" id='btnRec`+i+`'></div>
-              <img src=`+slika[i].childNodes[0].nodeValue+` alt="Podatak ne postoji"
+              <img src=`+slika[i].childNodes[0].nodeValue+` alt="Podatak ne postoji">
             </figure>
             <a href="">
               <h3>`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</h3>

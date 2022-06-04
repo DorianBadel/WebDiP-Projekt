@@ -78,7 +78,7 @@
          </div>
 
          <div class="link">
-           <a href="pages/moj_recenzije.php">
+           <a href="pages/moje_recenzije.php">
               <i class='bx bx-edit-alt'></i>
            <span class="title">Moje recenzije</span>
           </a>

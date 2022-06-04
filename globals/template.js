@@ -80,7 +80,7 @@ function getLocationLinksAuth(){
     else if(
       path == "auth_stat.php" ||
       path == "blo_kat.php" ||
-      path == "moj_recenzije.php" ||
+      path == "moje_recenzije.php" ||
       path == "moj_vijesti.php"
     ){
       links.push("../pocetna.php");
@@ -130,7 +130,7 @@ function getLocationLinksRec(){
   else if(
     path == "auth_stat.php" ||
     path == "blo_kat.php" ||
-    path == "moj_recenzije.php" ||
+    path == "moje_recenzije.php" ||
     path == "moj_vijesti.php"
   ){
     links.push("../pocetna.php");
@@ -208,7 +208,7 @@ function getLocationLinksAdmin(){
   else if(
     path == "auth_stat.php" ||
     path == "blo_kat.php" ||
-    path == "moj_recenzije.php" ||
+    path == "moje_recenzije.php" ||
     path == "moj_vijesti.php"
   ){
     links.push("../pocetna.php");
@@ -421,7 +421,7 @@ function getLocationPrefiks(){
   else if(
     path == "auth_stat.php" ||
     path == "blo_kat.php" ||
-    path == "moj_recenzije.php" ||
+    path == "moje_recenzije.php" ||
     path == "moj_vijesti.php" ||
     path == "Blo_kor.php" ||
     path == "moj_recenzije.php" ||

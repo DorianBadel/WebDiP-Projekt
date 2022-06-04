@@ -139,7 +139,6 @@
                   <th>Autori</th>
                   <th>Izvori</th>
                   <th>Datum objave</th>
-                  <th>Verzija vijesti</th>
                 </tr> <!-- HEADER -->
               </thead>
 
@@ -149,7 +148,6 @@
 
               <tfoot>
                 <tr>
-                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
