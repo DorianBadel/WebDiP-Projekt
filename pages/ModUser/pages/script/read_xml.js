@@ -10,6 +10,9 @@ function ucitajPodatke(){
       let xmlFile = this.responseXML;
       let korisnik = xmlFile.getElementsByTagName("korisnik");
       let razlog = xmlFile.getElementsByTagName("razlog");
+      let od = xmlFile.getElementsByTagName("blokiran_od");
+      let doD = xmlFile.getElementsByTagName("blokiran_do");
+      let kat = xmlFile.getElementsByTagName("naziv");
 
       function isUndefined(value){
         if(typeof value === 'undefined'){
@@ -24,7 +27,14 @@ function ucitajPodatke(){
           <div class="recenzija">
                 <h3>`+(isUndefined(korisnik[i].childNodes[0]) ? korisnik[i].childNodes[0].nodeValue : "")+`</h3>
                 <p>`+(isUndefined(razlog[i].childNodes[0]) ? razlog[i].childNodes[0].nodeValue : "")+`</p>
-            <a href="" blo-kor='`+(isUndefined(korisnik[i].childNodes[0]) ? korisnik[i].childNodes[0].nodeValue : "")+`'><i class='bx bx-edit'></i></a>
+            <a href="" onClick="triggerEdit(this)"
+            blo-kor='`+(isUndefined(korisnik[i].childNodes[0]) ? korisnik[i].childNodes[0].nodeValue : "")+`'
+            blo-raz='`+(isUndefined(razlog[i].childNodes[0]) ? razlog[i].childNodes[0].nodeValue : "")+`'
+            blo-od='`+(isUndefined(od[i].childNodes[0]) ? od[i].childNodes[0].nodeValue : "")+`'
+            blo-do='`+(isUndefined(doD[i].childNodes[0]) ? doD[i].childNodes[0].nodeValue : "")+`'
+            blo-kat='`+(isUndefined(kat[i].childNodes[0]) ? kat[i].childNodes[0].nodeValue : "")+`'
+            >
+            <i class='bx bx-edit'></i></a>
           </div>
           `;
           section.innerHTML += vijest;

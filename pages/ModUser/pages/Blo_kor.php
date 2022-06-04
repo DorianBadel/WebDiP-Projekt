@@ -96,20 +96,63 @@
        ?>
     </div>
 
-    <?php
-      shell_exec('php script/blo_kor_xml.php');
-    ?>
-
     <div class="section_header">
       <h1>Blokirani korisnici</h1>
     </div>
     </div>
     <div class="section_body" id="bod">
+      <?php
+      include "script/azuriraj_blo_kor.php";
+      ?>
+      <div class="add_form" id="add_form_blok" style="display: none">
+
+        <form action"" method="POST">
+            <label for="naslov">Korisnik:*</label>
+            <input type="text" name="kor" id="kor" required readonly/>
+
+            <label for="tekst">Blokiran u kategoriji:*</label>
+            <input type="text" name="kat"  id="kat" required readonly></input>
+
+            <label for="izvor">Razlog blokiranja:*</label>
+            <input type="text" name="raz" id="raz" required/>
+
+            <label for="autori">Blokiran od:*</label>
+            <input type="date" name="od"  id="od" required/>
+
+            <label for="autori">Blokiran do:*</label>
+            <input type="date" name="doD"  id="doD" required/>
+
+            <div id="btnn">
+              <button name='edit'>Azuriraj blokiranje</button>
+            </div>
+
+        </form>
+      </div>
       <div class="section__rec">
 
 
       </div>
     </div>
+
+    <script type="text/javascript">
+      function triggerEdit(blok){
+        event.preventDefault();
+        let value = document.getElementById('btnn');
+        document.getElementById('kor').value = blok.getAttribute('blo-kor');
+        document.getElementById('raz').value = blok.getAttribute('blo-raz');
+        document.getElementById('od').value = blok.getAttribute('blo-od');
+        document.getElementById('doD').value = blok.getAttribute('blo-do');
+        document.getElementById('kat').value = blok.getAttribute('blo-kat');
+
+        var pu = document.getElementById('add_form_blok');
+        if(pu.style.display === "none"){
+          pu.style.display = "block";
+        } else {
+          pu.style.display = 'none';
+        }
+      }
+
+    </script>
 
     <!-- If user has no JS -->
     <noscript>Sorry, your browser does not support JavaScript!</noscript>

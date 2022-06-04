@@ -118,7 +118,6 @@
       <?php
       include "script/azuriraj_vijest.php";
       include "script/dodaj_vijest.php";
-      $add = 3;
       ?>
       <div class="add_form" id="add_form" style="display: none">
 
@@ -189,20 +188,20 @@
       </div>
     </div>
     <script type="text/javascript">
-      function triggerMenu(el){
+      function triggerMenu(vj){
         event.preventDefault();
         let value = document.getElementById('btnn');
         value.innerHTML += "<button name='submit'>Azuriraj vijest</button>";
-        document.getElementById('naslov').value = el.getAttribute('vj-name');
-        document.getElementById('izvor').value = el.getAttribute('vj-izvor');
-        document.getElementById('tekst').value = el.getAttribute('vj-tekst');
-        document.getElementById('autori').value = el.getAttribute('vj-autori');
-        document.getElementById('slika_src').value = el.getAttribute('vj-slika');
-        document.getElementById('video_src').value = el.getAttribute('vj-video');
-        document.getElementById('audio_src').value = el.getAttribute('vj-audio');
-        document.getElementById('index').value = el.getAttribute('vj-index');
-        document.getElementById('verzija').value = el.getAttribute('vj-verzija');
-        document.getElementById('kategorija').value = el.getAttribute('vj-kateg');
+        document.getElementById('naslov').value = vj.getAttribute('vj-name');
+        document.getElementById('izvor').value = vj.getAttribute('vj-izvor');
+        document.getElementById('tekst').value = vj.getAttribute('vj-tekst');
+        document.getElementById('autori').value = vj.getAttribute('vj-autori');
+        document.getElementById('slika_src').value = vj.getAttribute('vj-slika');
+        document.getElementById('video_src').value = vj.getAttribute('vj-video');
+        document.getElementById('audio_src').value = vj.getAttribute('vj-audio');
+        document.getElementById('index').value = vj.getAttribute('vj-index');
+        document.getElementById('verzija').value = vj.getAttribute('vj-verzija');
+        document.getElementById('kategorija').value = vj.getAttribute('vj-kateg');
 
         var pu = document.getElementById('add_form');
         if(pu.style.display === "none"){
