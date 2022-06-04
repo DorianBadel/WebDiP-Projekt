@@ -117,6 +117,122 @@ function ucitajPodatkeMR(){
   });
 }
 
+function ucitajPodatkeSTAT(){
+  var table = $('#java_table').DataTable(
+    {
+      "aaSorting": [[1,"desc"]],
+      "bPaginate":true,
+      "bDeferRender": true
+    }
+  );
+
+  var xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+
+      let xmlFile = this.responseXML;
+      let korisnik = xmlFile.getElementsByTagName("korisnik");
+      let br_pr = xmlFile.getElementsByTagName("br_pr");
+      let br_odb = xmlFile.getElementsByTagName("br_odb");
+
+      for(let i=0; i< korisnik.length; i++){
+          table.row.add([
+            (korisnik[i].childNodes[0].nodeValue || "Podatak ne postoji"),
+            (br_pr[i].childNodes[0].nodeValue || "Podatak ne postoji"),
+            (br_odb[i].childNodes[0].nodeValue || "Podatak ne postoji"),
+          ]).draw(false);
+      }
+
+      drawGraph(korisnik,br_pr,br_odb);
+
+      function drawGraph(kor,prih,odb){
+        let canv = document.getElementById("canvas");
+        var cont = canv.getContext("2d");
+
+        let TOP = 25;
+        let LEFT = 55;
+
+        let HEIGHT = canv.getAttribute('height')-110;
+        let BOTTOM = HEIGHT+75;
+        let WIDTH = canv.getAttribute('width')-100;
+        let RIGHT = WIDTH+75;
+
+        cont.clearRect(0,0,400,400);
+        cont.fillStyle = 'red';
+
+        cont.beginPath();
+        cont.lineJoin = "round";
+        cont.strokeStyle = "black";
+        cont.moveTo(LEFT, TOP);
+        cont.lineTo(LEFT,BOTTOM);
+        cont.lineTo(RIGHT, BOTTOM);
+        cont.lineTo(RIGHT, TOP);
+        cont.lineTo(LEFT, TOP);
+        cont.stroke();
+
+        let barWidth = WIDTH/kor.length;
+        let max = 0;
+        for(let i=0; i< kor.length; i++){
+          if(prih[i].childNodes[0].nodeValue > max) max = prih[i].childNodes[0].nodeValue;
+          if (odb[i].childNodes[0].nodeValue > max) max = odb[i].childNodes[0].nodeValue;
+        }
+
+        let increment = (HEIGHT-TOP)/max;
+        let offset = LEFT;
+
+        cont.strokeStyle = "rgba(255,255,255,0.5)";
+        for(let i = 0; i<= max; ++i){
+          cont.beginPath();
+          cont.moveTo(LEFT, HEIGHT-increment*i);
+          cont.lineTo(RIGHT, HEIGHT-increment*i);
+          cont.fillText(i,10,HEIGHT-increment*i);
+          cont.stroke();
+        }
+
+        cont.strokeStyle = "black";
+
+        for(let i=0; i< kor.length; i++){
+          if(prih[i].childNodes[0].nodeValue != 0 || odb[i].childNodes[0].nodeValue != 0){
+            cont.fillText(kor[i].childNodes[0].nodeValue,offset,BOTTOM+20);
+
+            if(prih[i].childNodes[0].nodeValue != 0){
+              cont.moveTo(offset, BOTTOM);
+              cont.lineTo(offset,HEIGHT-increment*prih[i].childNodes[0].nodeValue);
+              cont.lineTo(offset+barWidth,HEIGHT-increment*prih[i].childNodes[0].nodeValue);
+              cont.lineTo(offset+barWidth,BOTTOM);
+
+              cont.stroke();
+            }
+
+            offset += barWidth;
+
+
+
+            if(odb[i].childNodes[0].nodeValue != 0){
+              cont.moveTo(offset, BOTTOM);
+              cont.lineTo(offset,HEIGHT-increment*odb[i].childNodes[0].nodeValue);
+              cont.lineTo(offset+barWidth,HEIGHT-increment*odb[i].childNodes[0].nodeValue);
+              cont.lineTo(offset+barWidth,BOTTOM);
+
+              cont.stroke();
+            }
+            offset += barWidth;
+          }
+        }
+
+      }
+
+
+
+
+    }
+
+  }
+  xml.open("GET","script/rec_stat_xml.php",true);
+  xml.send();
+
+}
+
 $(document).ready(function(){
   console.log(document.title);
 
@@ -132,6 +248,10 @@ $(document).ready(function(){
     console.log("Spojen na moje recenzije");
 
     ucitajPodatkeMR();
+  }else if(document.title.match('Statistika o autorima')){
+    console.log("Statistika o autorima");
+
+    ucitajPodatkeSTAT();
   }else{
     console.log("error");
   }
