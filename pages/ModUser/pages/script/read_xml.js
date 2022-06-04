@@ -47,25 +47,42 @@ function ucitajPodatkeVJ(){
   let vijest;
   let section = document.querySelector(".section__rec");
   section.innerHTML = "";
-  console.log("test1");
 
-  $.ajax({url: "https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/tablice/odb_vijesti.xml",
-    type: "GET",
-    dataType: "xml",
-    success: function(result){
-      $(result).find("xml blokiran").each(function(){
+  var xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+
+      let xmlFile = this.responseXML;
+      let korisnik = xmlFile.getElementsByTagName("korisnik");
+      let datum = xmlFile.getElementsByTagName("datum_objave");
+      let kat = xmlFile.getElementsByTagName("naziv");
+      let naslov = xmlFile.getElementsByTagName("naslov");
+
+      function isUndefined(value){
+        if(typeof value === 'undefined'){
+          return false;
+        }
+        else return true;
+      }
+
+
+      for(let i=0; i< korisnik.length; i++){
           vijest = `
           <div class="recenzija">
-                <h3>`+($(this).find('naslov').text() || "Podatak ne postoji")+`</h3>
-                <p>`+($(this).find('korisnik').text() || "Podatak ne postoji")+`</p>
-                <span>`+($(this).find('datum_objave').text() || "Podatak ne postoji")+`</span>
-            <a href=""><i class='bx bx-edit'></i></a>
+                <h3>`+isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "")+`</h3>
+                <p>`+isUndefined(korisnik[i].childNodes[0]) ? korisnik[i].childNodes[0].nodeValue : "")+`</p>
+                <span>`+isUndefined(datum[i].childNodes[0]) ? datum[i].childNodes[0].nodeValue : "")+`</span>
+            <a href=""
+            odb-kor='`+isUndefined(korisnik[i].childNodes[0]) ? korisnik[i].childNodes[0].nodeValue : "")+`';
+            odb-kat='`+isUndefined(kat[i].childNodes[0]) ? kat[i].childNodes[0].nodeValue : "")+`';
+
+            ><i class='bx bx-edit'></i></a>
           </div>
           `;
           section.innerHTML += vijest;
-      })
-    }
-  });
+  }}}
+  xml.open("GET","script/odb_vijest_xml.php",true);
+  xml.send();
 }
 
 function ucitajPodatkeMR(){
