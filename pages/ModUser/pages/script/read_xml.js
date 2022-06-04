@@ -69,13 +69,12 @@ function ucitajPodatkeVJ(){
       for(let i=0; i< korisnik.length; i++){
           vijest = `
           <div class="recenzija">
-                <h3>`+isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "")+`</h3>
-                <p>`+isUndefined(korisnik[i].childNodes[0]) ? korisnik[i].childNodes[0].nodeValue : "")+`</p>
-                <span>`+isUndefined(datum[i].childNodes[0]) ? datum[i].childNodes[0].nodeValue : "")+`</span>
-            <a href=""
-            odb-kor='`+isUndefined(korisnik[i].childNodes[0]) ? korisnik[i].childNodes[0].nodeValue : "")+`';
-            odb-kat='`+isUndefined(kat[i].childNodes[0]) ? kat[i].childNodes[0].nodeValue : "")+`';
-
+                <h3>`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "")+`</h3>
+                <p>`+(isUndefined(korisnik[i].childNodes[0]) ? korisnik[i].childNodes[0].nodeValue : "")+`</p>
+                <span>`+(isUndefined(datum[i].childNodes[0]) ? datum[i].childNodes[0].nodeValue : "")+`</span>
+            <a href="" onClick="triggerEditOdb(this)"
+            odb-kor='`+(isUndefined(korisnik[i].childNodes[0]) ? korisnik[i].childNodes[0].nodeValue : "")+`';
+            odb-kat='`+(isUndefined(kat[i].childNodes[0]) ? kat[i].childNodes[0].nodeValue : "")+`';
             ><i class='bx bx-edit'></i></a>
           </div>
           `;

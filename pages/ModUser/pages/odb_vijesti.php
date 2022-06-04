@@ -99,14 +99,14 @@
 
     </div>
     <?php
-      include "script/azuriraj_blo_kor.php";
+      include "script/blokiraj_kor.php";
     ?>
 
     <div class="section_header">
       <h1>Odbijene vijesti</h1>
     </div>
     </div>
-    <div class="add_form" id="add_form_blok" style="display: none">
+    <div class="add_form" id="add_form_odb" style="display: none">
 
       <form action"" method="POST">
           <label for="naslov">Korisnik:*</label>
@@ -118,14 +118,16 @@
           <label for="izvor">Razlog blokiranja:*</label>
           <input type="text" name="raz" id="raz" required/>
 
+
           <label for="autori">Blokiran od:*</label>
-          <input type="date" name="od"  id="od" required/>
+          <input type="date" name="od"  id="od" value="<?php echo date('Y-m-d'); ?>"
+          required readonly/>
 
           <label for="autori">Blokiran do:*</label>
           <input type="date" name="doD"  id="doD" required/>
 
           <div id="btnn">
-            <button name='edit'>Azuriraj blokiranje</button>
+            <button name='add'>Blokirajte korisnika</button>
           </div>
 
       </form>
@@ -138,14 +140,12 @@
     </div>
 
     <script type="text/javascript">
-      function triggerEdit(blok){
+      function triggerEditOdb(blok){
         event.preventDefault();
-        let value = document.getElementById('btnn');
-        document.getElementById('kor').value = blok.getAttribute('blo-kor');
-        document.getElementById('raz').value = blok.getAttribute('blo-raz');
-        document.getElementById('kat').value = blok.getAttribute('blo-kat');
+        document.getElementById('kor').value = blok.getAttribute('odb-kor');
+        document.getElementById('kat').value = blok.getAttribute('odb-kat');
 
-        var pu = document.getElementById('add_form_blok');
+        var pu = document.getElementById('add_form_odb');
         if(pu.style.display === "none"){
           pu.style.display = "block";
         } else {
