@@ -50,23 +50,39 @@ function ucitajPodatkeZak(){
   section.innerHTML = "";
   console.log("test1");
 
-  $.ajax({url: "https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/tablice/zak_kor.xml",
-    type: "GET",
-    dataType: "xml",
-    success: function(result){
-      $(result).find("xml zakljucan").each(function(){
+  var xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+
+      let xmlFile = this.responseXML;
+      let ime = xmlFile.getElementsByTagName("ime");
+      let korisnicko_ime = xmlFile.getElementsByTagName("korisnicko_ime");
+      let email = xmlFile.getElementsByTagName("email");
+      let id = xmlFile.getElementsByTagName("id");
+
+      function isUndefined(value){
+        if(typeof value === 'undefined'){
+          return false;
+        }
+        else return true;
+      }
+
+      for(let i=0; i< ime.length; i++){
         vijest = `
         <div class="recenzija">
-              <h3>`+($(this).find('ime').text()+" "+$(this).find('prezime').text() || "Podatak ne postoji")+`</h3>
-              <span>`+($(this).find('korisnicko_ime').text() || "Podatak ne postoji")+`</span>
-              <p>`+($(this).find('email').text() || "Podatak ne postoji")+`</p>
-          <a href="" style="float: right">Makni blokadu</i></a>
+              <h3>`+(isUndefined(ime[i].childNodes[0]) ? ime[i].childNodes[0].nodeValue : "")+`</h3>
+              <span>`+(isUndefined(korisnicko_ime[i].childNodes[0]) ? korisnicko_ime[i].childNodes[0].nodeValue : "")+`</span>
+              <p>`+(isUndefined(email[i].childNodes[0]) ? email[i].childNodes[0].nodeValue : "")+`</p>
+              <form action"" method="POST">
+                  <input type="hidden" name="ind"  id="ind" value='`+(isUndefined(id[i].childNodes[0]) ? id[i].childNodes[0].nodeValue : "")+`' required>
+                  <button name='submit' style="float: right">Makni blokadu</button>
+              </form>
         </div>
         `;
           section.innerHTML += vijest;
-      })
-    }
-  });
+    }}}
+    xml.open("GET","script/zak_kor_xml.php",true);
+    xml.send();
 }
 
 function ucitajPodatkeVJRec(){
@@ -74,23 +90,35 @@ function ucitajPodatkeVJRec(){
   let section = document.querySelector(".section__rec");
   section.innerHTML = "";
 
-  $.ajax({url: "https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/tablice/vj_za_rec.xml",
-    type: "GET",
-    dataType: "xml",
-    success: function(result){
-      $(result).find("xml vijest").each(function(){
+  var xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+
+      let xmlFile = this.responseXML;
+      let naslov = xmlFile.getElementsByTagName("naslov");
+      let autor = xmlFile.getElementsByTagName("autor");
+      let kategorija = xmlFile.getElementsByTagName("kategorija");
+
+      function isUndefined(value){
+        if(typeof value === 'undefined'){
+          return false;
+        }
+        else return true;
+      }
+
+      for(let i=0; i< naslov.length; i++){
         vijest = `
         <div class="recenzija">
-              <h3>`+($(this).find('naslov').text()+" "+$(this).find('prezime').text() || "Podatak ne postoji")+`</h3>
-              <p>`+($(this).find('autor').text() || "Podatak ne postoji")+`</p>
-              <p>`+($(this).find('kategorija').text() || "Podatak ne postoji")+`</p>
+              <h3>`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "")+`</h3>
+              <p>`+(isUndefined(autor[i].childNodes[0]) ? autor[i].childNodes[0].nodeValue : "")+`</p>
+              <p>`+(isUndefined(kategorija[i].childNodes[0]) ? kategorija[i].childNodes[0].nodeValue : "")+`</p>
           <a href="" style="float: right">Dodaj recenzenta</i></a>
         </div>
         `;
           section.innerHTML += vijest;
-      })
-    }
-  });
+      }}}
+      xml.open("GET","script/vj_za_rec.php",true);
+      xml.send();
 }
 
 $(document).ready(function(){

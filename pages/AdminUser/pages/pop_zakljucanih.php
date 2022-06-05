@@ -1,7 +1,7 @@
 <?php
   $requireLogin =true;
   $minStatus = 4;
-  include "../../../globals/global.php"
+  include "../../../globals/global.php";
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +44,7 @@
               echo "<a href='prijava.php'><i class='bx bx-log-in' id='log_out'></i></a>";
             }
             else{
-              echo "<a href='../../globals/logout.php'><i class='bx bx-log-out' id='log_out'></i></a>";
+              echo "<a href='../../../globals/logout.php'><i class='bx bx-log-out' id='log_out'></i></a>";
             }
           ?>
 
@@ -99,14 +99,23 @@
 
     </div>
 
-    <?php
-      shell_exec('php script/zak_kor_xml.php');
-    ?>
+
 
     <div class="section_header">
       <h1>Zakljucani korisnici</h1>
     </div>
-    </div>
+
+    <?php
+    if(isset($_POST['submit'])){
+      $id = $_POST['ind'];
+
+      $dataB = new DB();
+
+      $dataB->query("UPDATE `korisnik` SET br_neuspj_unosa=? WHERE `ID` = ?","ii",true,['0',$id]);
+
+    }
+    ?>
+
     <div class="section_body" id="bod">
       <div class="section__rec">
 

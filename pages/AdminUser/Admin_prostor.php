@@ -76,7 +76,7 @@
          </a>
          </div>
          <div class="link">
-           <a href="pages/ispis_svih_kor.php">
+           <a href="../../privatno/korisnici.php">
              <i class='bx bxs-user-detail'></i>
            <span class="title">Ispis svih korisnika</span>
          </a>
