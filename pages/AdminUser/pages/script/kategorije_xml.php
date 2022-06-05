@@ -1,6 +1,7 @@
 <?php
   include '../../../../globals/global.php';
   $dataB = new DB();
+  header("Content-Type: text/xml");
 
   $sql = $dataB->query("SELECT * FROM kategorija");
 
@@ -9,24 +10,23 @@
 
   $xmlRoot = $xmlDom->createElement("xml");
   $xmlRoot = $xmlDom->appendChild($xmlRoot);
-  $file = "../../../../tablice/kategorije.xml";
-
-  if($file) unlink($file);
 
   foreach($sql as &$r){
     $t1 = $r['naziv'];
     $t2 = $r['sazetak'];
     $t3 = $r['opis'];
+    $t4 = $r['ID'];
 
-    $element = $xmlDom->createElement("korisnik");
+    $element = $xmlDom->createElement("kategorija");
     $element = $xmlRoot->appendChild($element);
 
     $element->appendChild($xmlDom->createElement('naziv',$t1));
     $element->appendChild($xmlDom->createElement('sazetak',$t2));
     $element->appendChild($xmlDom->createElement('opis',$t3));
+    $element->appendChild($xmlDom->createElement('id',$t4));
 
   }
 
-  echo $xmlDom->save("../../../../tablice/kategorije.xml");
+  echo $xmlDom->saveXML();
 
  ?>

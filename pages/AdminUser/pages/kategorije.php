@@ -102,14 +102,11 @@
     <div class="section_header">
       <h1>Kategorije</h1>
     </div>
-    <?php
-    shell_exec('php script/kategorije_xml.php');
-     ?>
 
     <div class="sub__header">
       <div class ="sub__header-buttons">
         <div class="add">
-          <a onClick="triggerMenu()">
+          <a onClick="triggerMenuAdd()">
             <i class='bx bxs-plus-square'></i>
           </a>
         </div>
@@ -123,10 +120,34 @@
               <input type="text" name="sazetak" required>
               <label for="opis">Detaljan opis kategorije:</label>
               <textarea type="text" name="opis"></textarea>
-              <label for="mod">Izaberite moderatora:</label>
+
+              <button name='submit' onClick='triggerMenuAdd()'>Dodaj vijest</button>
+          </form>
+        </div>
+
+        <div class="add_form" id="edit_form" style="display: none">
+
+          <form action"" method="POST">
+              <label for="kategorija">Naziv kategorije:</label>
+              <input type="text" name="kategorija"  id="kat" required>
+              <label for="sazetak">Kratko o kategoriji:</label>
+              <input type="text" name="sazetak"  id="opi" required>
+              <label for="opis">Detaljan opis kategorije:</label>
+              <textarea type="text" name="opis" id="opis"></textarea>
+
+              <input type="HIDDEN" name="ind"  id="id" required>
+
+              <button name='edit' >Uredi kategoriju</button>
+          </form>
+        </div>
+
+        <div class="add_form" id="add_mod" style="display: none">
+
+          <form action"" method="POST">
+
+            <label for="mod">Izaberite moderatora:</label>
               <select class="moderator" name="mod" required>
                 <?php
-                  include '../../../globals/global.php';
                   include 'script/dodaj_kat.php';
 
                   $dataB = new DB();
@@ -140,13 +161,41 @@
               </select>
 
 
-              <button name="submit" onClick="triggerMenu()">Dodaj vijest</button>
           </form>
         </div>
 
+
+
+
+
         <script type="text/javascript">
-          function triggerMenu(){
+          function triggerMenuAdd(){
+            event.preventDefault();
             var pu = document.getElementById('add_form');
+            if(pu.style.display === "none"){
+              pu.style.display = "block";
+            } else {
+              pu.style.display = 'none';
+            }
+          }
+          function triggerEditKat(kat){
+            event.preventDefault();
+            event.preventDefault();
+            var pu = document.getElementById('edit_form');
+            document.getElementById('kat').value = kat.getAttribute('kat-naziv');
+            document.getElementById('opi').value  = kat.getAttribute('kat-opis-short');
+            document.getElementById('opis').value = kat.getAttribute('kat-opis-long');
+            document.getElementById('id').value = kat.getAttribute('kat-id');
+
+            if(pu.style.display === "none"){
+              pu.style.display = "block";
+            } else {
+              pu.style.display = 'none';
+            }
+          }
+          function triggerAddMod(kat){
+            event.preventDefault();
+            var pu = document.getElementById('add_mod');
             if(pu.style.display === "none"){
               pu.style.display = "block";
             } else {

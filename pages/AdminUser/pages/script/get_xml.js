@@ -3,23 +3,43 @@ function ucitajPodatke(){
   let section = document.querySelector(".section__rec");
   section.innerHTML = "";
 
-  $.ajax({url: "https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/tablice/kategorije.xml",
-    type: "GET",
-    dataType: "xml",
-    success: function(result){
-      $(result).find("xml korisnik").each(function(){
+  var xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+
+      let xmlFile = this.responseXML;
+      let naziv = xmlFile.getElementsByTagName("naziv");
+      let sazetak = xmlFile.getElementsByTagName("sazetak");
+      let opis = xmlFile.getElementsByTagName("opis");
+      let id = xmlFile.getElementsByTagName("id");
+
+      function isUndefined(value){
+        if(typeof value === 'undefined'){
+          return false;
+        }
+        else return true;
+      }
+
+      for(let i=0; i< naziv.length; i++){
           vijest = `
           <div class="recenzija">
-                <h3>`+($(this).find('naziv').text() || "Podatak ne postoji")+`</h3>
-                <span>`+($(this).find('sazetak').text() || "Podatak ne postoji")+`</span>
-                <p>`+($(this).find('opis').text() || "Podatak ne postoji")+`</p>
-            <a href=""><i class='bx bx-edit'></i></a>
+                <h3>`+(isUndefined(naziv[i].childNodes[0]) ? naziv[i].childNodes[0].nodeValue : "")+`</h3>
+                <span>`+(isUndefined(sazetak[i].childNodes[0]) ? sazetak[i].childNodes[0].nodeValue : "")+`</span>
+                <p>`+(isUndefined(opis[i].childNodes[0]) ? opis[i].childNodes[0].nodeValue : "")+`</p>
+            <a href="" onClick="triggerEditKat(this)"
+            kat-naziv ='`+(isUndefined(naziv[i].childNodes[0]) ? naziv[i].childNodes[0].nodeValue : "")+`'
+            kat-opis-short='`+(isUndefined(sazetak[i].childNodes[0]) ? sazetak[i].childNodes[0].nodeValue : "")+`'
+            kat-opis-long='`+(isUndefined(opis[i].childNodes[0]) ? opis[i].childNodes[0].nodeValue : "")+`'
+            kat-id='`+(isUndefined(id[i].childNodes[0]) ? id[i].childNodes[0].nodeValue : "")+`'
+            ><i class='bx bx-edit'></i></a>
+
+            <a href="" onClick="triggerAddMod(this)" style="position: relative; float: right; font-size: 20px; padding-right: 20px;"><i class='bx bx-message-alt-add'></i></a>
           </div>
           `;
           section.innerHTML += vijest;
-      })
-    }
-  });
+    }}}
+    xml.open("GET","script/kategorije_xml.php",true);
+    xml.send();
 }
 
 function ucitajPodatkeZak(){
