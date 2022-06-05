@@ -98,6 +98,8 @@ function ucitajPodatkeVJRec(){
       let naslov = xmlFile.getElementsByTagName("naslov");
       let autor = xmlFile.getElementsByTagName("autor");
       let kategorija = xmlFile.getElementsByTagName("kategorija");
+      let id_vj = xmlFile.getElementsByTagName("id_vj");
+      let id_kat = xmlFile.getElementsByTagName("id_kat");
 
       function isUndefined(value){
         if(typeof value === 'undefined'){
@@ -112,12 +114,15 @@ function ucitajPodatkeVJRec(){
               <h3>`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "")+`</h3>
               <p>`+(isUndefined(autor[i].childNodes[0]) ? autor[i].childNodes[0].nodeValue : "")+`</p>
               <p>`+(isUndefined(kategorija[i].childNodes[0]) ? kategorija[i].childNodes[0].nodeValue : "")+`</p>
-          <a href="" style="float: right">Dodaj recenzenta</i></a>
+          <a href="" style="float: right" onClick="triggerAddMod(this)"
+          kat-id=`+(isUndefined(id_vj[i].childNodes[0]) ? id_vj[i].childNodes[0].nodeValue : "")+`
+          vj-id=`+(isUndefined(id_kat[i].childNodes[0]) ? id_kat[i].childNodes[0].nodeValue : "")+`
+          >Dodaj recenzenta</i></a>
         </div>
         `;
           section.innerHTML += vijest;
       }}}
-      xml.open("GET","script/vj_za_rec.php",true);
+      xml.open("GET","script/vj_za_rec_xml.php",true);
       xml.send();
 }
 

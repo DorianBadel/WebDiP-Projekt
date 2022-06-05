@@ -44,7 +44,7 @@
               echo "<a href='prijava.php'><i class='bx bx-log-in' id='log_out'></i></a>";
             }
             else{
-              echo "<a href='../../globals/logout.php'><i class='bx bx-log-out' id='log_out'></i></a>";
+              echo "<a href='../../../globals/logout.php'><i class='bx bx-log-out' id='log_out'></i></a>";
             }
           ?>
 
@@ -99,20 +99,65 @@
 
     </div>
 
-    <?php
-      shell_exec('php script/vj_za_rec_xml.php');
-    ?>
-
     <div class="section_header">
       <h1>Vijesti za recenziju</h1>
     </div>
     </div>
+
+    <div class="add_form" id="add_mod" style="display: none">
+      <form action"" method="POST">
+        <input type="text" name="indkat"  id="indkat" required>
+        <input type="text" name="indvj"  id="indvj" required>
+
+        <div class="select-rec">
+        </div>
+
+        <label for="mod">Izaberite recenzenta:</label>
+          <select class="moderator" name="rec" required>
+            <?php
+              if(isset($_POST['dodaj'])){
+
+                $dataB = new DB();
+                $sql = $dataB->query("SELECT `korisnik`.`korisnicko_ime`, `kategorija`.`ID`, `pripada`.`ID_kategorije`
+                  FROM `korisnik`
+                      LEFT JOIN `pripada` ON `pripada`.`ID_korisnika` = `korisnik`.`ID`
+                      LEFT JOIN `kategorija` ON `pripada`.`ID_kategorije` = `kategorija`.`ID`
+                  WHERE `kategorija`.`ID` = ? AND `pripada`.`jeModerator` = '1'",'i',false,[$_POST['indkat']]);
+
+                foreach($sql as &$rec){
+                  $html = "<option value='".$rec['ID']."'>".$rec['korisnicko_ime']."</option>";
+                  echo $html;
+                }
+              }
+            ?>
+          </select>
+
+          <button name='modAdd' >Dodaj moderatora</button>
+
+
+      </form>
+    </div>
+
     <div class="section_body" id="bod">
       <div class="section__rec">
 
 
       </div>
     </div>
+
+    <SCRIPT>
+      function triggerAddMod(kat){
+        event.preventDefault();
+        var pu = document.getElementById('add_mod');
+        document.getElementById('indkat').value = kat.getAttribute('kat-id');
+        document.getElementById('indvj').value = kat.getAttribute('vj-id');
+        if(pu.style.display === "none"){
+          pu.style.display = "block";
+        } else {
+          pu.style.display = 'none';
+        }
+      }
+  </script>
 
     <!-- If user has no JS -->
     <noscript>Sorry, your browser does not support JavaScript!</noscript>
