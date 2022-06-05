@@ -103,6 +103,10 @@
       <h1>Kategorije</h1>
     </div>
 
+    <?php
+    include "script/dodaj_kat.php"
+    ?>
+
     <div class="sub__header">
       <div class ="sub__header-buttons">
         <div class="add">
@@ -111,7 +115,7 @@
           </a>
         </div>
 
-        <div class="add_form" id="add_form" style="display: none">
+        <div class="add_form" id="add_form_kat_adm" style="display: none">
 
           <form action"" method="POST">
               <label for="kategorija">Naziv kategorije:</label>
@@ -121,23 +125,25 @@
               <label for="opis">Detaljan opis kategorije:</label>
               <textarea type="text" name="opis"></textarea>
 
-              <button name='submit' onClick='triggerMenuAdd()'>Dodaj vijest</button>
+              <button name='submit'>Dodaj vijest</button>
           </form>
         </div>
 
         <div class="add_form" id="edit_form" style="display: none">
 
-          <form action"" method="POST">
-              <label for="kategorija">Naziv kategorije:</label>
-              <input type="text" name="kategorija"  id="kat" required>
-              <label for="sazetak">Kratko o kategoriji:</label>
-              <input type="text" name="sazetak"  id="opi" required>
-              <label for="opis">Detaljan opis kategorije:</label>
-              <textarea type="text" name="opis" id="opis"></textarea>
 
-              <input type="HIDDEN" name="ind"  id="id" required>
+          <form action"" method="POST">
+              <label for="kategorija_edit">Naziv kategorije:</label>
+              <input type="text" name="kategorija_edit"  id="kat" required>
+              <label for="sazetak_edit">Kratko o kategoriji:</label>
+              <input type="text" name="sazetak_edit"  id="opi" required>
+              <label for="opis_edit">Detaljan opis kategorije:</label>
+              <textarea type="text" name="opis_edit" id="opis"></textarea>
+
+              <input type="text" name="ind"  id="ind" required>
 
               <button name='edit' >Uredi kategoriju</button>
+              <button name='del' >Izbrisi kategoriju</button>
           </form>
         </div>
 
@@ -145,10 +151,11 @@
 
           <form action"" method="POST">
 
+            <input type="HIDDEN" name="indkat"  id="indkat" required>
+
             <label for="mod">Izaberite moderatora:</label>
               <select class="moderator" name="mod" required>
                 <?php
-                  include 'script/dodaj_kat.php';
 
                   $dataB = new DB();
                   $sql = $dataB->query("SELECT * FROM korisnik WHERE ID_tipa_korisnika = ?",'i',false,['3']);
@@ -160,6 +167,8 @@
                 ?>
               </select>
 
+              <button name='modAdd' >Dodaj moderatora</button>
+
 
           </form>
         </div>
@@ -168,51 +177,57 @@
 
 
 
-        <script type="text/javascript">
-          function triggerMenuAdd(){
-            event.preventDefault();
-            var pu = document.getElementById('add_form');
-            if(pu.style.display === "none"){
-              pu.style.display = "block";
-            } else {
-              pu.style.display = 'none';
-            }
-          }
-          function triggerEditKat(kat){
-            event.preventDefault();
-            event.preventDefault();
-            var pu = document.getElementById('edit_form');
-            document.getElementById('kat').value = kat.getAttribute('kat-naziv');
-            document.getElementById('opi').value  = kat.getAttribute('kat-opis-short');
-            document.getElementById('opis').value = kat.getAttribute('kat-opis-long');
-            document.getElementById('id').value = kat.getAttribute('kat-id');
 
-            if(pu.style.display === "none"){
-              pu.style.display = "block";
-            } else {
-              pu.style.display = 'none';
-            }
-          }
-          function triggerAddMod(kat){
-            event.preventDefault();
-            var pu = document.getElementById('add_mod');
-            if(pu.style.display === "none"){
-              pu.style.display = "block";
-            } else {
-              pu.style.display = 'none';
-            }
-          }
-        </script>
 
       </div>
 
     </div>
+
     <div class="section_body" id="bod">
+      <div class="returnMessage">
+      </div>
       <div class="section__rec">
 
 
       </div>
     </div>
+
+    <script type="text/javascript">
+      function triggerMenuAdd(){
+        event.preventDefault();
+        var pu = document.getElementById('add_form_kat_adm');
+        if(pu.style.display === "none"){
+          pu.style.display = "block";
+        } else {
+          pu.style.display = 'none';
+        }
+      }
+      function triggerEditKat(kat){
+        event.preventDefault();
+        var pu = document.getElementById('edit_form');
+        document.getElementById('kat').value = kat.getAttribute('kat-naziv');
+        document.getElementById('opi').value  = kat.getAttribute('kat-opis-short');
+        document.getElementById('opis').value = kat.getAttribute('kat-opis-long');
+        document.getElementById('ind').value = kat.getAttribute('kat-id');
+
+        if(pu.style.display === "none"){
+          pu.style.display = "block";
+        } else {
+          pu.style.display = 'none';
+        }
+
+      }
+      function triggerAddMod(kat){
+        event.preventDefault();
+        var pu = document.getElementById('add_mod');
+        document.getElementById('indkat').value = kat.getAttribute('kat-idd');
+        if(pu.style.display === "none"){
+          pu.style.display = "block";
+        } else {
+          pu.style.display = 'none';
+        }
+      }
+    </script>
 
     <!-- If user has no JS -->
     <noscript>Sorry, your browser does not support JavaScript!</noscript>

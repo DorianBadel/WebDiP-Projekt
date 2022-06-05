@@ -33,7 +33,9 @@ function ucitajPodatke(){
             kat-id='`+(isUndefined(id[i].childNodes[0]) ? id[i].childNodes[0].nodeValue : "")+`'
             ><i class='bx bx-edit'></i></a>
 
-            <a href="" onClick="triggerAddMod(this)" style="position: relative; float: right; font-size: 20px; padding-right: 20px;"><i class='bx bx-message-alt-add'></i></a>
+            <a href="" onClick="triggerAddMod(this)"
+            kat-idd='`+(isUndefined(id[i].childNodes[0]) ? id[i].childNodes[0].nodeValue : "")+`'
+            style="position: relative; float: right; font-size: 20px; padding-right: 20px;"><i class='bx bx-message-alt-add'></i></a>
           </div>
           `;
           section.innerHTML += vijest;
