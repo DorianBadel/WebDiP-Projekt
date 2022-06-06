@@ -56,6 +56,8 @@
   transition: all 0.5s ease;
 }
 
+
+
 .section__links .link:hover a{
   color: var(--color-text-primary);
 }
@@ -75,4 +77,26 @@
 
 .section__links .link:hover span{
   color: var(--color-text-primary);
+}
+
+.section__links .disabled{
+  padding: 20px;
+  text-align: center;
+  background-color: var(--color-text-tertiary);
+  opacity: 70%;
+  min-height: 150px;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.section__links .disabled i{
+  width: 100%;
+  font-size: 50px;
+
+}
+
+.section__links .disabled a{
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  transition: all 0.5s ease;
 }

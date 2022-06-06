@@ -114,10 +114,12 @@ function ucitajPodatkeVJRec(){
               <h3>`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "")+`</h3>
               <p>`+(isUndefined(autor[i].childNodes[0]) ? autor[i].childNodes[0].nodeValue : "")+`</p>
               <p>`+(isUndefined(kategorija[i].childNodes[0]) ? kategorija[i].childNodes[0].nodeValue : "")+`</p>
-          <a href="" style="float: right" onClick="triggerAddMod(this)"
-          kat-id=`+(isUndefined(id_vj[i].childNodes[0]) ? id_vj[i].childNodes[0].nodeValue : "")+`
-          vj-id=`+(isUndefined(id_kat[i].childNodes[0]) ? id_kat[i].childNodes[0].nodeValue : "")+`
-          >Dodaj recenzenta</i></a>
+              <form action"" method="POST">
+                <button name='dodaj' style="float: right" onClick="triggerAddMod(this)"
+                kat-id=`+(isUndefined(id_vj[i].childNodes[0]) ? id_vj[i].childNodes[0].nodeValue : "")+`
+                vj-id=`+(isUndefined(id_kat[i].childNodes[0]) ? id_kat[i].childNodes[0].nodeValue : "")+`
+                >Dodaj recenzenta</i></button>
+              </form>
         </div>
         `;
           section.innerHTML += vijest;

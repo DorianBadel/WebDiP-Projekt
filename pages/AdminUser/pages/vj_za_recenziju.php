@@ -104,12 +104,21 @@
     </div>
     </div>
 
+
+
+    <div class="section_body" id="bod">
+      <div class="section__rec">
+
+
+      </div>
+    </div>
+
     <div class="add_form" id="add_mod" style="display: none">
       <form action"" method="POST">
         <input type="text" name="indkat"  id="indkat" required>
         <input type="text" name="indvj"  id="indvj" required>
 
-        <div class="select-rec">
+        <div id="select-rec">
         </div>
 
         <label for="mod">Izaberite recenzenta:</label>
@@ -138,19 +147,13 @@
       </form>
     </div>
 
-    <div class="section_body" id="bod">
-      <div class="section__rec">
-
-
-      </div>
-    </div>
-
     <SCRIPT>
       function triggerAddMod(kat){
         event.preventDefault();
         var pu = document.getElementById('add_mod');
         document.getElementById('indkat').value = kat.getAttribute('kat-id');
         document.getElementById('indvj').value = kat.getAttribute('vj-id');
+        document.getElementById('select-rec');
         if(pu.style.display === "none"){
           pu.style.display = "block";
         } else {

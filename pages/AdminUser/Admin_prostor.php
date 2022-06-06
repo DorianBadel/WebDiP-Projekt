@@ -81,8 +81,8 @@
            <span class="title">Ispis svih korisnika</span>
          </a>
          </div>
-         <div class="link">
-           <a href="pages/konfiguracija.php">
+         <div class="disabled">
+           <a href="#">
              <i class='bx bx-cog' ></i>
            <span class="title">Konfiguracija sustava</span>
          </a>
@@ -93,14 +93,14 @@
            <span class="title">Popis vijesti bez recenzenata</span>
          </a>
          </div>
-         <div class="link">
-           <a href="pages/edit_kolacic.php">
+         <div class="disabled">
+           <a href="#">
              <i class='bx bx-cookie' ></i>
            <span class="title">Kolačići</span>
          </a>
          </div>
-         <div class="link">
-           <a href="pages/dnevnik_rada.php">
+         <div class="disabled">
+           <a href="#">
               <i class='bx bx-book-bookmark'></i>
               <span class="title">Dnevnik rada</span>
            </a>

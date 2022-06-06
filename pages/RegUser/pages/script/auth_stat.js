@@ -19,11 +19,15 @@ function ucitajPodatke(){
       let datum = xmlFile.getElementsByTagName("datum");
       let tmpStatus = xmlFile.getElementsByTagName("status");
 
-      console.log(pregled[0].childNodes[0].nodeValue);
-
+      function isUndefined(value){
+        if(typeof value === 'undefined'){
+          return false;
+        }
+        else return true;
+      }
 
       for(let i=0; i< naslov.length; i++){
-        if(tmpStatus[i].childNodes[0].nodeValue == 3)
+        if(isUndefined(tmpStatus[i].childNodes[0]) ? tmpStatus[i].childNodes[0].nodeValue == 3 : false)
           table.row.add([
             (pregled[i].childNodes[0].nodeValue || "Podatak ne postoji"),
             (naslov[i].childNodes[0].nodeValue || "Podatak ne postoji"),
