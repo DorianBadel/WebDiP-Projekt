@@ -79,8 +79,11 @@ catch(Exception $ex){
 
   <!--Globals-->
   <script src="../../globals/template.js" type="text/javascript"></script>
-  <script src="script/registracija.js" type="text/javascript"></script>
   <link rel="stylesheet" href="../../globals/template.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 </head>
 <body>
@@ -131,7 +134,7 @@ catch(Exception $ex){
               ?>
             </div>
             <form action"" method="POST">
-                <span id="er-ime"></span>
+
                 <label for="ime">Ime:</label>
                 <input type="text" name="ime" id="java-ime" placeholder="Ime..." value="<?php echo @htmlspecialchars($ime) ?>" required>
                 <label for="prezime">Prezime:</label>
@@ -139,7 +142,8 @@ catch(Exception $ex){
                 <label for="opis">Opis:</label>
                 <textarea name="opis" cols="30" rows="10" placeholder="Opis..." value="<?php echo @htmlspecialchars($opis) ?>"></textarea>
                 <label for="korime">Korisničko ime:</label>
-                <input type="text" name="korime" id="java-korime" placeholder="Korisničko ime..." value="<?php echo @htmlspecialchars($korime) ?>" required>
+                <input type="text" name="korime" id="java-korime" onInput="provjeraKor()" placeholder="Korisničko ime..." value="<?php echo @htmlspecialchars($korime) ?>" required>
+                <p id="er-korime"></p>
                 <label for="email">E-pošta:</label>
                 <input type="email" name="email" id="java-mail" placeholder="Email..." value="<?php echo @htmlspecialchars($email) ?>" required>
                 <label for="lozinka">Lozinka:</label>
@@ -159,6 +163,21 @@ catch(Exception $ex){
         </div>
 
     </div>
+
+    <script type="text/javascript">
+      function provjeraKor(){
+        jQuery.ajax({
+          url: "script/provjeraKor.php",
+          data: 'korime='+$("#java-korime").val(),
+          type: "POST",
+          success: function(data){
+            $("#er-korime").html(data);
+          },
+          error: function(){}
+        })
+      }
+
+    </script>
 
     <!-- If user has no JS -->
     <noscript>Sorry, your browser does not support JavaScript!</noscript>

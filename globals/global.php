@@ -49,11 +49,11 @@ class DB{
 
     if(!empty($argTypes))
       if($prep->bind_param($argTypes, ...$args) == false){
-          throw new Exception("DB ".__line__."");
+          throw new Exception("Wrong parameters");
       }
 
     if(!$prep || !$prep->execute()){
-      throw new Exception("DBA ".__line__."");
+      throw new Exception("Sql faulty");
     }
 
     if(!$command){
@@ -69,8 +69,7 @@ class DB{
 
 
   public function exists(string $kor){
-    return $this->query("SELECT EXISTS (SELECT * FROM korisnik WHERE korisnicko_ime = ?) as t", "s",false, [$kor])[0]["t"];
-
+      return $this->query("SELECT EXISTS (SELECT * FROM korisnik WHERE korisnicko_ime = ?) as t", "s",false, [$kor])[0]["t"];
 
   }
 
