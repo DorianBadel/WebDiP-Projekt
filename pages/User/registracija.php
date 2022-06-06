@@ -11,8 +11,12 @@ if(isset($_POST['submit']) && !empty($_POST['ime']) && !empty($_POST['prezime'])
   $prezime = $_POST['prezime'];
 
   $opis = $_POST['opis'];
+
+  if(!preg_match("/^[A-Z]/",$ime)) $warning .= "Ime pocinje s velikim slovom!";
+  if(!preg_match("/^[A-Z]/",$prezime)) $warning .= "Prezime pocinje s velikim slovom!";
+
   $korime = $_POST['korime'];
-  if(strlen($korime) < 5 || !preg_match("/.*[A-Z].*[a-z]/")) $warning .= "Korisnicko ime pre kratko";
+  if(strlen($korime) < 5 || !preg_match("/.*[A-Z].*[a-z]/",$korime)) $warning .= "Korisnicko ime pre kratko";
 
   $lozinka = $_POST['lozinka'];
   if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/", $lozinka)) $warning .= "Lozinka mora imati minimalno jedno veliko slovo,malo slovo,broj, nekakav znak, min 8 znakova max 30";
