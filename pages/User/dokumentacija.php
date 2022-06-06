@@ -220,7 +220,9 @@
         <div class="docu__e-tehnologije"> <!-- "popis i opis korištenih tehnologija i alata" -->
           <span>Popis i opis korištenih tehnologija i alata</span>
           <hr>
-          <p>Za izradu projekta korišten je Atom kao text editor, phpmyadmin kao baza podataka te se aplikacija izradila od HTML-a, CSS-a, JS-a, jQuery-a, Ajax-a, XML-a i PHP-a.
+          <p>Za izradu projekta korišten je Atom kao text editor,
+            <br>git i gitHub za verzioniranje,
+            <br>phpmyadmin kao baza podataka te se aplikacija izradila od HTML-a, CSS-a, JS-a, jQuery-a, Ajax-a, XML-a i PHP-a.
             <br>U jednoj funkcionalnosti se koristi Smarty.
             <br>Ikone korištene u aplikaciji su sa boxicons stranice.
           </p>
