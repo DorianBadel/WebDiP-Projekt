@@ -101,24 +101,51 @@
         <div class="docu__a-opis"> <!-- Opis projektnog zadatka -->
           <span>Opis projektnog zadatka: </span>
           <hr>
-          <p>Ovo je opis</p>
+          <p>
+                Projektni zadatka je izraditi stranicu za pisanje i recenziju vijesti prije same objave.
+              Za funkcioniranje takvog sustava potrebna su 4 tipa korisnika: čitatelj, autor, recenzent i moderator/admin. <br>
+              Čitatelj je neregistrirani korisnik -> svaki korisnik koji dođe na stranicu bez ikakve prijave ima pristup vijestima i nekim informativnim stranicama.<br>
+              Autor je registrirani korisnik -> korisnik koji se registrirao i prijavio u sustav, ima opciju pisati vijesti i gledati informacije o svojim objavama.<br>
+              Recenzent je korisnik koji odlučuje jeli vijest dovoljno spremna za javnost te kontrolira autore.<br>
+              Admin kontrolira cijeli sustav i jedini ima prava na stvari poput otključavanja korisnickih racuna i konfiguriranje sustava.
+          </p>
         </div>
         <div class="docu__b-opis"> <!-- Opis projektnog rjesenja -->
           <span>Opis projektnog rješenja: </span>
           <hr>
-          <p>Ovo je opis</p>
+          <p>
+              Moje riješenje pruža jednostavnu uniformnu navigaciju kroz sve uloge koja olakšava korištenje sustava. Svaka poveznica je uređena na oku ugodan i moderan način. Postoje različiti prikazi ovisno o sadržaju, često se koristi prikaz informacija u individualnim kvadratičima umjesto u tradicionalnim tablicama za lakše snalaženje.
+            <strong>Neregistrirani korisnik</strong> mora prihvatiti uvjete korištenja koji se spremaju u kolacic na dva dana. Nakon toga ima pristup popisu objavljenih vijesti u obliku galerije. Galerija vijesti ima i html i css za sortiranje no samo sortiranje nije implementirano.
+            Dalje može gledati rang listu vijesti koja služi kao više statistički pregled vijesti. Rang lista vijesti također ima vizualni dio sortiranja ali nema implementaciju.
+            Dodatno se iz njegovog pogleda mogu pročitati dokumentaciju i informacije o autoru za lakšu navigaciju.
+            Da bi autor mogao pristupiti svom radnom prostor mora prvo biti prijavljen u sustav. Registracija ne traži autentifikaciju mailom več se odmah pri pravilnom unosu podataka može i logirati.
+            <strong>Registrirani korisnik </strong> kroz navigaciu može doći do početnog sučelja gdje može raditi sve što i neregistrirani korisnik ili do svog radnog prostora. U svom radnom prostoru može pogledati u kojim kategorijama je blokiran. Može pregledati svoje objave urediti ih ako su u statusu dorada ili napraviti novu.
+            Može pregledati povratne informacije od recenzenata te urediti vijesst ako je u statusu dorada. Konačno može analizirati svoju statistiku o broju pregleda pojedine objave kroz tablicu i graf.
+            <Strong>Moderator</strong> kroz navigaciju dolazi do uredničkog prostora gdje može pregledati blokirane korisnike, ažurirati i ukloniti im blokadu. U sekciji moje recenzije može pregledati vijesti
+              koje treba ispraviti. Recenziranje samih vijesti nije ostvarena u ovoj verziji riješenja. Omogučen mu je i pregled odbijenih vijesti gdje može blokirati osobu koja ju je objavila. Dodatno ima pogled na broj odbijenih u odnosu na broj prihvačenih vijesti pojedinog registriranog korisnika.
+            Konačno <strong> Administrator </strong> u administratorskom prostoru se nalazi par izbljeđenih gumbova koji inače preusmjeravaju na dijelove aplikacije koje nisu izvršene u ovoj verziji. Ono na što administrator može kliknuti su kategorije koje može, dodavati, pretraživati, uređivati, brisati te im dodjeliti moderatore.
+            Može pristupiti zaključanim korisnicima (korisnici koji su neuspješno unjeli lozinku više puta) te ih može otključati. Može ispisati sve korisnike prijavljene u sustav te im vidjeti lozinku ulogu i korisnicko ime. Zadnja ostvarena funkcionalnost je pregled vijesti u statusu recenzije. Dodavanje recenzenata bije moguče.
+
+         </p>
         </div>
         <div class="docu__c-ERA"> <!-- "Bitne odrednice projektnog rješenja" ERA -->
           <span>ERA dijagram:  </span>
           <hr>
-          <p>Ovo je opis</p>
-          <img src="" alt="ERA dijagram">
+          <p>Ispod se nalazi era dijagram. Datagrid mi nažalost nije dozvolio brisanje tablice sesija te ona nebi trebala postojati</p>
+          <img src="../../media/era-dijagram.jpg" alt="ERA dijagram">
         </div>
         <div class="docu__d-skripte"> <!-- "popis i opis skripata, mapa mjesta, navigacijski dijagram" -->
           <span>Popis i opis skripata, mapa mjesta, navigacijski dijagram </span>
           <hr>
-          <p>Ovo je opis</p>
-          <img src="" alt="Navigacijski dijagram">
+          <p>Navigacijski dijagrami. Odvojene su slike za svakog tipa korisnika. Crveno su oznacene promijene u odnosu na nižu ulogu.</p>
+          <p>Neregistrirani korisnik</p>
+          <img src="../../media/navigacijski-dijagram-1" alt="Navigacijski dijagram">
+          <p>Autor</p>
+          <img src="../../media/navigacijski-dijagram-2" alt="Navigacijski dijagram">
+          <p>Recenzent</p>
+          <img src="../../media/navigacijski-dijagram-3" alt="Navigacijski dijagram">
+          <p>Administrator</p>
+          <img src="../../media/navigacijski-dijagram-4" alt="Navigacijski dijagram">
         </div>
         <div class="docu__e-tehnologije"> <!-- "popis i opis korištenih tehnologija i alata" -->
           <span>Popis i opis korištenih tehnologija i alata</span>

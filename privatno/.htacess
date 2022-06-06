@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "WebDiP Apache Login"
-AuthUserFile "../forbiden/user.txt"
+AuthUserFile /var/www/WebDiP/2021_projekti/WebDiP2021x003/forbiden/user.txt
 Require valid-user
