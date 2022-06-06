@@ -132,26 +132,98 @@
           <span>ERA dijagram:  </span>
           <hr>
           <p>Ispod se nalazi era dijagram. Datagrid mi nažalost nije dozvolio brisanje tablice sesija te ona nebi trebala postojati</p>
-          <img src="../../media/era-dijagram.jpg" alt="ERA dijagram">
+          <img style="width: 1000px" src="../../media/era-dijagram.jpg" alt="ERA dijagram">
         </div>
         <div class="docu__d-skripte"> <!-- "popis i opis skripata, mapa mjesta, navigacijski dijagram" -->
           <span>Popis i opis skripata, mapa mjesta, navigacijski dijagram </span>
           <hr>
           <p>Navigacijski dijagrami. Odvojene su slike za svakog tipa korisnika. Crveno su oznacene promijene u odnosu na nižu ulogu.</p>
-          <p>Neregistrirani korisnik</p>
-          <img src="../../media/navigacijski-dijagram-1" alt="Navigacijski dijagram">
+          <br><p>Neregistrirani korisnik</p>
+          <img style="width: 1000px" src="../../media/navigacijski-dijagram-01.jpg" alt="Navigacijski dijagram">
           <p>Autor</p>
-          <img src="../../media/navigacijski-dijagram-2" alt="Navigacijski dijagram">
+          <img style="width: 1000px"src="../../media/navigacijski-dijagram-02.jpg" alt="Navigacijski dijagram">
           <p>Recenzent</p>
-          <img src="../../media/navigacijski-dijagram-3" alt="Navigacijski dijagram">
+          <img style="width: 1000px" src="../../media/navigacijski-dijagram-03.jpg" alt="Navigacijski dijagram">
           <p>Administrator</p>
-          <img src="../../media/navigacijski-dijagram-4" alt="Navigacijski dijagram">
+          <img style="width: 1000px" src="../../media/navigacijski-dijagram-04.jpg" alt="Navigacijski dijagram">
+          <br>
+
+          <p><strong>Opis skripti:</strong> najznačajnije skripte su global.php, template.js i themes.css </p>
+          <p>global.php -> skripta koja nam omogučava spajanje na bazu i brani prespajanje na stranice za koje nemamo ovlasti. </p>
+          <p>template.js -> skripta je koja služi za postavljanje navigacije ovisno o trenutnoj poziciji u aplikaciji. </p>
+          <p>themes.css -> skripta je koja definira stilske upute koje se u ostalim .css datotekama koriste kao varijable. </p>
+          <br>
+
+          <p><strong>Popis mapa mijesta:</strong> </p>
+            <ul class="element">
+              <li> forbiden
+                <ul>
+                  <li> user.txt </li>
+                  <li> .htacess </li>
+                </ul>
+              </li>
+            </ul><br>
+            <ul class="element">
+              <li> globals
+                <ul>
+                  <li> /smarty </li>
+                  <ul>
+                    <li>components</li>
+                    <ul>
+                      index.tpl
+                    </ul>
+                    <li>smarty_main.php</li>
+                    <li>...</li>
+                  </ul>
+                  <li> global.php </li>
+                  <li> logout.php </li>
+                  <li> roles.php </li>
+                  <li> template.css </li>
+                  <li> template.js </li>
+                  <li> theme.css </li>
+                </ul>
+              </li>
+            </ul><br>
+            <ul class="element">
+              <li> media
+                <ul>
+                  <li> razne slike potrebne za aplikaciju</li>
+                </ul>
+              </li>
+            </ul><br>
+            <ul class="element">
+              <li> pages
+                <ul>
+                  <li> AdminUser</li>
+                </ul>
+                <ul>
+                  <li> RegUser</li>
+                </ul>
+                <ul>
+                  <li> ModUser</li>
+                </ul>
+                <ul>
+                  <li> User</li>
+                </ul>
+                <ul>
+                  <li> privatno</li>
+                </ul>
+                <li>index.css</li>
+                <li>index.php</li>
+              </li>
+            </ul><br>
+
+
+
+
         </div>
         <div class="docu__e-tehnologije"> <!-- "popis i opis korištenih tehnologija i alata" -->
           <span>Popis i opis korištenih tehnologija i alata</span>
           <hr>
-          <p>Ovo je opis</p>
-          <img src="" alt="ERA dijagram">
+          <p>Za izradu projekta korišten je Atom kao text editor, phpmyadmin kao baza podataka te se aplikacija izradila od HTML-a, CSS-a, JS-a, jQuery-a, Ajax-a, XML-a i PHP-a.
+            <br>U jednoj funkcionalnosti se koristi Smarty.
+            <br>Ikone korištene u aplikaciji su sa boxicons stranice.
+          </p>
         </div>
         <div class="docu__f-tehnologije"> <!-- "popis i opis vanjskih (tuđih) modula/biblioteka i njihovo korištenje u skriptama i sl." -->
           <span>Popis i opis vanjskih (tuđih) modula/biblioteka i njihovo korištenje u skriptama i sl.</span>
