@@ -195,15 +195,19 @@
               <li> pages
                 <ul>
                   <li> AdminUser</li>
-                </ul>
-                <ul>
-                  <li> RegUser</li>
+                  <img style="width: 300px" src="../../media/mapa-mj-1.jpg" alt="mapa admin">
                 </ul>
                 <ul>
                   <li> ModUser</li>
+                  <img style="width: 300px" src="../../media/mapa-mj-2.jpg" alt="mapa recenzent">
+                </ul>
+                <ul>
+                  <li> RegUser</li>
+                  <img style="width: 300px" src="../../media/mapa-mj-3.jpg" alt="mapa autor">
                 </ul>
                 <ul>
                   <li> User</li>
+                  <img style="width: 300px" src="../../media/mapa-mj-4.jpg" alt="mapa korisnik">
                 </ul>
                 <ul>
                   <li> privatno</li>
