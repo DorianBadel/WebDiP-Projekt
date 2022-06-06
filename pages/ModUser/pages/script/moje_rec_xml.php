@@ -2,6 +2,7 @@
   include '../../../../globals/global.php';
   $dataB = new DB();
   @session_start();
+  header("Content-Type: text/xml");
 
   $korisnik = $dataB->query("SELECT * FROM korisnik WHERE korisnicko_ime = ?","s",false,[$_SESSION['username']]);
   $ID_korisnika = (int)$korisnik[0]['ID'];
@@ -12,9 +13,6 @@
 
   $xmlRoot = $xmlDom->createElement("xml");
   $xmlRoot = $xmlDom->appendChild($xmlRoot);
-  $file = "../../../../tablice/moje_rec.xml";
-
-  if($file) unlink($file);
 
   foreach($sql as &$r){
     $t2 = $r['naslov'];
@@ -37,6 +35,6 @@
     $element->appendChild($xmlDom->createElement('slika',$g2));
   }
 
-  echo $xmlDom->save("../../../../tablice/moje_rec.xml");
+  echo $xmlDom->saveXML();
 
  ?>

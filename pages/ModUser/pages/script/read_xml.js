@@ -89,32 +89,48 @@ function ucitajPodatkeMR(){
   let section = document.querySelector(".section__news");
   section.innerHTML = "";
 
-  $.ajax({url: "https://barka.foi.hr/WebDiP/2021_projekti/WebDiP2021x003/tablice/moje_rec.xml",
-    type: "GET",
-    dataType: "xml",
-    success: function(result){
-      $(result).find("xml vijest").each(function(){
+  var xml = new XMLHttpRequest();
+  xml.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+      let xmlFile = this.responseXML;
+
+      let naslov = xmlFile.getElementsByTagName("naslov");
+      let autori = xmlFile.getElementsByTagName("autori");
+      let izvor = xmlFile.getElementsByTagName("izvor");
+      let datum = xmlFile.getElementsByTagName("datum");
+      let slika = xmlFile.getElementsByTagName("slika");
+      let tekst = xmlFile.getElementsByTagName("tekst");
+      let verzija = xmlFile.getElementsByTagName("verzija");
+
+      function isUndefined(value){
+        if(typeof value === 'undefined'){
+          return false;
+        }
+        else return true;
+      }
+
+      for(let i=0; i< naslov.length; i++){
           vijest = `
           <div class="news">
 
               <figure>
-                <img src=`+$(this).find('slika').text()+` alt="Podatak ne postoji"
+                <img src=`+slika[i].childNodes[0].nodeValue+` alt="Podatak ne postoji"
               </figure>
-              <h3>`+($(this).find('naslov').text() || "Podatak ne postoji")+`</h3>
-              <p>`+($(this).find('tekst').text() || "Podatak ne postoji")+`</p>
-              <p>`+($(this).find('izvor').text() || "Podatak ne postoji")+`</p>
-              <span>`+($(this).find('autori').text() || "Podatak ne postoji")+`</span>
-              <span class="date">`+($(this).find('datum').text() || "Podatak ne postoji")+`</span>
-              <p class="broj_pregleda">`+($(this).find('verzija').text() || "Podatak ne postoji")+`</p>
+              <h3>`+(isUndefined(naslov[i].childNodes[0]) ? naslov[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</h3>
+              <p>`+(isUndefined(tekst[i].childNodes[0]) ? tekst[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</p>
+              <p>`+(isUndefined(izvor[i].childNodes[0]) ? izvor[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</p>
+              <span>`+(isUndefined(autori[i].childNodes[0]) ? autori[i].childNodes[0].nodeValue  : "Podatak ne postoji")+`</span>
+              <span class="date">`+(isUndefined(datum[i].childNodes[0]) ? datum[i].childNodes[0].nodeValue : "Podatak ne postoji")+`</span>
+              <p class="broj_pregleda">`+(isUndefined(verzija[i].childNodes[0]) ? verzija[i].childNodes[0].nodeValue  : "Podatak ne postoji")+`</p>
               <a href=""><i class='bx bx-edit-alt'></i></a>
 
           </div>
           `;
 
           section.innerHTML += vijest;
-      })
-    }
-  });
+    }}}
+    xml.open("GET","script/moje_rec_xml.php",true);
+    xml.send();
 }
 
 function ucitajPodatkeSTAT(){

@@ -105,9 +105,6 @@
     </div>
 
     <div class="section_body">
-      <?php
-        shell_exec('php script/moje_rec_xml.php');
-      ?>
       <div class="section__news">
 
 

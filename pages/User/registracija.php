@@ -79,6 +79,7 @@ catch(Exception $ex){
 
   <!--Globals-->
   <script src="../../globals/template.js" type="text/javascript"></script>
+  <script src="script/registracija.js" type="text/javascript"></script>
   <link rel="stylesheet" href="../../globals/template.css">
 
 </head>
@@ -130,20 +131,21 @@ catch(Exception $ex){
               ?>
             </div>
             <form action"" method="POST">
+                <span id="er-ime"></span>
                 <label for="ime">Ime:</label>
-                <input type="text" name="ime" placeholder="Ime..." value="<?php echo @htmlspecialchars($ime) ?>" required>
+                <input type="text" name="ime" id="java-ime" placeholder="Ime..." value="<?php echo @htmlspecialchars($ime) ?>" required>
                 <label for="prezime">Prezime:</label>
-                <input type="text" name="prezime" placeholder="Prezime..." value="<?php echo @htmlspecialchars($prezime) ?>" required>
+                <input type="text" name="prezime" id="java-prezime" placeholder="Prezime..." value="<?php echo @htmlspecialchars($prezime) ?>" required>
                 <label for="opis">Opis:</label>
                 <textarea name="opis" cols="30" rows="10" placeholder="Opis..." value="<?php echo @htmlspecialchars($opis) ?>"></textarea>
                 <label for="korime">Korisničko ime:</label>
-                <input type="text" name="korime" placeholder="Korisničko ime..." value="<?php echo @htmlspecialchars($korime) ?>" required>
+                <input type="text" name="korime" id="java-korime" placeholder="Korisničko ime..." value="<?php echo @htmlspecialchars($korime) ?>" required>
                 <label for="email">E-pošta:</label>
-                <input type="email" name="email" placeholder="Email..." value="<?php echo @htmlspecialchars($email) ?>" required>
+                <input type="email" name="email" id="java-mail" placeholder="Email..." value="<?php echo @htmlspecialchars($email) ?>" required>
                 <label for="lozinka">Lozinka:</label>
-                <input type="password" name="lozinka" placeholder="Lozinka..."  required>
+                <input type="password" name="lozinka" id="java-loz" placeholder="Lozinka..."  required>
                 <label for="ponlozinka">Ponovljena lozinka:</label>
-                <input type="password" name="ponlozinka" placeholder="Ponovljena lozinka..."  required>
+                <input type="password" name="ponlozinka" id="java-pon-loz" placeholder="Ponovljena lozinka..."  required>
                 <select name="uvjeti" value="<?php echo @htmlspecialchars($uvjeti) ?>" required>
                   <option value="1">Prihvacam dijeliti sve neosjetljive podatke s vama za optimalno iskustvo.</option>
                   <option value="2">Prihvacam dijeliti samo informacije za svrhu statistike</option>
