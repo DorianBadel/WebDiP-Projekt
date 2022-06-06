@@ -124,6 +124,7 @@
 
             <div id="btnn">
               <button name='edit'>Azuriraj blokiranje</button>
+              <button name='unblock'>Ukloni blokadu</button>
             </div>
 
         </form>

@@ -159,12 +159,13 @@
                   //pronadi ID_korisnika
                   $id_kor = $dataB->query("SELECT * FROM korisnik WHERE korisnicko_ime = ?","s",false,[$_SESSION['username']]);
 
-                  $sql = $dataB->query("SELECT * FROM pripada WHERE ID_korisnika = ?",'i',false,[$id_kor[0]['ID']]);
+                  $sql = $dataB->query("SELECT * FROM kategorija
+                    WHERE NOT EXISTS(SELECT * FROM blokiran WHERE ID_kategorije= kategorija.ID AND ID_korisnika = ?)",'i',false,[$id_kor[0]['ID']]);
+
 
                   foreach($sql as &$rec){
-                    $kategorija = $dataB->query("SELECT * FROM kategorija WHERE ID = ?",'i',false,[$rec['ID_kategorije']]);
-                    $ID_kat = $kategorija[0]['ID'];
-                    $naziv_kat = $kategorija[0]['naziv'];
+                    $ID_kat = $rec['ID'];
+                    $naziv_kat = $rec['naziv'];
 
                     $html = "<option value='".$ID_kat."'>".$naziv_kat."</option>";
                     echo $html;
