@@ -1,4 +1,4 @@
-# WebDiP-Projekt
+# WebDiP-Projekt -> najnovija grana je *regAJAX*
 
 > Glavni repozitorij za projekt webdip-a
 
